@@ -1,13 +1,8 @@
 package com.ngochuy.ecommerce.feature.main.adapter
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.ngochuy.ecommerce.data.Product
-import com.ngochuy.ecommerce.databinding.ItemProductSaleBinding
 
 class MyFragmentPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
 

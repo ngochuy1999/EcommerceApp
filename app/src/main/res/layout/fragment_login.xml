@@ -5,7 +5,7 @@
 
         <variable
             name="fragment"
-            type="com.ngochuy.ecommerce.feature.authentication.signin.LoginFragment" />
+            type="com.ngochuy.ecommerce.feature.authentication.LoginFragment" />
 
         <variable
             name="userViewModel"
@@ -72,9 +72,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/edit_btn_sign_in"
                 android:linksClickable="true"
-                android:onClick="@{() ->fragment.onClickLogin()}"
+                style="@style/Button"
+                android:enabled="@{userViewModel.isValidateLogin()}"
                 android:text="@string/sign_in"
                 android:textColor="@android:color/white" />
 

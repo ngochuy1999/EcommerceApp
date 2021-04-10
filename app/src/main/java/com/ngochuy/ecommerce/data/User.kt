@@ -1,5 +1,6 @@
 package com.ngochuy.ecommerce.data
 
+
 import com.google.gson.annotations.SerializedName
 
 data class User(

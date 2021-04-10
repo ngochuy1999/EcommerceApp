@@ -1,4 +1,4 @@
-package com.ngochuy.ecommerce.feature.authentication.signin
+package com.ngochuy.ecommerce.feature.authentication
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.ngochuy.ecommerce.databinding.FragmentLoginBinding
 
-
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false)

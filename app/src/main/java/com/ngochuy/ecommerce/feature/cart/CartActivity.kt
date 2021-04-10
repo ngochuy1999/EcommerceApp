@@ -1,14 +1,14 @@
-package com.ngochuy.ecommerce.feature.product
+package com.ngochuy.ecommerce.feature.cart
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ngochuy.ecommerce.R
 
 
-class ProductInCategoryActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_in_category)
+        setContentView(R.layout.activity_cart)
     }
 }

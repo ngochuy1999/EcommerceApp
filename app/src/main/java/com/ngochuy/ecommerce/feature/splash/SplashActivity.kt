@@ -7,8 +7,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.view.doOnLayout
 import com.ngochuy.ecommerce.R
-import kotlinx.android.synthetic.main.activity_splash.*
 import com.ngochuy.ecommerce.feature.main.MainActivity
+import kotlinx.android.synthetic.main.activity_splash.*
 
 
 class SplashActivity : AppCompatActivity() , Animation.AnimationListener{

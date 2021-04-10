@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout>
 
     <data>
 
+        <variable
+            name="product"
+            type="com.ngochuy.ecommerce.data.Product" />
     </data>
 
-    <LinearLayout
-        android:id="@+id/ll_product_sale"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/itemProductSale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:background="@color/colorWhiteBG"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp">
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -23,18 +25,19 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
+                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(1)}"
                 android:background="@color/colorWhiteBG"
                 android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/tv_product_sale_home"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|end"
                 android:background="@drawable/edit_btn_sign_in"
                 android:gravity="center"
                 android:padding="1dp"
-                android:text="@string/sale_percent"
+                textDiscount="@{product.sale}"
                 android:textColor="@color/colorWhiteBG"
                 android:textSize="13sp" />
 
@@ -49,18 +52,25 @@
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:maxLines="1"
-            android:text="@string/tv_name"
+            android:text="@{product.name}"
             android:textColor="@color/colorTextHint"
             android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tv_price_product"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            txtPrice="@{product.price}"
+            android:textColor="@color/colorGray" />
 
         <TextView
             android:id="@+id/tv_price_product_favorite"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/_1_290_000"
+            price="@{product.price}"
+            discount="@{product.sale}"
             android:textColor="@color/colorTextHint"
             android:textStyle="bold" />
-
     </LinearLayout>
 </layout>

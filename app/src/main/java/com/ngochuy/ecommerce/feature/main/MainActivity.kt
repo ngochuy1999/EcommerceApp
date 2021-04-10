@@ -1,6 +1,5 @@
 package com.ngochuy.ecommerce.feature.main
 
-
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +11,6 @@ import com.ngochuy.ecommerce.feature.category.CategoryFragment
 import com.ngochuy.ecommerce.feature.home.HomeFragment
 import com.ngochuy.ecommerce.feature.main.adapter.MyFragmentPagerAdapter
 import com.ngochuy.ecommerce.feature.user.UserFragment
-
 
 class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener {
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

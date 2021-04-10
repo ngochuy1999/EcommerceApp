@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Ecommerce</string>
+    <string name="app_name">PhoneShop</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="sign_in">Sign In</string>
 
     <string name="bot_nav_home">Home</string>
@@ -34,7 +36,7 @@
     <string name="sign_out">Sign out</string>
     <string name="update">Update</string>
     <string name="title_sign_in_sign_up">Sign in/Sign up</string>
-    <string name="email_phone_number">Email/phone number</string>
+    <string name="email_phone_number"><font size="30">Email hoặc số điện thoại</font></string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="or_sign_in_with">Or sign in with</string>
@@ -74,7 +76,7 @@
     <string name="search_history">Search history</string>
     <string name="hot_keywords">Hot keywords</string>
     <string name="delete">Delete</string>
-    <string name="welcome_to_tiki">Welcome to tiki</string>
+    <string name="welcome_to_tiki">Welcome to Hmobile</string>
     <string name="sign_in_sign_up">Sign in/Sign up</string>
     <string name="pass_word_reset">Reset Password</string>
     <string name="text_reset_pw">Please provide your email or phone number to retrieve your password</string>
@@ -105,8 +107,10 @@
     <string name="error_input_email_exists">Email already exists</string>
     <string name="error_signup">Registration failed</string>
     <string name="error_input_email_not_exists">The email does not exist or is not registered</string>
+    <string name="err_email_not_valid" translatable="false">Invalid email</string>
     <string name="error_input_address_not_entered">Please enter your address</string>
     <string name="error_input_name_not_entered">Please enter your name</string>
+    <string name="error_input_user" translatable="false">Please enter your user name</string>
     <string name="error_input_name_not_length">The name must be 1 character or more</string>
     <string name="error_input_phone_not_entered">Please enter your phone</string>
     <string name="error_input_phone_not_correct">Invalid phone number</string>
@@ -183,6 +187,9 @@
     <string name="thanks_order">Thank you for purchasing our store.</string>
     <string name="view_orders">View orders</string>
     <string name="order_id">Order ID:</string>
+    <string name="dialogLogOut" translatable="false">Are you sure you want to log out?</string>
+    <string name="dialogOk" translatable="false">OK</string>
+    <string name="dialogCancel" translatable="false">Cancel</string>
     <string name="err_address_empty">You have not selected an address, please enter a new address to continue</string>
     <string name="order_date">Order date:</string>
     <string name="order_status">Order status:</string>
@@ -196,6 +203,12 @@
     <string name="the_order_list_is_empty">The order list is empty</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="selling_products">Selling products</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="selling_products" translatable="false">Selling products</string>
+    <string name="user_name" translatable="false">User name</string>
+    <string name="note" translatable="false">Note</string>
+    <string name="address_order" translatable="false">Address order</string>
+    <string name="change_theme" translatable="false">Change theme</string>
+    <string name="line" translatable="false"> Not crossed <strike> crossed </strike> </string>
+
 </resources>

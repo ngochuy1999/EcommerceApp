@@ -25,17 +25,6 @@
     </style>
 
 
-    <style name="Button">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/bg_btn_rounded_corner</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:longClickable">false</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:padding">15dp</item>
-    </style>
 
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlNormal">@color/colorGray</item>
@@ -69,4 +58,23 @@
         <item name="colorAccent">@color/colorBlue</item>
         <item name="android:textColorSecondary">@color/colorGray</item>
     </style>
+
+    <style name="Btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="Button" parent="Btn">
+        <item name="android:background">@drawable/bg_btn_rounded_corner</item>
+    </style>
+
+    <style name="BtnSignUp" parent="Btn">
+        <item name="background">@drawable/bg_rounded_corner_stroke_sign_up</item>
+    </style>
+
 </resources>

@@ -45,7 +45,7 @@
                         app:srcCompat="@drawable/ic_user_profile" />
 
                     <LinearLayout
-                        android:id="@+id/ll_infor_logged"
+                        android:id="@+id/ll_info_logged"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
@@ -81,14 +81,14 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_infor_not_logged"
+                        android:id="@+id/ll_info_not_logged"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <TextView
                             android:id="@+id/tv_welcome"
