@@ -139,13 +139,13 @@ class ApiService(private val apiApi: ApiManager) {
 
 
     fun login(
-            email: String,
+            username: String,
             password: String,
             onPrepared: () -> Unit,
             onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.login(email, password)
+        val request = apiApi.login(username, password)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }

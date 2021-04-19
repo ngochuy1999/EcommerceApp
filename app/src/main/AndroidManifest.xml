@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".feature.order.OrderActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".feature.cart.CartActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".feature.authentication.LoginActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity

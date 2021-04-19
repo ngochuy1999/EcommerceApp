@@ -82,10 +82,10 @@ class LoginFragment : Fragment() {
 
     fun onClickLogin() {
         var check = true
-        val email = binding.edtEmailSignIn.textTrim()
+        val username = binding.edtUserSignIn.textTrim()
         val pass = binding.edtPasswordSignIn.textTrim()
-        if (email.isEmpty()) {
-            binding.edtEmailSignIn.error = getString(R.string.error_input_email_not_entered)
+        if (username.isEmpty()) {
+            binding.edtUserSignIn.error = getString(R.string.error_input_email_not_entered)
             check = false
         }
 //        else if (!isValidEmail(email)) {
@@ -97,9 +97,8 @@ class LoginFragment : Fragment() {
             check = false
         }
         if (check) {
-            userViewModel.login(email, pass)
+            userViewModel.login(username, pass)
         }
     }
 
-    fun onClickForgotPw(){}
 }

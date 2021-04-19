@@ -33,26 +33,26 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-//    override fun getListSlide(): Result<ArrayList<Slide>> {
-//        val networkState = MutableLiveData<NetworkState>()
-//        val responseSlides = MutableLiveData<ArrayList<Slide>>()
-//        apiService.getListSlide(
-//                onPrepared = {
-//                    networkState.postValue(NetworkState.LOADING)
-//                },
-//                onSuccess = { response ->
-//                    responseSlides.value = response ?: arrayListOf()
-//                    networkState.postValue(NetworkState.LOADED)
-//                },
-//                onError = { errMessage ->
-//                    networkState.postValue(NetworkState.error(errMessage))
-//                }
-//        )
-//        return Result(
-//                data = responseSlides,
-//                networkState = networkState
-//        )
-//    }
+    override fun getListSlide(): Result<ArrayList<Slide>> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseSlides = MutableLiveData<ArrayList<Slide>>()
+        apiService.getListSlide(
+                onPrepared = {
+                    networkState.postValue(NetworkState.LOADING)
+                },
+                onSuccess = { response ->
+                    responseSlides.value = response ?: arrayListOf()
+                    networkState.postValue(NetworkState.LOADED)
+                },
+                onError = { errMessage ->
+                    networkState.postValue(NetworkState.error(errMessage))
+                }
+        )
+        return Result(
+                data = responseSlides,
+                networkState = networkState
+        )
+    }
 
     override fun getAllListProductSale(): Result<ArrayList<Product>> {
         val networkState = MutableLiveData<NetworkState>()

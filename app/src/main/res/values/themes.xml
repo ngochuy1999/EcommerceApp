@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Ecommerce" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
+    <style name="Theme.Ecommerce" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
         <item name="android:configChanges">keyboardHidden|orientation|screenSize</item>
         <item name="colorPrimary">@color/colorBlueLight</item>
         <item name="android:screenOrientation">portrait</item>
@@ -20,11 +20,29 @@
 
     <style name="AppTheme.SplashScreen" parent="Theme.Ecommerce">
         <item name="android:windowBackground">@drawable/bg_splash_screen</item>
-        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
-        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
 
+
+    <style name="Btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="Button" parent="Btn">
+        <item name="android:background">@drawable/bg_btn_rounded_corner</item>
+    </style>
+
+    <style name="BtnSignUp" parent="Btn">
+        <item name="background">@drawable/bg_rounded_corner_stroke_sign_up</item>
+    </style>
 
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlNormal">@color/colorGray</item>
@@ -32,9 +50,9 @@
         <item name="colorControlHighlight">@color/colorBlue</item>
     </style>
 
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
+    <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@color/colorTextHint</item>
+        <item name="android:textColorHint">#6E6D6D</item>
         <item name="android:textSize">16sp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
         <item name="colorAccent">@color/colorGray</item>
@@ -57,24 +75,6 @@
     <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
         <item name="colorAccent">@color/colorBlue</item>
         <item name="android:textColorSecondary">@color/colorGray</item>
-    </style>
-
-    <style name="Btn">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:longClickable">false</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:padding">15dp</item>
-    </style>
-    <style name="Button" parent="Btn">
-        <item name="android:background">@drawable/bg_btn_rounded_corner</item>
-    </style>
-
-    <style name="BtnSignUp" parent="Btn">
-        <item name="background">@drawable/bg_rounded_corner_stroke_sign_up</item>
     </style>
 
 </resources>

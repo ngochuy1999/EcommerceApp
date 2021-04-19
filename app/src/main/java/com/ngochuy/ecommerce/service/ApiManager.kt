@@ -52,7 +52,7 @@ interface ApiManager {
         }
     }
 
-    @GET("login")
+    @POST("login")
     fun login(
             @Query("username") username: String,
             @Query("password") password: String
@@ -103,7 +103,7 @@ interface ApiManager {
     @GET("products/{id}")
     fun getProductDetailByID(@Path("id") productID: Int): Call<Product>
 
-    @GET("")
+    @GET("slides")
     fun getListSlider(): Call<ArrayList<Slide>>
 
 
@@ -127,7 +127,7 @@ interface ApiManager {
     @POST("")
     fun minusCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
 
-    @GET("")
+    @GET("carts")
     fun getProductsCart(@Query("userId") userID: Int): Call<ArrayList<Product>>
 
 
