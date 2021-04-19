@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/tbEditProfile"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="wrap_content"
             android:background="@color/colorBlue">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -91,68 +91,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/ll_text_name"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="16dp"
-                        android:theme="@style/TextLabel">
-
-                        <com.ngochuy.ecommerce.widget.EditTextField
-                            android:id="@+id/edt_name_sign_up"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/name_sign_up"
-                            android:inputType="textPersonName"
-                            android:singleLine="true"
-                            android:text="@{user.name}"
-                            android:theme="@style/EditTextTheme"
-                            app:clearButtonMode="whileEditing" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="16dp"
-                        android:theme="@style/TextLabel">
-
-                        <com.ngochuy.ecommerce.widget.EditTextField
-                            android:id="@+id/edt_phone_sign_up"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/phone"
-                            android:inputType="phone"
-                            android:singleLine="true"
-                            android:text="@{user.phone}"
-                            android:theme="@style/EditTextTheme"
-                            app:clearButtonMode="whileEditing" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="16dp"
-                        android:theme="@style/TextLabel">
-
-                        <com.ngochuy.ecommerce.widget.EditTextField
-                            android:id="@+id/edt_email_sign_up"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/email"
-                            android:inputType="textEmailAddress"
-                            android:singleLine="true"
-                            android:text="@{user.email}"
-                            android:theme="@style/EditTextTheme"
-                            app:clearButtonMode="whileEditing" />
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="fill_parent"

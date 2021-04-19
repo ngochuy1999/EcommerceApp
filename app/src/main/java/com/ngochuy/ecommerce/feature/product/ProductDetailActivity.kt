@@ -38,7 +38,8 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
-        productId = intent.getIntExtra(PRODUCT_ID, -1)
+        productId = intent.getIntExtra(PRODUCT_ID,-1)
+        Log.d("huy",productId.toString())
         if (productId != -1 && productId != null) {
             // Set cart count, check user is login yet? check by get userID from Shared pref
             val userId = getIntPref(USER_ID)

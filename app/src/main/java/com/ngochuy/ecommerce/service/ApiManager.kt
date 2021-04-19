@@ -52,26 +52,56 @@ interface ApiManager {
         }
     }
 
-    @POST("")
-    fun login(email: String, password: String): Call<Int>
+    @GET("login")
+    fun login(
+            @Query("username") username: String,
+            @Query("password") password: String
+    ): Call<ResultApi>
 
-    @POST("")
-    fun signUp(user: User): Call<Int>
+    @POST("signUp")
+    fun signUp(
+            @Query("username") username: String,
+            @Query("password") password: String,
+            @Query("name") name: String,
+            @Query("email") email: String,
+            @Query("phone") phone: String,
+            @Query("address") address: String
+    ): Call<ResultApi>
+
+    @PUT("updateUser")
+    fun changeInfoAcc(
+            @Query("userId") userId: Int,
+            @Query("name") name: String,
+            @Query("email") email: String,
+            @Query("phone") phone: String,
+            @Query("address") address: String,
+            @Query("avatar") avatar: String
+    ): Call<ResultApi>
+
+    @GET("changePassword")
+    fun changePass(
+            @Query("userId") userId: Int,
+            @Query("oldPass") oldPass: String,
+            @Query("newPass") newPass: String
+    ): Call<ResultApi>
 
     @POST("")
     fun forgotPassword(email: String): Call<Int>
 
+    @POST("userInfoById")
+    fun getUserInfoByUserID(@Query("userId") userID: Int): Call<ArrayList<User>>
+
     @GET("products")
     fun getListProductSale(): Call<ArrayList<Product>>
 
-    @GET("")
+    @GET("products")
     fun getAllProducts(): Call<ArrayList<Product>>
 
     @GET("")
     fun getListProductOfCategory(@Query("") cateId: Int): Call<ArrayList<Product>>
 
-    @GET("products")
-    fun getProductDetailByID(@Query("id") productID: Int): Call<ArrayList<Product>>
+    @GET("products/{id}")
+    fun getProductDetailByID(@Path("id") productID: Int): Call<Product>
 
     @GET("")
     fun getListSlider(): Call<ArrayList<Slide>>
@@ -96,5 +126,40 @@ interface ApiManager {
 
     @POST("")
     fun minusCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
+
+    @GET("")
+    fun getProductsCart(@Query("userId") userID: Int): Call<ArrayList<Product>>
+
+
+    @PUT("checkOut")
+    fun addOrder(
+            @Query("userId") userID: Int,
+            @Query("name") name: String,
+            @Query("phone") phone: String,
+            @Query("email") email: String,
+            @Query("address") address: String,
+            @Query("note") note: String
+    ): Call<ResultApi>
+
+    @GET("")
+    fun getAllOrder(@Query("userId") userId: Int): Call<ArrayList<Order>>
+
+    @GET("")
+    fun getAllOrderByStatus(
+            @Query("userId") userId: Int,
+            @Query("statusId") statusId: Int
+    ): Call<ArrayList<Order>>
+
+    @GET("")
+    fun getAllOrderStatus(): Call<ArrayList<OrderStatus>>
+
+    @PUT("")
+    fun cancelOrder(
+            @Query("orderId") orderId: Int
+    ): Call<ResultApi>
+
+
+    @GET("")
+    fun getAllOrderItem( @Query("orderId") orderId: Int): Call<ArrayList<OrderItem>>
 
 }

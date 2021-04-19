@@ -37,7 +37,7 @@
                     android:hint="@string/email_phone_number"
                     android:inputType="textEmailAddress"
                     android:singleLine="true"
-                    android:text="@{userViewModel.email}"
+                    android:text="@{userViewModel.username}"
                     android:theme="@style/EditTextTheme"
                     app:clearButtonMode="whileEditing" />
             </com.google.android.material.textfield.TextInputLayout>

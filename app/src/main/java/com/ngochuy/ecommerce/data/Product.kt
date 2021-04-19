@@ -21,7 +21,7 @@ data class Product(
         @SerializedName("name")
         val name: String? = null,
         @SerializedName("price")
-        val price: Float? = null,
+        val price: Long? = null,
         @SerializedName("quantity")
         val quantity: Int? = null,
         @SerializedName("quantityOder")

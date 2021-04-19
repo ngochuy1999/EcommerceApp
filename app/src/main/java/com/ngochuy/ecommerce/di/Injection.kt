@@ -22,9 +22,9 @@ object Injection {
         return ProductRepositoryImpl(provideApiService())
     }
 
-//    private fun provideOrderRepository(): OrderRepository {
-//        return OrderRepositoryImpl(provideApiService())
-//    }
+    private fun provideOrderRepository(): OrderRepository {
+        return OrderRepositoryImpl(provideApiService())
+    }
 
     private fun provideAuthRepository(): AuthRepository {
         return AuthRepositoryImpl(provideApiService())
@@ -33,6 +33,9 @@ object Injection {
     private fun provideCategoryRepository(): CategoryRepository {
         return CategoryRepositoryImpl(provideApiService())
     }
+    private fun provideCartRepository(): CartRepository {
+        return CartRepositoryImpl(provideApiService())
+    }
 
     /*----------------- View model factory -----------------*/
 
@@ -40,9 +43,9 @@ object Injection {
         return HomeViewModelFactory(provideProductRepository())
     }
 
-//    fun provideOrderViewModelFactory(): ViewModelProvider.Factory {
-//        return OrderViewModelFactory(provideOrderRepository())
-//    }
+    fun provideOrderViewModelFactory(): ViewModelProvider.Factory {
+        return OrderViewModelFactory(provideOrderRepository())
+    }
 
     fun provideAuthViewModelFactory(): ViewModelProvider.Factory {
         return UserViewModelFactory(provideAuthRepository())
@@ -54,6 +57,10 @@ object Injection {
 
     fun provideProductsViewModelFactory(): ViewModelProvider.Factory {
         return ProductsViewModelFactory(provideProductRepository())
+    }
+
+    fun provideCartViewModelFactory(): ViewModelProvider.Factory {
+        return CartViewModelFactory(provideCartRepository())
     }
 
 }

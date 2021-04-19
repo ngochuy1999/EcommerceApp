@@ -130,8 +130,8 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
                     networkState.postValue(NetworkState.LOADING)
                 },
                 onSuccess = { response ->
-                    if (response?.size != 0)
-                        responseProduct.value = response?.get(0)
+                    if (response != null)
+                        responseProduct.value = response.copy()
                     else responseProduct.value = null
                     networkState.postValue(NetworkState.LOADED)
                 },

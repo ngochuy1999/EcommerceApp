@@ -9,8 +9,11 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.ngochuy.ecommerce.data.OrderStatus
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
 
 
 @BindingAdapter("imageFromUrl")
@@ -29,21 +32,37 @@ fun bindTextDiscount(view: TextView, discount: Int?) {
     view.text = "-" + discount.toString() + "%"
 }
 
-@BindingAdapter(value = ["price", "discount"], requireAll = false)
-fun bindTextPrice(view: TextView, price: Float?, discount: Int) {
-    val df = DecimalFormat("#,###,###")
-    df.roundingMode = RoundingMode.CEILING
-    val priceSale = price?.minus(((discount * 0.01) * price))
-    val priceSelling = df.format(priceSale) + " đ"
-    view.text = priceSelling
+@BindingAdapter(value = ["statusID", "listStatus"], requireAll = false)
+fun setOrderStatus(view: TextView, statusID: Int?, listStatus: ArrayList<OrderStatus>?) {
+    if (listStatus != null)
+        for (status in listStatus) {
+            if (status.id == statusID) {
+                view.text = status.statusName
+                break;
+            }
+        }
 }
+@BindingAdapter(value = ["price", "discount"], requireAll = false)
+fun bindTextPrice(view: TextView, price: Long?, discount: Int) {
+    val localeVN = Locale("vi", "VN")
+    val currencyVN = NumberFormat.getCurrencyInstance(localeVN)
+    val priceSale = price?.minus(((discount * 0.01) * price))
+    view.text = currencyVN.format(priceSale?:0)
+}
+
 @BindingAdapter("txtPrice")
-fun bindPrice(view: TextView, price: Float?) {
-    val df = DecimalFormat("#,###,###")
-    df.roundingMode = RoundingMode.CEILING
-    val priceSelling = df.format(price) + " đ"
-    view.text = priceSelling
-    view.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+fun bindPrice(view: TextView, price: Long?) {
+    val localeVN = Locale("vi", "VN")
+    val currencyVN = NumberFormat.getCurrencyInstance(localeVN)
+    view.text = currencyVN.format(price)
+}
+
+@BindingAdapter("txtPriceDiscount")
+fun bindPriceDiscount(view: TextView, price: Long?) {
+    val localeVN = Locale("vi", "VN")
+    val currencyVN = NumberFormat.getCurrencyInstance(localeVN)
+    view.text = currencyVN.format(price?:0)
+    view.paintFlags = view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 }
 
 @BindingAdapter("productStock")

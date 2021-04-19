@@ -2,156 +2,23 @@ package com.ngochuy.ecommerce.repository.impl
 
 import androidx.lifecycle.MutableLiveData
 import com.ngochuy.ecommerce.data.NetworkState
+import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Result
-import com.ngochuy.ecommerce.data.ResultApi
-import com.ngochuy.ecommerce.data.User
-import com.ngochuy.ecommerce.repository.AuthRepository
+import com.ngochuy.ecommerce.repository.CartRepository
 import com.ngochuy.ecommerce.service.ApiService
 
-class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
-    override fun login(username: String, password: String): Result<ResultApi> {
+
+class CartRepositoryImpl(private val apiService: ApiService) : CartRepository {
+    override fun getCartCount(userID: Int): Result<Int> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseLogin = MutableLiveData<ResultApi>()
-        apiService.login(
-                username, password,
-                onPrepared = {
-                    networkState.postValue(NetworkState.LOADING)
-                },
-                onSuccess = { response ->
-                    responseLogin.value = response
-                    networkState.postValue(NetworkState.LOADED)
-                },
-                onError = { errMessage ->
-                    networkState.postValue(NetworkState.error(errMessage))
-                }
-        )
-
-        return Result(
-                data = responseLogin,
-                networkState = networkState
-        )
-    }
-
-    override fun signUp(
-            username: String,
-            password: String,
-            name: String,
-            email: String,
-            phone: String,
-            address: String
-    ): Result<ResultApi> {
-        val networkState = MutableLiveData<NetworkState>()
-        val responseSignUp = MutableLiveData<ResultApi>()
-        apiService.signUp(
-                username, password, name, email, phone, address,
-                onPrepared = {
-                    networkState.postValue(NetworkState.LOADING)
-                },
-                onSuccess = { response ->
-                    responseSignUp.value = response
-                    networkState.postValue(NetworkState.LOADED)
-                },
-                onError = { errMessage ->
-                    networkState.postValue(NetworkState.error(errMessage))
-                }
-        )
-
-        return Result(
-                data = responseSignUp,
-                networkState = networkState
-        )
-    }
-
-    override fun changeInfo(
-            userId: Int,
-            name: String,
-            email: String,
-            phone: String,
-            address: String,
-            avatar: String
-    ): Result<ResultApi> {
-        val networkState = MutableLiveData<NetworkState>()
-        val responseSignUp = MutableLiveData<ResultApi>()
-        apiService.changeUserInfo(
-                userId, name, email, phone, address, avatar,
-                onPrepared = {
-                    networkState.postValue(NetworkState.LOADING)
-                },
-                onSuccess = { response ->
-                    responseSignUp.value = response
-                    networkState.postValue(NetworkState.LOADED)
-                },
-                onError = { errMessage ->
-                    networkState.postValue(NetworkState.error(errMessage))
-                }
-        )
-
-        return Result(
-                data = responseSignUp,
-                networkState = networkState
-        )
-    }
-
-    override fun forgotPassword(email: String): Result<Int> {
-        val networkState = MutableLiveData<NetworkState>()
-        val responseForgotPassword = MutableLiveData<Int>()
-        apiService.forgotPassword(
-                email,
-                onPrepared = {
-                    networkState.postValue(NetworkState.LOADING)
-                },
-                onSuccess = { response ->
-                    responseForgotPassword.value = response
-                    networkState.postValue(NetworkState.LOADED)
-                },
-                onError = { errMessage ->
-                    networkState.postValue(NetworkState.error(errMessage))
-                }
-        )
-
-        return Result(
-                data = responseForgotPassword,
-                networkState = networkState
-        )
-    }
-
-    override fun changePassword(
-            userId: Int,
-            oldPass: String,
-            newPass: String
-    ): Result<ResultApi> {
-        val networkState = MutableLiveData<NetworkState>()
-        val responseSignUp = MutableLiveData<ResultApi>()
-        apiService.changePassword(
-                userId, oldPass, newPass,
-                onPrepared = {
-                    networkState.postValue(NetworkState.LOADING)
-                },
-                onSuccess = { response ->
-                    responseSignUp.value = response
-                    networkState.postValue(NetworkState.LOADED)
-                },
-                onError = { errMessage ->
-                    networkState.postValue(NetworkState.error(errMessage))
-                }
-        )
-
-        return Result(
-                data = responseSignUp,
-                networkState = networkState
-        )
-    }
-
-    override fun getUserInfoByUserID(userID: Int): Result<User> {
-        val networkState = MutableLiveData<NetworkState>()
-        val responseUser = MutableLiveData<User>()
-        apiService.getUserInfoByUserID(
+        val responseCategories = MutableLiveData<Int>()
+        apiService.getCartCount(
                 userID,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },
                 onSuccess = { response ->
-                    responseUser.value = response?.get(0)
+                    responseCategories.value = response
                     networkState.postValue(NetworkState.LOADED)
                 },
                 onError = { errMessage ->
@@ -160,8 +27,104 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
         )
 
         return Result(
-                data = responseUser,
+                data = responseCategories,
                 networkState = networkState
         )
     }
+
+    override fun getProductCart(userID: Int): Result<ArrayList<Product>> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseProducts = MutableLiveData<ArrayList<Product>>()
+        apiService.getProductCart(
+                userID,
+                onPrepared = {
+                    networkState.postValue(NetworkState.LOADING)
+                },
+                onSuccess = { response ->
+                    responseProducts.value = response ?: arrayListOf()
+                    networkState.postValue(NetworkState.LOADED)
+                },
+                onError = { errMessage ->
+                    networkState.postValue(NetworkState.error(errMessage))
+                }
+        )
+
+        return Result(
+                data = responseProducts,
+                networkState = networkState
+        )
+    }
+
+    override fun plusCart(userID: Int, productID: Int, quantity: Int): Result<Boolean> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseCategories = MutableLiveData<Boolean>()
+        apiService.plusCart(
+                userID, productID, quantity,
+                onPrepared = {
+                    networkState.postValue(NetworkState.LOADING)
+                },
+                onSuccess = { response ->
+                    responseCategories.value = response
+                    networkState.postValue(NetworkState.LOADED)
+                },
+                onError = { errMessage ->
+                    networkState.postValue(NetworkState.error(errMessage))
+                }
+        )
+
+        return Result(
+                data = responseCategories,
+                networkState = networkState
+        )
+    }
+
+    override fun minusCart(userID: Int, productID: Int): Result<Boolean> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseCategories = MutableLiveData<Boolean>()
+        apiService.minusCart(
+                userID,
+                productID,
+                onPrepared = {
+                    networkState.postValue(NetworkState.LOADING)
+                },
+                onSuccess = { response ->
+                    responseCategories.value = response
+                    networkState.postValue(NetworkState.LOADED)
+                },
+                onError = { errMessage ->
+                    networkState.postValue(NetworkState.error(errMessage))
+                }
+        )
+
+        return Result(
+                data = responseCategories,
+                networkState = networkState
+        )
+    }
+
+    override fun delCart(userID: Int, productID: Int): Result<Boolean> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseCategories = MutableLiveData<Boolean>()
+        apiService.delCart(
+                userID,
+                productID,
+                onPrepared = {
+                    networkState.postValue(NetworkState.LOADING)
+                },
+                onSuccess = { response ->
+                    responseCategories.value = response
+                    networkState.postValue(NetworkState.LOADED)
+                },
+                onError = { errMessage ->
+                    networkState.postValue(NetworkState.error(errMessage))
+                }
+        )
+
+        return Result(
+                data = responseCategories,
+                networkState = networkState
+        )
+    }
+
+
 }

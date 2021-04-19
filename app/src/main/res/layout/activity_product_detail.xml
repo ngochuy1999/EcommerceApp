@@ -91,7 +91,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_product_detail"
-                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(1)}"
+                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(0)}"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
                 android:layout_marginStart="16dp"
@@ -115,10 +115,11 @@
 
             <TextView
                 android:id="@+id/tv_price_discount_product_detail"
-                android:text="@{product.price.toString()}"
+                price="@{product.price}"
+                discount="@{product.sale}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10sp"
+                android:layout_margin="16sp"
                 android:textColor="@color/colorTextHint"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -128,19 +129,17 @@
 
             <TextView
                 android:id="@+id/tv_price_product_detail"
+                txtPriceDiscount="@{product.price}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{product.price.toString()}"
-                android:layout_margin="10sp"
+                android:layout_margin="16sp"
                 android:layout_marginStart="16dp"
                 android:textColor="@color/colorGray"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_price_discount_product_detail"
                 app:layout_constraintStart_toEndOf="@id/tv_price_discount_product_detail"
                 app:layout_constraintTop_toTopOf="@+id/tv_price_discount_product_detail"
-                tools:text="@string/_1_290_000"
-                android:gravity="center"
-               />
+                tools:text="@string/_1_290_000" />
 
             <TextView
                 android:id="@+id/tv_discount_percent"
@@ -199,19 +198,57 @@
                 app:layout_constraintTop_toBottomOf="@id/btnBuy" />
 
             <TextView
-                android:id="@+id/tv_content_product_detail"
+                android:id="@+id/tv_content_product_detail1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@{product.description.toString()}"
+                android:layout_marginEnd="10dp"
+                android:text="@{product.description.get(0)}"
                 android:textColor="@color/colorTextHint"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_title"
+                tools:text="@string/content_of_product_detail" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_product_detail2"
+                imageFromUrl="@{product.description.get(1)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content_product_detail1" />
+            <TextView
+                android:id="@+id/tv_content_product_detail3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{product.description.get(2)}"
+                android:textColor="@color/colorTextHint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_product_detail2"
+                tools:text="@string/content_of_product_detail" />
+            <TextView
+                android:id="@+id/tv_content_product_detail4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{product.details.toString()}"
+                android:textColor="@color/colorTextHint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content_product_detail3"
                 tools:text="@string/content_of_product_detail" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

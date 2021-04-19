@@ -25,7 +25,7 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
-                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(1)}"
+                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(0)}"
                 android:background="@color/colorWhiteBG"
                 android:scaleType="centerCrop" />
 
@@ -60,7 +60,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            txtPrice="@{product.price}"
+            txtPriceDiscount="@{product.price}"
             android:textColor="@color/colorGray" />
 
         <TextView

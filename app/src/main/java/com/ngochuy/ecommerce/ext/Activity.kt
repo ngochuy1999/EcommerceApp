@@ -11,39 +11,39 @@ import com.ngochuy.ecommerce.R
 
 fun Activity.hideSoftKeyboard() {
     val inputMethodManager =
-        getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as? InputMethodManager
+            getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as? InputMethodManager
 
     inputMethodManager?.hideSoftInputFromWindow(
-        currentFocus?.windowToken, 0
+            currentFocus?.windowToken, 0
     )
 }
 
 fun Activity.showKeyBoard() {
     val inputMethodManager =
-        getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager?
+            getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager?
     inputMethodManager!!.toggleSoftInputFromWindow(
-        currentFocus?.windowToken,
-        InputMethodManager.SHOW_FORCED,
-        0
+            currentFocus?.windowToken,
+            InputMethodManager.SHOW_FORCED,
+            0
     )
 }
 
 
 fun Activity?.replaceFragment(
-    @IdRes id: Int = R.id.frmLogin,
-    fragment: Fragment,
-    tag: String? = null,
-    addToBackStack: Boolean = false
+        @IdRes id: Int = R.id.frmLogin,
+        fragment: Fragment,
+        tag: String? = null,
+        addToBackStack: Boolean = false
 ) {
     val compatActivity = this as? AppCompatActivity ?: return
     compatActivity.supportFragmentManager.beginTransaction()
-        .apply {
-            replace(id, fragment, tag)
-            if (addToBackStack) {
-                addToBackStack(null)
+            .apply {
+                replace(id, fragment, tag)
+                if (addToBackStack) {
+                    addToBackStack(null)
+                }
+                commit()
             }
-            commit()
-        }
 }
 
 fun Activity?.removeFragment(tag: String) {
@@ -53,19 +53,19 @@ fun Activity?.removeFragment(tag: String) {
 }
 
 fun Activity?.addFragment(
-    @IdRes id: Int = R.id.frmLogin,
-    fragment: Fragment,
-    tag: String? = null,
-    addToBackStack: Boolean = true
+        @IdRes id: Int = R.id.frmLogin,
+        fragment: Fragment,
+        tag: String? = null,
+        addToBackStack: Boolean = true
 ) {
     val compatActivity = this as? AppCompatActivity ?: return
     compatActivity.supportFragmentManager.beginTransaction()
-        .apply {
-            add(id, fragment, tag)
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            if (addToBackStack) {
-                addToBackStack(null)
+            .apply {
+                add(id, fragment, tag)
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                if (addToBackStack) {
+                    addToBackStack(null)
+                }
+                commit()
             }
-            commit()
-        }
 }
