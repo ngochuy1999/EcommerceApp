@@ -63,28 +63,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/ll_username"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
-                    android:theme="@style/TextLabel">
-
-                    <com.ngochuy.ecommerce.widget.EditTextField
-                        android:id="@+id/edtUsername"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/user_name"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:text="@{userViewModel.userName}"
-                        android:theme="@style/EditTextTheme"
-                        app:clearButtonMode="whileEditing" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ll_text_name"

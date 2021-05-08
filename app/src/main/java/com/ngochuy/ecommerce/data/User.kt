@@ -8,12 +8,16 @@ data class User(
         val address: String? = null,
         @SerializedName("id")
         val id: Int? = null,
-        @SerializedName("idCart")
-        val idCart: Int? = null,
+        @SerializedName("image")
+        val image: String? =null,
         @SerializedName("password")
-        val password: String? = null,
+        val password: String? =null,
+        @SerializedName("phone")
+        val phone: String? = null,
+        @SerializedName("role")
+        val role: Boolean? = null,
         @SerializedName("status")
-        val status: Boolean? = null,
-        @SerializedName("username")
+        val status: String? = null,
+        @SerializedName("name")
         val username: String? = null
 )

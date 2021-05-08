@@ -43,7 +43,7 @@ class ConfirmOrderFragment :Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
+      //  cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
     }
 
     override fun onCreateView(
@@ -87,7 +87,7 @@ class ConfirmOrderFragment :Fragment(){
 
     private fun addOrder() {
         orderViewModel.addOrder(
-                requireActivity().getIntPref(USER_ID),
+                USER_ID,
                 cartViewModel.name.value.toString(),
                 cartViewModel.phone.value.toString(),
                 cartViewModel.email.value.toString(),
@@ -103,12 +103,12 @@ class ConfirmOrderFragment :Fragment(){
         })
 
         orderViewModel.dataCheckOut.observe(viewLifecycleOwner) {
-            when (it[0].result) {
+            when (it.isStatus) {
                 1 -> {
                     showOrderSuccess()
                 }
                 else -> {
-                    Toast.makeText(requireContext(), it.get(0).message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), it.isStatus, Toast.LENGTH_LONG).show()
                 }
             }
         }

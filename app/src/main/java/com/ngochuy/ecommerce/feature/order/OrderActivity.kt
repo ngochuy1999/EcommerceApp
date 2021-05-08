@@ -48,7 +48,7 @@ class OrderActivity : AppCompatActivity() {
         setContentView(R.layout.activity_order)
         statusOrder = intent.getParcelableExtra(ORDER_STATUS)
 
-        orderViewModel.getAllStatusOrder()
+      //  orderViewModel.getAllStatusOrder()
         initViews()
         getDataByStatus()
         setEvents()
@@ -93,10 +93,10 @@ class OrderActivity : AppCompatActivity() {
 
     private fun getDataByStatus() {
         if (statusOrder == null) {
-            orderViewModel.getAllOrder(getIntPref(USER_ID))
+           // orderViewModel.getAllOrder(getIntPref(USER_ID))
             tvTbOrder.text = getString(R.string.order_management)
         } else {
-            orderViewModel.getAllOrder(getIntPref(USER_ID), statusOrder?.id)
+           // orderViewModel.getAllOrder(getIntPref(USER_ID), statusOrder?.id)
             tvTbOrder.text = statusOrder?.statusName
         }
     }

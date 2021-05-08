@@ -14,7 +14,6 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
     var email = MutableLiveData<String>().apply { value = "" }
     var password = MutableLiveData<String>().apply { value = "" }
     var name = MutableLiveData<String>().apply { value = "" }
-    var userName = MutableLiveData<String>().apply { value = "" }
     var phone = MutableLiveData<String>().apply { value = "" }
 
     /*---------------- Check text empty set button enable ----------------*/
@@ -27,7 +26,7 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
     }
 
     fun isValidateSignUp(): Boolean =
-        !userName.value.equals("") && !name.value.equals("") && !address.value.equals("")
+        name.value.equals("") && !address.value.equals("")
                 && !phone.value.equals("") && !email.value.equals("") && !password.value.equals("")
 
     /*---------------Login---------------*/
@@ -56,14 +55,13 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
     }
 
     fun signUp(
-        username: String,
-        password: String,
-        name: String,
-        email: String,
-        phone: String,
-        address: String
+            email: String,
+            name: String,
+            password: String,
+            phone: String,
+            address: String
     ) {
-        requestSignUp.value = repository.signUp(username, password, name, email, phone, address)
+        requestSignUp.value = repository.signUp(email, name, password, phone, address)
     }
 
     /*--------------- Forgot password---------------*/
@@ -88,8 +86,8 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
         it.data
     }
 
-    fun getInfoUser(userID: Int) {
-        requestUserInfo.value = repository.getUserInfoByUserID(userID)
+    fun getInfoUser(token: Int) {
+        requestUserInfo.value = repository.getUserInfoByUserID(token)
     }
 
 

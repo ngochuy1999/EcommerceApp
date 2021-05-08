@@ -1,6 +1,7 @@
 package com.ngochuy.ecommerce.feature.authentication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,13 +54,14 @@ class LoginFragment : Fragment() {
 
     private fun bindingViewModel() {
         userViewModel.resultLogin.observe(viewLifecycleOwner, Observer {
-            when (it[0].result) {
-                -1 , -2-> {
-                    Toast.makeText(requireContext(), it[0].message, Toast.LENGTH_LONG).show()
+            when (it.isStatus) {
+                0 -> {
+                    Toast.makeText(requireContext(), "error", Toast.LENGTH_LONG).show()
                 }
-                else -> {
-                    Toast.makeText(requireContext(), it[0].message, Toast.LENGTH_LONG).show()
-                    requireContext().setIntPref(USER_ID, it[0].result)
+                1 -> {
+                    //      Toast.makeText(requireContext(), "ok", Toast.LENGTH_LONG).show()
+                    USER_ID = it.token
+                    Log.d("huy", USER_ID.toString())
                     startActivity<MainActivity>()
                     requireActivity().finish()
                 }

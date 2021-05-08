@@ -50,23 +50,23 @@ class CartFragment : Fragment() {
     }
 
     private fun minusItemCart(id: Int) {
-        cartViewModel.minusCart(requireActivity().getIntPref(USER_ID), id)
-        cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
+        cartViewModel.minusCart(USER_ID, id)
+        cartViewModel.getProductsCart(USER_ID)
     }
 
     private fun plusItemCart(id: Int) {
-        cartViewModel.plusCart(id, requireActivity().getIntPref(USER_ID), 1)
-        cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
+        cartViewModel.plusCart(id, USER_ID, 1)
+        cartViewModel.getProductsCart(USER_ID)
     }
 
     private fun delItemCart(id: Int) {
-        cartViewModel.delCartItem(requireActivity().getIntPref(USER_ID), id)
-        cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
-    }
+        cartViewModel.delCartItem(USER_ID, id)
+        cartViewModel.getProductsCart(USER_ID)
+}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
+        cartViewModel.getProductsCart(USER_ID)
     }
 
     override fun onCreateView(
@@ -95,7 +95,7 @@ class CartFragment : Fragment() {
         btn_continue_shopping_cart.setOnClickListener { startActivity<MainActivity>() ; requireActivity().finish()}
 //        btnOrderCart.setOnClickListener { showAddress() }
         swCart.setOnRefreshListener {
-            cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
+            cartViewModel.getProductsCart(USER_ID)
             swCart.isRefreshing = false
         }
     }
@@ -112,7 +112,7 @@ class CartFragment : Fragment() {
         cartViewModel.productsCart.observe(viewLifecycleOwner, Observer {
             if (it.size!=0) {
                 cartAdapter.setProductList(it)
-  //              setPriceCart(it)
+               setPriceCart(it)
                 cartEmpty.gone()
             } else cartEmpty.visible()
         })
@@ -132,15 +132,17 @@ class CartFragment : Fragment() {
         })*/
     }
 
-//    private fun setPriceCart(prosCart: ArrayList<Product>) {
-//        var totalPriceCart = 0F
-//        var discount = 0f
-//        var price = 0f
-//        for (pro in prosCart) {
-//            discount = pro.sale? : 0F
-//            price = pro.price ?: 0F
-//            totalPriceCart += (price - price * discount).times(pro.quantity ?: 1)
-//        }
-//        bindPrice(tv_price_cart, totalPriceCart)
-//    }
+    private fun setPriceCart(prosCart: ArrayList<Product>) {
+        var totalPriceCart: Long? = 0
+        var discount : Int
+        var price :Long
+        if (totalPriceCart != null) {
+            for (pro in prosCart) {
+                discount = pro.sale!!
+                price = pro.price!!
+                totalPriceCart += (price - price * discount).times(pro.quantity ?: 1)
+            }
+        }
+        bindPrice(tv_price_cart, totalPriceCart)
+    }
 }

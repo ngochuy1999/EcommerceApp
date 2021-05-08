@@ -7,6 +7,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.view.doOnLayout
 import com.ngochuy.ecommerce.R
+import com.ngochuy.ecommerce.ext.USER_ID
+import com.ngochuy.ecommerce.ext.getIntPref
+import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -31,7 +34,8 @@ class SplashActivity : AppCompatActivity() , Animation.AnimationListener{
     }
 
     private fun openNextScreen() {
-        startActivity<MainActivity>()
+        if(USER_ID==-1)startActivity<LoginActivity>()
+        else startActivity<MainActivity>()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
     }

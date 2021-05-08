@@ -33,28 +33,25 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
     }
 
     override fun signUp(
-            username: String,
-            password: String,
-            name: String,
             email: String,
+            name: String,
+            password: String,
             phone: String,
             address: String
     ): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
         val responseSignUp = MutableLiveData<ResultApi>()
         apiService.signUp(
-                username, password, name, email, phone, address,
-                onPrepared = {
+                email, name, password, phone, address, onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },
                 onSuccess = { response ->
                     responseSignUp.value = response
                     networkState.postValue(NetworkState.LOADED)
-                },
-                onError = { errMessage ->
-                    networkState.postValue(NetworkState.error(errMessage))
                 }
-        )
+        ) { errMessage ->
+            networkState.postValue(NetworkState.error(errMessage))
+        }
 
         return Result(
                 data = responseSignUp,
@@ -142,16 +139,16 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
         )
     }
 
-    override fun getUserInfoByUserID(userID: Int): Result<User> {
+    override fun getUserInfoByUserID(token: Int): Result<User> {
         val networkState = MutableLiveData<NetworkState>()
         val responseUser = MutableLiveData<User>()
         apiService.getUserInfoByUserID(
-                userID,
+                token,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },
                 onSuccess = { response ->
-                    responseUser.value = response?.get(0)
+                    responseUser.value = response?.copy()
                     networkState.postValue(NetworkState.LOADED)
                 },
                 onError = { errMessage ->

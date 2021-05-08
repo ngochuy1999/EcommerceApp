@@ -43,7 +43,7 @@ class OrderDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail)
         order = intent.getParcelableExtra(ORDER)
-        orderViewModel.getAllStatusOrder()
+        //orderViewModel.getAllStatusOrder()
         order?.id?.let {
             orderViewModel.getAllOrderItem(it)
             binding.order = order
@@ -63,12 +63,12 @@ class OrderDetailActivity : AppCompatActivity() {
 
     private fun bindViewModel() {
         orderViewModel.cancelOrder.observe(this) {
-            when (it[0].result) {
+            when (it.isStatus) {
                 1 -> {
                     order?.id = 4
                     binding.order = order
                 }
-                else -> Toast.makeText(this, it.get(0).message, Toast.LENGTH_LONG).show()
+                else -> Toast.makeText(this, it.isStatus, Toast.LENGTH_LONG).show()
             }
         }
         orderViewModel.orderItem.observe(this) {

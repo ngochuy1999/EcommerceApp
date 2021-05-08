@@ -53,13 +53,13 @@ class SignUpFragment : Fragment() {
 
     private fun bindViewModel() {
         userViewModel.dataRegister.observe(viewLifecycleOwner, Observer {
-            when (it[0].result) {
+            when (it.isStatus) {
                 1 -> {
-                    Toast.makeText(requireContext(), it[0].message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), it.isStatus.toString(), Toast.LENGTH_LONG).show()
                     requireActivity().replaceFragment(fragment = LoginFragment())
                 }
                 else -> {
-                    Toast.makeText(requireContext(), it[0].message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), it.isStatus.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -82,16 +82,12 @@ class SignUpFragment : Fragment() {
 
     fun onSignUp() {
         var check = true
-        val userName = binding.edtUsername.textTrim()
         val name = binding.edtName.textTrim()
         val phone = binding.edtPhone.textTrim()
         val mail = binding.edtMail.textTrim()
         val address = binding.edtAddress.textTrim()
         val pass = binding.edtPass.textTrim()
-        if (userName.isEmpty()) {
-            binding.edtUsername.error = getString(R.string.error_input_user)
-            check = false
-        }
+
         if (name.isEmpty()) {
             binding.edtName.error = getString(R.string.error_input_name_not_entered)
             check = false
@@ -117,7 +113,7 @@ class SignUpFragment : Fragment() {
         }
 
         if (check) {
-            userViewModel.signUp(userName, pass, name, mail, phone, address)
+            userViewModel.signUp(mail, name, pass, phone, address)
         }
     }
 

@@ -9,8 +9,8 @@ interface OrderRepository {
               email: String,
               address: String,
               note: String): Result<ResultApi>
-    fun getAllOrder(userID: Int, statusID: Int?=null): Result<ArrayList<Order>>
+//    fun getAllOrder(userID: Int, statusID: Int?=null): Result<ArrayList<Order>>
     fun getAllOrderItem(orderID: Int): Result<ArrayList<OrderItem>>
-    fun getAllOrderStatus(): Result<ArrayList<OrderStatus>>
+//    fun getAllOrderStatus(): Result<ArrayList<OrderStatus>>
     fun cancelOrder(orderId:Int): Result<ResultApi>
 }

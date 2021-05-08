@@ -7,10 +7,9 @@ import com.ngochuy.ecommerce.data.User
 interface AuthRepository {
     fun login(username: String, password: String): Result<ResultApi>
     fun signUp(
-            username: String,
-            password: String,
-            name: String,
             email: String,
+            name: String,
+            password: String,
             phone: String,
             address: String
     ): Result<ResultApi>
@@ -32,5 +31,5 @@ interface AuthRepository {
             newPass: String
     ): Result<ResultApi>
 
-    fun getUserInfoByUserID(userID: Int): Result<User>
+    fun getUserInfoByUserID(token: Int): Result<User>
 }

@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:drawableEnd="@drawable/ic_blue_right_arrow"
                             android:singleLine="true"
-                            android:text="@{user.username}"
+                            android:text="@{user.phone}"
                             android:textColor="@android:color/darker_gray"
                             android:textSize="@dimen/ts_name"
                             tools:text="Email" />

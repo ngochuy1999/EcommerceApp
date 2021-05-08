@@ -1,6 +1,7 @@
 package com.ngochuy.ecommerce.service
 
 import com.ngochuy.ecommerce.data.*
+import retrofit2.http.Header
 
 class ApiService(private val apiApi: ApiManager) {
 
@@ -162,28 +163,27 @@ class ApiService(private val apiApi: ApiManager) {
     }
 
     fun getUserInfoByUserID(
-            userID: Int,
+            token: Int,
             onPrepared: () -> Unit,
-            onSuccess: (ArrayList<User>?) -> Unit,
+            onSuccess: (User?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.getUserInfoByUserID(userID)
+        val request = apiApi.getUserInfoByUserID(token)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
 
     fun signUp(
-            username: String,
-            password: String,
-            name: String,
             email: String,
+            name: String,
+            password: String,
             phone: String,
             address: String,
             onPrepared: () -> Unit,
             onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.signUp(username, password, name, email, phone, address)
+        val request = apiApi.signUp(email, name , password, phone, address)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
@@ -227,15 +227,15 @@ class ApiService(private val apiApi: ApiManager) {
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
-    fun getAllOrderStatus(
-            onPrepared: () -> Unit,
-            onSuccess: (ArrayList<OrderStatus>?) -> Unit,
-            onError: (String) -> Unit
-    ) {
-        val request = apiApi.getAllOrderStatus()
-        onPrepared()
-        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-    }
+//    fun getAllOrderStatus(
+//            onPrepared: () -> Unit,
+//            onSuccess: (ArrayList<OrderStatus>?) -> Unit,
+//            onError: (String) -> Unit
+//    ) {
+//        val request = apiApi.getAllOrderStatus()
+//        onPrepared()
+//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+//    }
 
     fun addOrder(
             userID: Int,
@@ -264,17 +264,17 @@ class ApiService(private val apiApi: ApiManager) {
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
 
-    fun getAllOrder(
-            userID: Int, statusID: Int?,
-            onPrepared: () -> Unit,
-            onSuccess: (ArrayList<Order>?) -> Unit,
-            onError: (String) -> Unit
-    ) {
-        val request = if (statusID == null) apiApi.getAllOrder(userID)
-        else apiApi.getAllOrderByStatus(userID, statusID)
-        onPrepared()
-        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-    }
+//    fun getAllOrder(
+//            userID: Int, statusID: Int?,
+//            onPrepared: () -> Unit,
+//            onSuccess: (ArrayList<Order>?) -> Unit,
+//            onError: (String) -> Unit
+//    ) {
+//        val request = if (statusID == null) apiApi.getAllOrder(userID)
+//        else apiApi.getAllOrderByStatus(userID, statusID)
+//        onPrepared()
+//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+//    }
 
     fun getAllOrderItem(
             orderID : Int,

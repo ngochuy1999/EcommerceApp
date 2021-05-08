@@ -38,7 +38,8 @@ class PrefUtil constructor(
 
 
 const val PREFS_NAME = "PREFERENCES"
-const val USER_ID = "USER_ID"
+const val TOKEN = "TOKEN"
+var USER_ID = -1
 
 fun Context.removeValueSharePrefs(KEY_NAME: String) {
     val pref: SharedPreferences = getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
@@ -72,7 +73,7 @@ fun Context.setIntPref(valueName: String, value: Int) {
 
 fun Context.getStringPref(valueName: String): String? {
     val pref = getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
-    return pref.getString(valueName, "")
+    return pref.getString(valueName,"")
 }
 
 fun Context.setStringPref(valueName: String, value: String) {

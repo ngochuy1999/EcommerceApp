@@ -17,12 +17,12 @@ class HomeViewModel(private val repository: ProductRepository) : ViewModel() {
     private val requestProductSale = MutableLiveData<Result<ArrayList<Product>>>()
 
     init {
-    //    getListSlide()
+        getListSlide()
         getListProductSale()
     }
 
     fun refresh(){
-    //    getListSlide()
+        getListSlide()
         getListProductSale()
     }
 
@@ -34,9 +34,9 @@ class HomeViewModel(private val repository: ProductRepository) : ViewModel() {
         it.networkState
     }
 
-//    fun getListSlide() {
-//        requestSlide.value = repository.getListSlide()
-//    }
+    fun getListSlide() {
+        requestSlide.value = repository.getListSlide()
+    }
 
     val listProductSale = Transformations.switchMap(requestProductSale) {
         it.data
