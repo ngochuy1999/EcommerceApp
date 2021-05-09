@@ -58,7 +58,7 @@ interface ApiManager {
             @Header("password") password: String
     ): Call<ResultApi>
 
-    @POST("addUsers")
+    @POST("users")
     fun signUp(
             @Header("email") email: String,
             @Header("name") name: String,
@@ -67,37 +67,33 @@ interface ApiManager {
             @Header("address") address: String
     ): Call<ResultApi>
 
-    @PUT("updateUser")
+    @PUT("users")
     fun changeInfoAcc(
-            @Query("userId") userId: Int,
-            @Query("name") name: String,
-            @Query("email") email: String,
-            @Query("phone") phone: String,
-            @Query("address") address: String,
-            @Query("avatar") avatar: String
+            @Header("id") userId: Int,
+            @Header("email") email: String,
+            @Header("name") name: String,
+            @Header("phone") phone: String,
+            @Header("address") address: String,
     ): Call<ResultApi>
 
-    @GET("changePassword")
+    @PUT("password")
     fun changePass(
-            @Query("userId") userId: Int,
-            @Query("oldPass") oldPass: String,
-            @Query("newPass") newPass: String
+            @Header("id") userId: Int,
+            @Header("old_password") oldPass: String,
+            @Header("new_password") newPass: String
     ): Call<ResultApi>
 
     @POST("")
     fun forgotPassword(email: String): Call<Int>
 
     @GET("users")
-    fun getUserInfoByUserID(@Header("id") token: Int): Call<User>
+    fun getUserInfoByUserID(@Header("id") userId: Int): Call<User>
 
     @GET("products")
     fun getListProductSale(): Call<ArrayList<Product>>
 
     @GET("products")
     fun getAllProducts(): Call<ArrayList<Product>>
-
-    @GET("")
-    fun getListProductOfCategory(@Query("") cateId: Int): Call<ArrayList<Product>>
 
     @GET("products/{id}")
     fun getProductDetailByID(@Path("id") productID: Int): Call<Product>
@@ -106,16 +102,19 @@ interface ApiManager {
     fun getListSlider(): Call<ArrayList<Slide>>
 
 
-    @GET("")
+    @GET("brands")
     fun getListCategory(): Call<ArrayList<Category>>
+
+    @GET("")
+    fun getListProductOfCategory(@Query("") cateId: Int): Call<ArrayList<Product>>
 
 
     @GET("")
     fun getCartCount(@Query("") userID: Int): Call<Int>
 
-    @POST("/carts")
+    @PUT("carts")
     fun plusCart(
-            @Header("token") userID: Int,
+            @Header("id_user") userID: Int,
             @Header("id") productID: Int,
             @Header("sl") quantity: Int
     ): Call<Boolean>
@@ -127,7 +126,7 @@ interface ApiManager {
     fun minusCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
 
     @GET("carts")
-    fun getProductsCart(@Header("token") userID: Int): Call<ArrayList<Product>>
+    fun getProductsCart(@Header("id") userID: Int): Call<ArrayList<Product>>
 
 
     @PUT("checkOut")

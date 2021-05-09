@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -112,7 +113,7 @@ class CartFragment : Fragment() {
         cartViewModel.productsCart.observe(viewLifecycleOwner, Observer {
             if (it.size!=0) {
                 cartAdapter.setProductList(it)
-               setPriceCart(it)
+                setPriceCart(it)
                 cartEmpty.gone()
             } else cartEmpty.visible()
         })
@@ -140,7 +141,7 @@ class CartFragment : Fragment() {
             for (pro in prosCart) {
                 discount = pro.sale!!
                 price = pro.price!!
-                totalPriceCart += (price - price * discount).times(pro.quantity ?: 1)
+                totalPriceCart += (price - price * discount).times(pro.quantityOrder ?: 1)
             }
         }
         bindPrice(tv_price_cart, totalPriceCart)

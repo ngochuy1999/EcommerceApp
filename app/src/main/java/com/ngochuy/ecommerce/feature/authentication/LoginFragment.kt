@@ -60,8 +60,7 @@ class LoginFragment : Fragment() {
                 }
                 1 -> {
                     //      Toast.makeText(requireContext(), "ok", Toast.LENGTH_LONG).show()
-                    USER_ID = it.token
-                    Log.d("huy", USER_ID.toString())
+                    USER_ID = it.id
                     startActivity<MainActivity>()
                     requireActivity().finish()
                 }

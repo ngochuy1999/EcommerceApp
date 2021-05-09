@@ -86,8 +86,8 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
         it.data
     }
 
-    fun getInfoUser(token: Int) {
-        requestUserInfo.value = repository.getUserInfoByUserID(token)
+    fun getInfoUser(userId: Int) {
+        requestUserInfo.value = repository.getUserInfoByUserID(userId)
     }
 
 
@@ -108,10 +108,9 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
         email: String,
         phone: String,
         address: String,
-        avatar: String
     ) {
         requestChangeInfo.value =
-            repository.changeInfo(userId, name, email, phone, address, avatar)
+            repository.changeInfo(userId, email, name, phone, address)
     }
 
     /*---------------Change pass --------------*/

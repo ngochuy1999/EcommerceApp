@@ -69,8 +69,8 @@ class ProductsViewModel(private val repository: ProductRepository) : ViewModel()
         it.networkState
     }
 
-    fun addCart(productId: Int, userD: Int, quantity: Int) {
-        requestAddCart.value = repository.addCart(productId, userD,quantity)
+    fun addCart( userId: Int,productId: Int, quantity: Int) {
+        requestAddCart.value = repository.addCart(userId,productId,quantity)
     }
 
 

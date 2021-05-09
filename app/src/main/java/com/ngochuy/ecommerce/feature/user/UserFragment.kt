@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +24,7 @@ import com.ngochuy.ecommerce.databinding.FragmentUserBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
-import com.ngochuy.ecommerce.feature.authentication.signup.EditProfileActivity
+import com.ngochuy.ecommerce.feature.authentication.EditProfileActivity
 import com.ngochuy.ecommerce.feature.order.OrderActivity
 import com.ngochuy.ecommerce.feature.user.adapter.OrderStatusAdapter
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
@@ -56,7 +58,7 @@ class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       userViewModel.getInfoUser((USER_ID))
+        userViewModel.getInfoUser(USER_ID)
        // orderViewModel.getAllStatusOrder()
     }
 
@@ -142,9 +144,44 @@ class UserFragment : Fragment() {
             startActivity<EditProfileActivity>()
         }
 
+        binding.btnChangeMode.setOnClickListener{
+            showDialogChooseModeTheme()
+        }
     }
 
 
+    private fun showDialogChooseModeTheme() {
+        val builder = AlertDialog.Builder(requireContext())
+        val styles = arrayOf("Light", "Dark", "System Default")
+        val checkedItem = requireContext().darkMode
+
+        builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
+
+            when (which) {
+                0 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    requireContext().darkMode = 0
+                    dialog.dismiss()
+                }
+                1 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    requireContext().darkMode = 1
+                    dialog.dismiss()
+                }
+                2 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    requireContext().darkMode = 2
+                    dialog.dismiss()
+                }
+
+            }
+
+//            recreate()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
 
     private fun confirmSignOut() {
         val builder = AlertDialog.Builder(requireContext())

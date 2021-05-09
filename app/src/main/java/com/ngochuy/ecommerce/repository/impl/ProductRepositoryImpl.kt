@@ -145,12 +145,12 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun addCart(productID: Int, userId: Int, quantity: Int): Result<Boolean> {
+    override fun addCart(userId: Int, productID: Int, quantity: Int): Result<Boolean> {
         val networkState = MutableLiveData<NetworkState>()
         val responseAddCart = MutableLiveData<Boolean>()
         apiService.addCart(
-                productID,
                 userId,
+                productID,
                 quantity,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)

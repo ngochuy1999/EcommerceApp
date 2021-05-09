@@ -99,7 +99,7 @@ class ConfirmOrderFragment :Fragment(){
     private fun bindViewModel() {
         cartViewModel.productsCart.observe(viewLifecycleOwner, Observer {
             productAdapter.setProductList(it)
-           // getTotalPrice(it)
+            getTotalPrice(it)
         })
 
         orderViewModel.dataCheckOut.observe(viewLifecycleOwner) {
@@ -115,16 +115,18 @@ class ConfirmOrderFragment :Fragment(){
 
     }
 
-//    private fun getTotalPrice(arrProduct: ArrayList<Product>) {
-//        var price = 0F
-//        var itemOrder: OrderItem
-//        var totalPriceCart = 0F
-//        var discount = 0f
-//        for (pro in arrProduct) {
-//            discount = pro.sale ?: 0F
-//            price = pro.price ?: 0F
-//            totalPriceCart += (price - price * discount).times(pro.quantity ?: 1)
-//        }
-//        binding.price = totalPriceCart
-//    }
+    private fun getTotalPrice(arrProduct: ArrayList<Product>) {
+        var price : Long
+        var itemOrder: OrderItem
+        var totalPriceCart: Long? =0
+        var discount : Int
+        if (totalPriceCart != null) {
+            for (pro in arrProduct) {
+                discount = pro.sale!!
+                price = pro.price!!
+                totalPriceCart += (price - price * discount).times(pro.quantity ?: 1)
+            }
+        }
+        binding.price = totalPriceCart
+    }
 }

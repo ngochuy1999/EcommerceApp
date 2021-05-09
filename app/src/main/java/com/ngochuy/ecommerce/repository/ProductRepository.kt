@@ -11,5 +11,5 @@ interface ProductRepository {
     fun getAllListProduct(): Result<ArrayList<Product>>
     fun getProductCategory(cateId: Int): Result<ArrayList<Product>>
     fun getProductByID(productID: Int): Result<Product>
-    fun addCart(productID: Int, userId: Int, quantity: Int): Result<Boolean>
+    fun addCart(userId: Int,productID: Int, quantity: Int): Result<Boolean>
 }

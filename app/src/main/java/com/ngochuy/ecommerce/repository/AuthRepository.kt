@@ -16,11 +16,10 @@ interface AuthRepository {
 
     fun changeInfo(
             userId: Int,
-            name: String,
             email: String,
+            name: String,
             phone: String,
-            address: String,
-            avatar: String
+            address: String
     ): Result<ResultApi>
 
     fun forgotPassword(email: String): Result<Int>
@@ -31,5 +30,5 @@ interface AuthRepository {
             newPass: String
     ): Result<ResultApi>
 
-    fun getUserInfoByUserID(token: Int): Result<User>
+    fun getUserInfoByUserID(userId: Int): Result<User>
 }

@@ -79,7 +79,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private fun addCart() {
         val userId = USER_ID
         if (userId != -1) {
-            productId?.let { productViewModel.addCart(it, userId, 1) }
+            productId?.let { productViewModel.addCart(userId, it, 1) }
             showBottomDialogAddCart()
         }
         // If haven't login , intent to login activity
@@ -112,7 +112,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 Status.RUNNING -> {
                 }
                 Status.FAILED -> {
-                    Toast.makeText(this, "Add cart success!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Add cart not success!", Toast.LENGTH_LONG).show()
                 }
                 Status.SUCCESS -> {
                     Toast.makeText(this, it.msg, Toast.LENGTH_LONG).show()

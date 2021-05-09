@@ -110,7 +110,7 @@
         android:paddingEnd="20dp"
         android:paddingBottom="5dp"
         tools:text="@string/_1"
-        android:text="@{product.quantity.toString()}"
+        android:text="@{product.quantityOrder.toString()}"
         android:textColor="@color/colorGrayStar"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/btnMinus"

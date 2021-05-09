@@ -19,5 +19,7 @@ data class User(
         @SerializedName("status")
         val status: String? = null,
         @SerializedName("name")
-        val username: String? = null
+        val username: String? = null,
+        @SerializedName("email")
+        val email: String? = null
 )

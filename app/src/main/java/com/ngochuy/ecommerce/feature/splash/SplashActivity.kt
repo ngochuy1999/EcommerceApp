@@ -38,6 +38,7 @@ class SplashActivity : AppCompatActivity() , Animation.AnimationListener{
         else startActivity<MainActivity>()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
+
     }
 
     override fun onAnimationStart(animation: Animation?) {}

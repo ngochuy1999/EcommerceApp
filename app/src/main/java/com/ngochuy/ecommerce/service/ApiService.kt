@@ -1,7 +1,7 @@
 package com.ngochuy.ecommerce.service
 
 import com.ngochuy.ecommerce.data.*
-import retrofit2.http.Header
+import retrofit2.http.Query
 
 class ApiService(private val apiApi: ApiManager) {
 
@@ -68,14 +68,14 @@ class ApiService(private val apiApi: ApiManager) {
     }
 
     fun addCart(
-            productID: Int,
             userID: Int,
+            productID: Int,
             quantity: Int,
             onPrepared: () -> Unit,
             onSuccess: (Boolean?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.plusCart(productID, userID, quantity)
+        val request = apiApi.plusCart(userID, productID, quantity)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
@@ -163,12 +163,12 @@ class ApiService(private val apiApi: ApiManager) {
     }
 
     fun getUserInfoByUserID(
-            token: Int,
+            userId: Int,
             onPrepared: () -> Unit,
             onSuccess: (User?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.getUserInfoByUserID(token)
+        val request = apiApi.getUserInfoByUserID(userId)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
@@ -190,16 +190,15 @@ class ApiService(private val apiApi: ApiManager) {
 
     fun changeUserInfo(
             userId: Int,
-            name: String,
             email: String,
+            name: String,
             phone: String,
             address: String,
-            avatar: String,
             onPrepared: () -> Unit,
             onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.changeInfoAcc(userId, name, email, phone, address, avatar)
+        val request = apiApi.changeInfoAcc(userId, email, name, phone, address)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }

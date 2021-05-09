@@ -7,6 +7,7 @@ import com.ngochuy.ecommerce.data.ResultApi
 import com.ngochuy.ecommerce.data.User
 import com.ngochuy.ecommerce.repository.AuthRepository
 import com.ngochuy.ecommerce.service.ApiService
+import retrofit2.http.Query
 
 class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
     override fun login(username: String, password: String): Result<ResultApi> {
@@ -61,16 +62,15 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
 
     override fun changeInfo(
             userId: Int,
-            name: String,
             email: String,
+            name: String,
             phone: String,
-            address: String,
-            avatar: String
+            address: String
     ): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
         val responseSignUp = MutableLiveData<ResultApi>()
         apiService.changeUserInfo(
-                userId, name, email, phone, address, avatar,
+                userId, email, name, phone, address,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },
@@ -139,11 +139,11 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
         )
     }
 
-    override fun getUserInfoByUserID(token: Int): Result<User> {
+    override fun getUserInfoByUserID(userId: Int): Result<User> {
         val networkState = MutableLiveData<NetworkState>()
         val responseUser = MutableLiveData<User>()
         apiService.getUserInfoByUserID(
-                token,
+                userId,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },
