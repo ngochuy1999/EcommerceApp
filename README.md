@@ -13,20 +13,24 @@ Technologies:
   
 # Screenshots
 ### Sign In/Up
-![image](https://user-images.githubusercontent.com/32425168/117561647-c3cbf600-b0c2-11eb-982d-e297e8a10d8d.png)
-![image](https://user-images.githubusercontent.com/32425168/117562130-df390000-b0c6-11eb-8b49-c08093c1da63.png)
-![image](https://user-images.githubusercontent.com/32425168/117562169-190a0680-b0c7-11eb-9bb4-fabd49364d25.png)
+![login](https://user-images.githubusercontent.com/32425168/117563586-26c48980-b0d1-11eb-8efe-271e3085ea6c.jpg)
+![login (2)](https://user-images.githubusercontent.com/32425168/117563589-288e4d00-b0d1-11eb-9064-6ee5654b1193.jpg)
+![login (3)](https://user-images.githubusercontent.com/32425168/117563593-2a581080-b0d1-11eb-9ed2-109a146a83ba.jpg)
+
 ### Home
 ![be7cd0fd15f8e0a6b9e9](https://user-images.githubusercontent.com/32425168/117563334-68543500-b0cf-11eb-99c2-f0b108cbe770.jpg)
-![image](https://user-images.githubusercontent.com/32425168/117562460-48ba0e00-b0c9-11eb-8a13-ac595dd62ef7.png)
+![home (2)](https://user-images.githubusercontent.com/32425168/117563612-3b088680-b0d1-11eb-820b-b1407fc99b47.jpg)
+
 ### Account
-![image](https://user-images.githubusercontent.com/32425168/117562470-5cfe0b00-b0c9-11eb-9f45-2d02fd7d0e46.png)
-![image](https://user-images.githubusercontent.com/32425168/117562485-73a46200-b0c9-11eb-8195-9034f03af8c6.png)
+![user](https://user-images.githubusercontent.com/32425168/117563615-4360c180-b0d1-11eb-990d-e2df17667cc1.jpg)
+![user (2)](https://user-images.githubusercontent.com/32425168/117563616-45c31b80-b0d1-11eb-9ea6-390b3de6f2f0.jpg)
+
 ### Product Details
-![image](https://user-images.githubusercontent.com/32425168/117562513-acdcd200-b0c9-11eb-9869-4591d8d4352d.png)
-![image](https://user-images.githubusercontent.com/32425168/117562519-bcf4b180-b0c9-11eb-8eb4-8d72d3d33016.png)
+![product (2)](https://user-images.githubusercontent.com/32425168/117563625-5378a100-b0d1-11eb-9867-ac857ec43688.jpg)
+![product](https://user-images.githubusercontent.com/32425168/117563629-5a9faf00-b0d1-11eb-9567-a2776175eca3.jpg)
+
 ### Cart
-![image](https://user-images.githubusercontent.com/32425168/117562535-ddbd0700-b0c9-11eb-9ac8-0a94f7170f53.png)
+![cart](https://user-images.githubusercontent.com/32425168/117563644-71460600-b0d1-11eb-9167-5f30716e93eb.jpg)
 
 # Test apk
 [EcommerceApp](https://drive.google.com/file/d/1odMvSCtqUJt260qbtmRYElKCAaTXYaAl/view?usp=sharing)
