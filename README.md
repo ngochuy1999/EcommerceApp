@@ -17,7 +17,7 @@ Technologies:
 ![image](https://user-images.githubusercontent.com/32425168/117562130-df390000-b0c6-11eb-8b49-c08093c1da63.png)
 ![image](https://user-images.githubusercontent.com/32425168/117562169-190a0680-b0c7-11eb-9bb4-fabd49364d25.png)
 ### Home
-![be7cd0fd15f8e0a6b9e9](https://user-images.githubusercontent.com/32425168/117563299-127f8d00-b0cf-11eb-9eed-ec178c01ee31.jpg)
+![be7cd0fd15f8e0a6b9e9](https://user-images.githubusercontent.com/32425168/117563334-68543500-b0cf-11eb-99c2-f0b108cbe770.jpg)
 ![image](https://user-images.githubusercontent.com/32425168/117562460-48ba0e00-b0c9-11eb-8a13-ac595dd62ef7.png)
 ### Account
 ![image](https://user-images.githubusercontent.com/32425168/117562470-5cfe0b00-b0c9-11eb-9f45-2d02fd7d0e46.png)
