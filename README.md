@@ -38,11 +38,11 @@ Libraries:
 
 Other:
 
-- [ConstraintLayout](https://developer.android.com/reference/android/support/constraint/ConstraintLayout) — for building flexible and efficient layouts. The Layout Editor uses constraints to determine the position of a UI element within the layout. A constraint represents a connection or alignment to another view, the parent layout, or an invisible guideline.
+- ConstraintLayout — for building flexible and efficient layouts. The Layout Editor uses constraints to determine the position of a UI element within the layout. A constraint represents a connection or alignment to another view, the parent layout, or an invisible guideline.
 
-- [CardView] — element which represents the information in a card manner with a drop shadow (elevation) and corner radius which looks consistent across the platform.
+- CardView — element which represents the information in a card manner with a drop shadow (elevation) and corner radius which looks consistent across the platform.
 
-- [RecyclerView] — a flexible and efficient version of ListView. It is a container for rendering large data set of views that can be recycled and scrolled very efficiently.
+- RecyclerView — a flexible and efficient version of ListView. It is a container for rendering large data set of views that can be recycled and scrolled very efficiently.
 
 Third-party:
 
