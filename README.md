@@ -3,10 +3,13 @@ An e-commerce mobile app for selling and/or buying smartphone.
 Language: Kotlin
 Technologies:
 
-  -MVVM architecture
-  -Android Jetpack (Livedata, view binding, databinding...)
-  -Kotlin Coroutine
-  -Retrofit/OkHttp
+  - MVVM architecture
+  
+  - Android Jetpack (Livedata, view binding, databinding...)
+  
+  - Kotlin Coroutine
+  
+  - Retrofit/OkHttp
   
 # Screenshots
 ### Sign In/Up
