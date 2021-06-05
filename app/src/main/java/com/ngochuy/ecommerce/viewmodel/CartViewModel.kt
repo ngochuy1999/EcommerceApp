@@ -6,16 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Result
+import com.ngochuy.ecommerce.data.ResultApi
+import com.ngochuy.ecommerce.data.User
 import com.ngochuy.ecommerce.repository.CartRepository
 
 class CartViewModel(private val repository: CartRepository) : ViewModel() {
 
     private val requestCartCount = MutableLiveData<Result<Int>>()
     private val requestProductsCart = MutableLiveData<Result<ArrayList<Product>>>()
-    private val requestPlusCart = MutableLiveData<Result<Boolean>>()
+    private val requestPlusCart = MutableLiveData<Result<ResultApi>>()
     private val requestMinusCart = MutableLiveData<Result<Boolean>>()
-    private val requestDelCart = MutableLiveData<Result<Boolean>>()
-
+    private val requestDelCart = MutableLiveData<Result<ResultApi>>()
     val name = MutableLiveData<String>().apply { value = "" }
     val phone = MutableLiveData<String>().apply { value = "" }
     val address = MutableLiveData<String>().apply { value = "" }

@@ -56,10 +56,10 @@ class LoginFragment : Fragment() {
         userViewModel.resultLogin.observe(viewLifecycleOwner, Observer {
             when (it.isStatus) {
                 0 -> {
-                    Toast.makeText(requireContext(), "error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.error_login), Toast.LENGTH_LONG).show()
                 }
                 1 -> {
-                    //      Toast.makeText(requireContext(), "ok", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.login), Toast.LENGTH_LONG).show()
                     USER_ID = it.id
                     startActivity<MainActivity>()
                     requireActivity().finish()
@@ -89,10 +89,10 @@ class LoginFragment : Fragment() {
             binding.edtUserSignIn.error = getString(R.string.error_input_email_not_entered)
             check = false
         }
-//        else if (!isValidEmail(email)) {
-//            binding.edtEmailSignIn.error = getString(R.string.err_email_not_valid)
-//            check = false
-//        }
+        else if (!isValidEmail(username)) {
+            binding.edtUserSignIn.error = getString(R.string.err_email_not_valid)
+            check = false
+        }
         if (pass.isEmpty()) {
             binding.edtPasswordSignIn.error = getString(R.string.error_old_passwords_is_empty)
             check = false

@@ -2,10 +2,7 @@ package com.ngochuy.ecommerce.repository.impl
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.ngochuy.ecommerce.data.NetworkState
-import com.ngochuy.ecommerce.data.Product
-import com.ngochuy.ecommerce.data.Result
-import com.ngochuy.ecommerce.data.Slide
+import com.ngochuy.ecommerce.data.*
 import com.ngochuy.ecommerce.repository.ProductRepository
 import com.ngochuy.ecommerce.service.ApiService
 
@@ -145,9 +142,9 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun addCart(userId: Int, productID: Int, quantity: Int): Result<Boolean> {
+    override fun addCart(userId: Int, productID: Int, quantity: Int): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseAddCart = MutableLiveData<Boolean>()
+        val responseAddCart = MutableLiveData<ResultApi>()
         apiService.addCart(
                 userId,
                 productID,

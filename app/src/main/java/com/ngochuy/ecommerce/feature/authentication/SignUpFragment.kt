@@ -55,11 +55,11 @@ class SignUpFragment : Fragment() {
         userViewModel.dataRegister.observe(viewLifecycleOwner, Observer {
             when (it.isStatus) {
                 1 -> {
-                    Toast.makeText(requireContext(), it.isStatus.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),getString(R.string.sign_up), Toast.LENGTH_LONG).show()
                     requireActivity().replaceFragment(fragment = LoginFragment())
                 }
                 else -> {
-                    Toast.makeText(requireContext(), it.isStatus.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.err_signup), Toast.LENGTH_LONG).show()
                 }
             }
         })

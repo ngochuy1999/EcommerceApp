@@ -210,5 +210,13 @@
     <string name="address_order" translatable="false">Address order</string>
     <string name="change_theme" translatable="false">Change theme</string>
     <string name="line" translatable="false"> Not crossed <strike> crossed </strike> </string>
+    <string name="login">Welcome to Phoneshop</string>
+    <string name="error_login">Wrong username or password</string>
+    <string name="signup">Sign Up Success</string>
+    <string name="err_signup">Registration failed</string>
+    <string name="edit_user">Change user information successfully</string>
+    <string name="err_edit_user">Change information failed</string>
+    <string name="change_pass">Change password successfully</string>
+    <string name="err_change_pass">Password change failed</string>
 
 </resources>

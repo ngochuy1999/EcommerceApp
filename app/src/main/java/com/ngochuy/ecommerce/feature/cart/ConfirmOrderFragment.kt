@@ -11,14 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.OrderItem
 import com.ngochuy.ecommerce.data.Product
+import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.FragmentConfirmOrderBinding
 import com.ngochuy.ecommerce.di.Injection
-import com.ngochuy.ecommerce.ext.USER_ID
-import com.ngochuy.ecommerce.ext.getIntPref
-import com.ngochuy.ecommerce.ext.replaceFragment
+import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.cart.adapter.ProductCartConfirmAdapter
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
+import com.ngochuy.ecommerce.viewmodel.UserViewModel
+import kotlinx.android.synthetic.main.fragment_cart.*
 
 class ConfirmOrderFragment :Fragment(){
     private val cartViewModel: CartViewModel by lazy {
@@ -33,6 +34,12 @@ class ConfirmOrderFragment :Fragment(){
                 Injection.provideOrderViewModelFactory()
         )[OrderViewModel::class.java]
     }
+    private val userViewModel: UserViewModel by lazy {
+        ViewModelProvider(
+                this,
+                Injection.provideAuthViewModelFactory()
+        )[UserViewModel::class.java]
+    }
 
     private var listProducts: ArrayList<Product> = arrayListOf()
     private var listItemOrder: ArrayList<OrderItem> = arrayListOf()
@@ -43,7 +50,8 @@ class ConfirmOrderFragment :Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      //  cartViewModel.getProductsCart(requireActivity().getIntPref(USER_ID))
+        userViewModel.getInfoUser(USER_ID)
+        cartViewModel.getProductsCart(USER_ID)
     }
 
     override fun onCreateView(
@@ -58,7 +66,6 @@ class ConfirmOrderFragment :Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.feeShip = 20000
-        binding.viewModel = cartViewModel
         bindViewModel()
         addEvents()
         initViews()
@@ -97,6 +104,9 @@ class ConfirmOrderFragment :Fragment(){
     }
 
     private fun bindViewModel() {
+        userViewModel.userInfo.observe(viewLifecycleOwner) {
+            binding.user = it
+        }
         cartViewModel.productsCart.observe(viewLifecycleOwner, Observer {
             productAdapter.setProductList(it)
             getTotalPrice(it)
@@ -116,16 +126,14 @@ class ConfirmOrderFragment :Fragment(){
     }
 
     private fun getTotalPrice(arrProduct: ArrayList<Product>) {
-        var price : Long
-        var itemOrder: OrderItem
-        var totalPriceCart: Long? =0
-        var discount : Int
-        if (totalPriceCart != null) {
-            for (pro in arrProduct) {
-                discount = pro.sale!!
-                price = pro.price!!
-                totalPriceCart += (price - price * discount).times(pro.quantity ?: 1)
-            }
+        var totalPriceCart = 0L
+        var discount = 0
+        var price = 0L
+        for (pro in arrProduct) {
+            discount = pro.sale ?: 0
+            price = pro.price ?: 0
+            val priceSale = (price?.minus(((discount * 0.01) * price))).times(pro.quantityOrder?: 1)
+            totalPriceCart += priceSale.toLong()
         }
         binding.price = totalPriceCart
     }

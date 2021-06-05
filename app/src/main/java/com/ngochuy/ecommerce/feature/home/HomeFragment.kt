@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
 
     private val slideAdapter: SlidingImageAdapter by lazy {
         SlidingImageAdapter(requireContext(), arrSlide){
-                productID -> showProductDetail(productID)
+               // productID -> showProductDetail(productID)
         }
     }
 

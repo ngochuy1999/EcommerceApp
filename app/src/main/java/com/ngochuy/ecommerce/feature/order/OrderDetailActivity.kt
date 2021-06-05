@@ -45,7 +45,7 @@ class OrderDetailActivity : AppCompatActivity() {
         order = intent.getParcelableExtra(ORDER)
         //orderViewModel.getAllStatusOrder()
         order?.id?.let {
-            orderViewModel.getAllOrderItem(it)
+            //orderViewModel.getAllOrder(it)
             binding.order = order
             binding.tranFee = 20000
             binding.totalPrice = 0
@@ -62,15 +62,7 @@ class OrderDetailActivity : AppCompatActivity() {
     }
 
     private fun bindViewModel() {
-        orderViewModel.cancelOrder.observe(this) {
-            when (it.isStatus) {
-                1 -> {
-                    order?.id = 4
-                    binding.order = order
-                }
-                else -> Toast.makeText(this, it.isStatus, Toast.LENGTH_LONG).show()
-            }
-        }
+
         orderViewModel.orderItem.observe(this) {
             productAdapter.setProductList(it)
             //getTotalPrice(it)
@@ -80,18 +72,7 @@ class OrderDetailActivity : AppCompatActivity() {
             binding.listStatus = it
         }
 
-        orderViewModel.networkCancelOrder.observe(this) {
-            when (it.status) {
-                Status.RUNNING -> progressOrderDetail.visible()
-                Status.SUCCESS -> {
-                    progressOrderDetail.gone()
-                }
-                Status.FAILED -> {
-                    progressOrderDetail.gone()
-                    Toast.makeText(this, it.msg, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
+
         orderViewModel.networkOrderItem.observe(this) {
             when (it.status) {
                 Status.RUNNING -> progressOrderDetail.visible()
@@ -121,11 +102,11 @@ class OrderDetailActivity : AppCompatActivity() {
     private fun setEvents() {
         ll_cart_number.setOnClickListener { startActivity<CartActivity>() }
         btnBack.setOnClickListener { finish() }
-        btnCancelOrder.setOnClickListener {
-            order?.id?.let { it1 -> orderViewModel.cancelOrder(it1) }
-            order?.id = 4
-            binding.tvStatusOrder.text="Da huy"
-            binding.btnCancelOrder.gone()
-        }
+//        btnCancelOrder.setOnClickListener {
+//            order?.id?.let { it1 -> orderViewModel.cancelOrder(it1) }
+//            order?.id = 4
+//            binding.tvStatusOrder.text="Da huy"
+//            binding.btnCancelOrder.gone()
+//        }
     }
 }

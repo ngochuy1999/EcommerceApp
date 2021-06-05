@@ -51,7 +51,7 @@ interface ApiManager {
 
         }
     }
-
+    //user
     @POST("login")
     fun login(
             @Header("email") username: String,
@@ -89,6 +89,7 @@ interface ApiManager {
     @GET("users")
     fun getUserInfoByUserID(@Header("id") userId: Int): Call<User>
 
+    //product
     @GET("products")
     fun getListProductSale(): Call<ArrayList<Product>>
 
@@ -101,34 +102,34 @@ interface ApiManager {
     @GET("slides")
     fun getListSlider(): Call<ArrayList<Slide>>
 
-
+    // category
     @GET("brands")
-    fun getListCategory(): Call<ArrayList<Category>>
+    fun getListCategory(): Call<ArrayList<String>>
 
     @GET("")
     fun getListProductOfCategory(@Query("") cateId: Int): Call<ArrayList<Product>>
 
+    // cart
+    @GET("countCarts/{id}")
+    fun getCartCount(@Path("id") userID: Int): Call<Int>
 
-    @GET("")
-    fun getCartCount(@Query("") userID: Int): Call<Int>
-
-    @PUT("carts")
+    @POST("carts")
     fun plusCart(
             @Header("id_user") userID: Int,
             @Header("id") productID: Int,
             @Header("sl") quantity: Int
-    ): Call<Boolean>
+    ): Call<ResultApi>
 
-    @DELETE("")
-    fun delItemCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
+    @DELETE("carts")
+    fun delItemCart(@Header("id_user") userID: Int, @Header("id") productID: Int): Call<ResultApi>
 
-    @POST("")
+    @PUT("carts")
     fun minusCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
 
     @GET("carts")
     fun getProductsCart(@Header("id") userID: Int): Call<ArrayList<Product>>
 
-
+    //order
     @PUT("checkOut")
     fun addOrder(
             @Query("userId") userID: Int,
@@ -139,25 +140,7 @@ interface ApiManager {
             @Query("note") note: String
     ): Call<ResultApi>
 
-  //  @GET("")
- //   fun getAllOrder(@Query("userId") userId: Int): Call<ArrayList<Order>>
-
-    @GET("")
-    fun getAllOrderByStatus(
-            @Query("userId") userId: Int,
-            @Query("statusId") statusId: Int
-    ): Call<ArrayList<Order>>
-
-//    @GET("")
-//    fun getAllOrderStatus(): Call<ArrayList<OrderStatus>>
-
-    @PUT("")
-    fun cancelOrder(
-            @Query("orderId") orderId: Int
-    ): Call<ResultApi>
-
-
-    @GET("")
-    fun getAllOrderItem( @Query("orderId") orderId: Int): Call<ArrayList<OrderItem>>
+    @GET("sold")
+    fun getAllOrderItem( @Header("id_user") orderId: Int): Call<ArrayList<OrderItem>>
 
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ngochuy.ecommerce.data.NetworkState
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Result
+import com.ngochuy.ecommerce.data.ResultApi
 import com.ngochuy.ecommerce.repository.CartRepository
 import com.ngochuy.ecommerce.service.ApiService
 
@@ -55,9 +56,9 @@ class CartRepositoryImpl(private val apiService: ApiService) : CartRepository {
         )
     }
 
-    override fun plusCart(userID: Int, productID: Int, quantity: Int): Result<Boolean> {
+    override fun plusCart(userID: Int, productID: Int, quantity: Int): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseCategories = MutableLiveData<Boolean>()
+        val responseCategories = MutableLiveData<ResultApi>()
         apiService.plusCart(
                 userID, productID, quantity,
                 onPrepared = {
@@ -102,9 +103,9 @@ class CartRepositoryImpl(private val apiService: ApiService) : CartRepository {
         )
     }
 
-    override fun delCart(userID: Int, productID: Int): Result<Boolean> {
+    override fun delCart(userID: Int, productID: Int): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseCategories = MutableLiveData<Boolean>()
+        val responseCategories = MutableLiveData<ResultApi>()
         apiService.delCart(
                 userID,
                 productID,

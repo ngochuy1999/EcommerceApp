@@ -72,7 +72,7 @@ class ApiService(private val apiApi: ApiManager) {
             productID: Int,
             quantity: Int,
             onPrepared: () -> Unit,
-            onSuccess: (Boolean?) -> Unit,
+            onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
         val request = apiApi.plusCart(userID, productID, quantity)
@@ -82,7 +82,7 @@ class ApiService(private val apiApi: ApiManager) {
 
     fun getListCategory(
             onPrepared: () -> Unit,
-            onSuccess: (ArrayList<Category>?) -> Unit,
+            onSuccess: (ArrayList<String>?) -> Unit,
             onError: (String) -> Unit
     ) {
         val request = apiApi.getListCategory()
@@ -118,7 +118,7 @@ class ApiService(private val apiApi: ApiManager) {
             productID: Int,
             quantity: Int,
             onPrepared: () -> Unit,
-            onSuccess: (Boolean?) -> Unit,
+            onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
         val request = apiApi.plusCart(userID, productID, quantity)
@@ -130,7 +130,7 @@ class ApiService(private val apiApi: ApiManager) {
             userID: Int,
             productID: Int,
             onPrepared: () -> Unit,
-            onSuccess: (Boolean?) -> Unit,
+            onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
         val request = apiApi.delItemCart(userID, productID)
@@ -226,15 +226,7 @@ class ApiService(private val apiApi: ApiManager) {
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
-//    fun getAllOrderStatus(
-//            onPrepared: () -> Unit,
-//            onSuccess: (ArrayList<OrderStatus>?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = apiApi.getAllOrderStatus()
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
+
 
     fun addOrder(
             userID: Int,
@@ -252,28 +244,6 @@ class ApiService(private val apiApi: ApiManager) {
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
 
-    fun cancelOrder(
-            orderId: Int,
-            onPrepared: () -> Unit,
-            onSuccess: (ResultApi?) -> Unit,
-            onError: (String) -> Unit
-    ) {
-        val request = apiApi.cancelOrder(orderId)
-        onPrepared()
-        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-    }
-
-//    fun getAllOrder(
-//            userID: Int, statusID: Int?,
-//            onPrepared: () -> Unit,
-//            onSuccess: (ArrayList<Order>?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = if (statusID == null) apiApi.getAllOrder(userID)
-//        else apiApi.getAllOrderByStatus(userID, statusID)
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
 
     fun getAllOrderItem(
             orderID : Int,

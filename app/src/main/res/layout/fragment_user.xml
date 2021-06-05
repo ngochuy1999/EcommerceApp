@@ -97,15 +97,6 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/ts_name" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvOrderStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_order_status"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
                 <TextView
                     android:id="@+id/btnChangeMode"
                     android:layout_width="match_parent"

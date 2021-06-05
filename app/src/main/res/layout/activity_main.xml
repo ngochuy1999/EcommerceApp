@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="cartCount"
+            type="Integer" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -50,7 +59,37 @@
                 android:textColor="@color/colorTextHint"
                 android:textSize="16sp" />
 
-            <include layout="@layout/ll_cart" />
+            <FrameLayout
+                android:id="@+id/cartProductDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="10dp"
+                    android:tint="@color/colorWhiteBG"
+                    app:srcCompat="@drawable/ic_shopping_cart"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:id="@+id/tv_number_cart"
+                    android:text="@{cartCount.toString()}"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center|top|end"
+                    android:background="@drawable/edt_number_cart"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhiteBG"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+            </FrameLayout>
+
+
+
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
@@ -81,3 +120,4 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

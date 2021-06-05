@@ -8,9 +8,9 @@ import com.ngochuy.ecommerce.repository.CategoryRepository
 import com.ngochuy.ecommerce.service.ApiService
 
 class CategoryRepositoryImpl(private val apiService: ApiService) : CategoryRepository {
-    override fun getListCategory(): Result<ArrayList<Category>> {
+    override fun getListCategory(): Result<ArrayList<String>> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseCategories = MutableLiveData<ArrayList<Category>>()
+        val responseCategories = MutableLiveData<ArrayList<String>>()
         apiService.getListCategory(
             onPrepared = {
                 networkState.postValue(NetworkState.LOADING)

@@ -51,12 +51,12 @@ class CartFragment : Fragment() {
     }
 
     private fun minusItemCart(id: Int) {
-        cartViewModel.minusCart(USER_ID, id)
+        cartViewModel.plusCart(USER_ID,id, -1)
         cartViewModel.getProductsCart(USER_ID)
     }
 
     private fun plusItemCart(id: Int) {
-        cartViewModel.plusCart(id, USER_ID, 1)
+        cartViewModel.plusCart(USER_ID,id, 1)
         cartViewModel.getProductsCart(USER_ID)
     }
 
@@ -94,20 +94,20 @@ class CartFragment : Fragment() {
     private fun addEvents() {
         btnBackCart.setOnClickListener { requireActivity().onBackPressed() }
         btn_continue_shopping_cart.setOnClickListener { startActivity<MainActivity>() ; requireActivity().finish()}
-//        btnOrderCart.setOnClickListener { showAddress() }
+        btnOrderCart.setOnClickListener { showAddress() }
         swCart.setOnRefreshListener {
             cartViewModel.getProductsCart(USER_ID)
             swCart.isRefreshing = false
         }
     }
 
-//    private fun showAddress() {
-//        requireActivity().replaceFragment(
-//                id = R.id.frmCart,
-//                fragment = AddressCartFragment(),
-//                addToBackStack = true
-//        )
-//    }
+    private fun showAddress() {
+        requireActivity().replaceFragment(
+                id = R.id.frmCart,
+                fragment = ConfirmOrderFragment(),
+                addToBackStack = true
+        )
+    }
 
     private fun bindViewModel() {
         cartViewModel.productsCart.observe(viewLifecycleOwner, Observer {
@@ -134,15 +134,14 @@ class CartFragment : Fragment() {
     }
 
     private fun setPriceCart(prosCart: ArrayList<Product>) {
-        var totalPriceCart: Long? = 0
-        var discount : Int
-        var price :Long
-        if (totalPriceCart != null) {
-            for (pro in prosCart) {
-                discount = pro.sale!!
-                price = pro.price!!
-                totalPriceCart += (price - price * discount).times(pro.quantityOrder ?: 1)
-            }
+        var totalPriceCart = 0L
+        var discount = 0
+        var price = 0L
+        for (pro in prosCart) {
+            discount = pro.sale ?: 0
+            price = pro.price ?: 0
+            val priceSale = (price?.minus(((discount * 0.01) * price))).times(pro.quantityOrder?: 1)
+            totalPriceCart += priceSale.toLong()
         }
         bindPrice(tv_price_cart, totalPriceCart)
     }

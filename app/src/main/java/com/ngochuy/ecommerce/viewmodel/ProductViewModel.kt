@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Result
+import com.ngochuy.ecommerce.data.ResultApi
 import com.ngochuy.ecommerce.repository.ProductRepository
 
 class ProductsViewModel(private val repository: ProductRepository) : ViewModel() {
@@ -15,7 +16,7 @@ class ProductsViewModel(private val repository: ProductRepository) : ViewModel()
     private val requestAllProducts = MutableLiveData<Result<ArrayList<Product>>>()
     private val requestAllProductOfCategory = MutableLiveData<Result<ArrayList<Product>>>()
     private val requestProduct = MutableLiveData<Result<Product>>()
-    private val requestAddCart = MutableLiveData<Result<Boolean>>()
+    private val requestAddCart = MutableLiveData<Result<ResultApi>>()
 
     val listProductSale = Transformations.switchMap(requestAllProductSale) {
         it.data
@@ -69,6 +70,9 @@ class ProductsViewModel(private val repository: ProductRepository) : ViewModel()
         it.networkState
     }
 
+    val resultAddCart = Transformations.switchMap(requestAddCart) {
+        it.data
+    }
     fun addCart( userId: Int,productId: Int, quantity: Int) {
         requestAddCart.value = repository.addCart(userId,productId,quantity)
     }

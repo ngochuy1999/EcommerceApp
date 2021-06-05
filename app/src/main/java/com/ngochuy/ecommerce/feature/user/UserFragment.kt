@@ -25,8 +25,7 @@ import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.authentication.EditProfileActivity
-import com.ngochuy.ecommerce.feature.order.OrderActivity
-import com.ngochuy.ecommerce.feature.user.adapter.OrderStatusAdapter
+import com.ngochuy.ecommerce.feature.order.OrderDetailActivity
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import org.jetbrains.anko.support.v4.startActivity
@@ -44,22 +43,10 @@ class UserFragment : Fragment() {
         )[UserViewModel::class.java]
     }
 
-    private val orderViewModel: OrderViewModel by lazy {
-        ViewModelProvider(
-                this,
-                Injection.provideOrderViewModelFactory()
-        )[OrderViewModel::class.java]
-    }
-
-    private val statusAdapter: OrderStatusAdapter by lazy {
-        OrderStatusAdapter() { orderStatus -> showOrderByStatusId(orderStatus) }
-    }
-
     private lateinit var binding: FragmentUserBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userViewModel.getInfoUser(USER_ID)
-       // orderViewModel.getAllStatusOrder()
     }
 
     override fun onCreateView(
@@ -79,9 +66,6 @@ class UserFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding.rvOrderStatus.adapter = statusAdapter
-        binding.rvOrderStatus.setItemViewCacheSize(20)
-        binding.rvOrderStatus.setHasFixedSize(true)
     }
 
     private fun bindViewModel() {
@@ -101,28 +85,6 @@ class UserFragment : Fragment() {
                 }
             }
         }
-
-        orderViewModel.dataStatusOrder.observe(viewLifecycleOwner) {
-            statusAdapter.setOrderStatusList(it)
-        }
-        orderViewModel.networkStatusOrder.observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.RUNNING -> binding.progressUser.visible()
-                Status.SUCCESS -> {
-                    binding.progressUser.gone()
-                }
-                Status.FAILED -> {
-                    binding.progressUser.gone()
-                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-    }
-
-    private fun showOrderByStatusId(orderStatus: OrderStatus) {
-        val intent = Intent(context, OrderActivity::class.java)
-        intent.putExtra(ORDER_STATUS, orderStatus)
-        requireActivity().startActivity(intent)
     }
 
     private fun addEvents() {
@@ -131,7 +93,7 @@ class UserFragment : Fragment() {
              error()
          }*/
         binding.tvManageOrder.setOnClickListener {
-            startActivity<OrderActivity>()
+            startActivity<OrderDetailActivity>()
         }
 
         binding.btnSignOut.setOnClickListener { confirmSignOut() }

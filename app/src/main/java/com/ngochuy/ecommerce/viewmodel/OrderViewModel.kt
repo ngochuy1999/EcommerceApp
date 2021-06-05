@@ -40,39 +40,6 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
         it.networkState
     }
 
-//    fun getAllStatusOrder() {
-//        requestStatusOrder.value = repository.getAllOrderStatus()
-//    }
-
-
-    /*         GET ALL ORDER    */
-    private val requestAllOrders = MutableLiveData<Result<ArrayList<Order>>>()
-
-    val listOrder = Transformations.switchMap(requestAllOrders) {
-        it.data
-    }
-    val networkListOrder = Transformations.switchMap(requestAllOrders) {
-        it.networkState
-    }
-//
-//    fun getAllOrder(userID: Int, statusID: Int? = null) {
-//        requestAllOrders.value = repository.getAllOrder(userID, statusID)
-//    }
-
-    /*         Cancel order    */
-    private val requestCancelOrder = MutableLiveData<Result<ResultApi>>()
-
-    val cancelOrder = Transformations.switchMap(requestCancelOrder) {
-        it.data
-    }
-    val networkCancelOrder = Transformations.switchMap(requestCancelOrder) {
-        it.networkState
-    }
-
-    fun cancelOrder(orderId: Int) {
-        requestCancelOrder.value = repository.cancelOrder(orderId)
-    }
-
     /*         ITEM ORDER   */
     private val requestItemOrder = MutableLiveData<Result<ArrayList<OrderItem>>>()
 

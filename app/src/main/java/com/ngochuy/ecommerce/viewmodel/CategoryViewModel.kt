@@ -10,7 +10,11 @@ import com.ngochuy.ecommerce.repository.CategoryRepository
 
 class CategoryViewModel(private val repository: CategoryRepository) : ViewModel() {
 
-    private val requestCategories = MutableLiveData<Result<ArrayList<Category>>>()
+    private val requestCategories = MutableLiveData<Result<ArrayList<String>>>()
+
+    init {
+        getListCategories()
+    }
 
     val listCategory= Transformations.switchMap(requestCategories) {
         it.data

@@ -15,13 +15,14 @@ import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityProductDetailBinding
 import com.ngochuy.ecommerce.databinding.BottomSheetAddCartBinding
 import com.ngochuy.ecommerce.di.Injection
-import com.ngochuy.ecommerce.ext.PRODUCT_ID
-import com.ngochuy.ecommerce.ext.USER_ID
-import com.ngochuy.ecommerce.ext.getIntPref
+import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
+import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
+import kotlinx.android.synthetic.main.fragment_cart.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class ProductDetailActivity : AppCompatActivity() {
 
@@ -50,8 +51,8 @@ class ProductDetailActivity : AppCompatActivity() {
             // Set cart count, check user is login yet? check by get userID from Shared pref
             val userId = USER_ID
             binding.cartCount = 0
-//            if (userId != -1)
-//                cartViewModel.getCartCount(userId)
+            if (userId != -1)
+                cartViewModel.getCartCount(userId)
 
             productViewModel.getProductById(productId!!)
             bindViewModel()
@@ -67,8 +68,8 @@ class ProductDetailActivity : AppCompatActivity() {
     private fun addEvents() {
         binding.cartProductDetail.setOnClickListener {
             // Check user login
-//            if (getIntPref(USER_ID) != -1) startActivity<CartActivity>()
-//            else startActivity<LoginActivity>()
+            if (USER_ID != -1) startActivity<CartActivity>()
+            else startActivity<LoginActivity>()
         }
         binding.btnBackProductDetail.setOnClickListener { finish() }
         binding.btnBuy.setOnClickListener {
@@ -103,8 +104,20 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun bindViewModel() {
+
         productViewModel.product.observe(this, Observer {
             binding.product = it
+        })
+        productViewModel.resultAddCart.observe(this, Observer {
+            when (it.isStatus) {
+                0 -> {
+                    Toast.makeText(this, "error", Toast.LENGTH_LONG).show()
+                }
+                1 -> {
+                    Toast.makeText(this ,"Add cart success", Toast.LENGTH_LONG).show()
+
+                }
+            }
         })
 
         productViewModel.networkStateAddCart.observe(this, Observer {
@@ -115,13 +128,13 @@ class ProductDetailActivity : AppCompatActivity() {
                     Toast.makeText(this, "Add cart not success!", Toast.LENGTH_LONG).show()
                 }
                 Status.SUCCESS -> {
-                    Toast.makeText(this, it.msg, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Add cart success!", Toast.LENGTH_LONG).show()
                 }
             }
         })
 
-//        cartViewModel.cartCount.observe(this, Observer {
-//            binding.cartCount = it ?: 0
-//        })
+        cartViewModel.cartCount.observe(this, Observer {
+            binding.cartCount = it ?: 0
+        })
     }
 }

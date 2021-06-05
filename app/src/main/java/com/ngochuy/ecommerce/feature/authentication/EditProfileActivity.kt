@@ -39,10 +39,10 @@ class EditProfileActivity : AppCompatActivity() {
             binding.user = it
         }
         userViewModel.dataChangePass.observe(this) {
-            Toast.makeText(this, it.isStatus.toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.change_pass), Toast.LENGTH_LONG).show()
         }
         userViewModel.statusChangeInfo.observe(this) {
-            Toast.makeText(this, it.isStatus.toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.edit_user), Toast.LENGTH_LONG).show()
         }
 
         userViewModel.networkUserInfo.observe(this)
