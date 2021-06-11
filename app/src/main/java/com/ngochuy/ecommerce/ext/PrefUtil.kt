@@ -37,7 +37,6 @@ class PrefUtil constructor(
 }
 
 const val PREFS_NAME = "PREFERENCES"
-const val TOKEN = "TOKEN"
 var USER_ID = -1
 
 fun Context.removeValueSharePrefs(KEY_NAME: String) {

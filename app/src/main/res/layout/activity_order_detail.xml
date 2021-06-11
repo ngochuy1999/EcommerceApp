@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="cartCount"
+            type="Integer" />
+
+        <variable
             name="totalPrice"
             type="Long" />
 
@@ -18,10 +22,10 @@
         <variable
             name="order"
             type="com.ngochuy.ecommerce.data.Order" />
-
         <variable
-            name="listStatus"
-            type="ArrayList&lt;com.ngochuy.ecommerce.data.OrderStatus&gt;" />
+            name="user"
+            type="com.ngochuy.ecommerce.data.User" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -63,7 +67,34 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <include layout="@layout/ll_cart" />
+                <FrameLayout
+                    android:id="@+id/cartProductDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="5dp"
+                        android:padding="10dp"
+                        android:tint="@color/colorWhiteBG"
+                        app:srcCompat="@drawable/ic_shopping_cart"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:id="@+id/tv_number_cart"
+                        android:text="@{cartCount.toString()}"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center|top|end"
+                        android:background="@drawable/edt_number_cart"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhiteBG"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -139,14 +170,12 @@
 
                     <TextView
                         android:id="@+id/tvStatusOrder"
-                        listStatus="@{listStatus}"
-                        statusID="@{order.statusID}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_status"
                         app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_status"
-                        tools:text="@string/order_id" />
+                        android:text="@string/status_order" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,7 +202,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{order.name}"
+                    android:text="@{`Name: `+user.username}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp"
                     tools:text="@string/name_sign_up" />
@@ -185,7 +214,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{order.phone}"
+                    android:text="@{`Phone: `+user.phone}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp"
                     tools:text="@string/phone" />
@@ -198,7 +227,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@{order.address}"
+                    android:text="@{`Address: `+user.address}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp"
                     tools:text="@string/add_address" />
@@ -372,14 +401,14 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="32dp"
-                    android:background="@drawable/bg_rounded_corner_stroke_sign_up"
+                    android:background="@drawable/bg_rounded_corner_red"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/cancel_order"
                     android:textAllCaps="true"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorWhite"
                     android:textSize="16sp"
-                    android:visibility="@{order.statusID==1? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{order.statusID !=-1? View.VISIBLE : View.GONE}" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

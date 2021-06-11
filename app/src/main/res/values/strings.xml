@@ -6,7 +6,7 @@
 
     <string name="bot_nav_home">Home</string>
     <string name="bot_nav_category">Category</string>
-    <string name="bot_nav_search">Search</string>
+    <string name="bot_nav_search">What are you looking for today?</string>
     <string name="bot_nav_notification">Notification</string>
     <string name="bot_nav_user">User</string>
     <string name="tv_name">Name</string>
@@ -63,7 +63,7 @@
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
     <string name="retype_new_password">Retype new password</string>
-    <string name="change_pasword">Change pasword</string>
+    <string name="change_password">Change password</string>
     <string name="account_information">Account information</string>
     <string name="save_changes">Save changes</string>
     <string name="you_have_no_orders_yet">You have no orders yet</string>
@@ -217,6 +217,8 @@
     <string name="edit_user">Change user information successfully</string>
     <string name="err_edit_user">Change information failed</string>
     <string name="change_pass">Change password successfully</string>
-    <string name="err_change_pass">Password change failed</string>
+    <string name="err_change_pass">Password change failed. Old password is not correct</string>
+    <string name="status_order">Waiting for delivery</string>
+    <string name="err_pass_empty">Password is not empty</string>
 
 </resources>

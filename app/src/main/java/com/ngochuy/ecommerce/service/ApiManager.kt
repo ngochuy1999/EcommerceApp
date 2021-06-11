@@ -107,7 +107,7 @@ interface ApiManager {
     fun getListCategory(): Call<ArrayList<String>>
 
     @GET("")
-    fun getListProductOfCategory(@Query("") cateId: Int): Call<ArrayList<Product>>
+    fun getListProductOfCategory(@Header("") cateId: Int): Call<ArrayList<Product>>
 
     // cart
     @GET("countCarts/{id}")
@@ -130,17 +130,9 @@ interface ApiManager {
     fun getProductsCart(@Header("id") userID: Int): Call<ArrayList<Product>>
 
     //order
-    @PUT("checkOut")
-    fun addOrder(
-            @Query("userId") userID: Int,
-            @Query("name") name: String,
-            @Query("phone") phone: String,
-            @Query("email") email: String,
-            @Query("address") address: String,
-            @Query("note") note: String
-    ): Call<ResultApi>
+    @POST("sold")
+    fun addOrder(@Header("id") orderId: Int): Call<ResultApi>
 
     @GET("sold")
-    fun getAllOrderItem( @Header("id_user") orderId: Int): Call<ArrayList<OrderItem>>
-
+    fun getAllOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
 }

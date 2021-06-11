@@ -230,16 +230,11 @@ class ApiService(private val apiApi: ApiManager) {
 
     fun addOrder(
             userID: Int,
-            name: String,
-            phone: String,
-            email: String,
-            address: String,
-            note: String,
             onPrepared: () -> Unit,
             onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.addOrder(userID, name, phone, email, address, note)
+        val request = apiApi.addOrder(userID)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
@@ -248,7 +243,7 @@ class ApiService(private val apiApi: ApiManager) {
     fun getAllOrderItem(
             orderID : Int,
             onPrepared: () -> Unit,
-            onSuccess: (ArrayList<OrderItem>?) -> Unit,
+            onSuccess: (ResultOrder?) -> Unit,
             onError: (String) -> Unit
     ) {
         val request =  apiApi.getAllOrderItem(orderID)

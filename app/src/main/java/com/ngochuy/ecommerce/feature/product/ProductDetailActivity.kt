@@ -71,7 +71,9 @@ class ProductDetailActivity : AppCompatActivity() {
             if (USER_ID != -1) startActivity<CartActivity>()
             else startActivity<LoginActivity>()
         }
-        binding.btnBackProductDetail.setOnClickListener { finish() }
+        binding.btnBackProductDetail.setOnClickListener {
+            finish()
+        }
         binding.btnBuy.setOnClickListener {
             addCart()
         }

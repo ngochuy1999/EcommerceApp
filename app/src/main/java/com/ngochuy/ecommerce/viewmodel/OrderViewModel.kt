@@ -21,27 +21,13 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
 
     fun addOrder(
             userID: Int,
-            name: String,
-            phone: String,
-            email: String,
-            address: String,
-            note: String
     ) {
-        requestOrder.value = repository.order(userID, name, phone, email, address, note)
+        requestOrder.value = repository.order(userID)
     }
 
-    /*         GET ALL STATUS OF ORDER    */
-    private val requestStatusOrder = MutableLiveData<Result<ArrayList<OrderStatus>>>()
-
-    val dataStatusOrder = Transformations.switchMap(requestStatusOrder) {
-        it.data
-    }
-    val networkStatusOrder = Transformations.switchMap(requestStatusOrder) {
-        it.networkState
-    }
 
     /*         ITEM ORDER   */
-    private val requestItemOrder = MutableLiveData<Result<ArrayList<OrderItem>>>()
+    private val requestItemOrder = MutableLiveData<Result<ResultOrder>>()
 
     val orderItem = Transformations.switchMap(requestItemOrder) {
         it.data

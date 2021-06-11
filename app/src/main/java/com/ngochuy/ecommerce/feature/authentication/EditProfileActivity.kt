@@ -8,13 +8,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityEditProfileBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
+import com.ngochuy.ecommerce.feature.cart.OrderSuccessFragment
+import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
+import kotlinx.android.synthetic.main.activity_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_order_success.*
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -38,11 +45,18 @@ class EditProfileActivity : AppCompatActivity() {
         userViewModel.userInfo.observe(this) {
             binding.user = it
         }
-        userViewModel.dataChangePass.observe(this) {
-            Toast.makeText(this, getString(R.string.change_pass), Toast.LENGTH_LONG).show()
-        }
+
         userViewModel.statusChangeInfo.observe(this) {
-            Toast.makeText(this, getString(R.string.edit_user), Toast.LENGTH_LONG).show()
+            when (it.isStatus) {
+                0 -> {
+                    Toast.makeText(this, getString(R.string.err_edit_user), Toast.LENGTH_LONG).show()
+                }
+                1 -> {
+                    Toast.makeText(this, getString(R.string.edit_user), Toast.LENGTH_LONG).show()
+                    startActivity<MainActivity>()
+                    finish()
+                }
+            }
         }
 
         userViewModel.networkUserInfo.observe(this)
@@ -59,19 +73,6 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
 
-        userViewModel.networkChangePass.observe(this)
-        {
-            when (it.status) {
-                Status.RUNNING -> binding.progressEditProfile.visible()
-                Status.SUCCESS -> {
-                    binding.progressEditProfile.gone()
-                }
-                Status.FAILED -> {
-                    binding.progressEditProfile.gone()
-                    Toast.makeText(this, it.msg, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
         userViewModel.networkChangeInfo.observe(this)
         {
             when (it.status) {
@@ -91,10 +92,6 @@ class EditProfileActivity : AppCompatActivity() {
         finish()
     }
 
-    fun onCheckChangePassword(view: View) {
-        if ((view as CheckBox).isChecked) binding.llEditPassword.visible()
-        else binding.llEditPassword.gone()
-    }
 
     fun onClickChangeInfo(view: View) {
         var check = true
@@ -102,9 +99,6 @@ class EditProfileActivity : AppCompatActivity() {
         val phone = binding.edtPhoneEdit.textTrim()
         val mail = binding.edtEmailEdit.textTrim()
         val address = binding.edtAddress.textTrim()
-        val pass = binding.edtOldPassword.textTrim()
-        val newPass = binding.edtNewPass.textTrim()
-        val reNewPass = binding.edtReNewPass.textTrim()
 
         if (name.isEmpty()) {
             binding.edtNameEdit.error = getString(R.string.error_input_name_not_entered)
@@ -125,26 +119,6 @@ class EditProfileActivity : AppCompatActivity() {
             binding.edtAddress.error = getString(R.string.error_input_email_not_entered)
             check = false
         }
-        if (binding.cbChangePw.isChecked) {
-            if (pass.isEmpty()) {
-                binding.edtOldPassword.error = getString(R.string.error_old_passwords_is_empty)
-                check = false
-            }
-            if (newPass.isEmpty()) {
-                binding.edtNewPass.error = getString(R.string.error_new_pw_empty)
-                check = false
-            }
-            if (reNewPass.isEmpty()) {
-                binding.edtReNewPass.error = getString(R.string.error_re_new_pw_empty)
-                check = false
-            }
-            if (newPass != reNewPass) {
-                binding.edtReNewPass.error = getString(R.string.error_passwords_do_not_match)
-                check = false
-            }
-            if (check) userViewModel.changePass(USER_ID, pass, newPass)
-        }
-
         if (check) {
             userViewModel.changeInfo(
                     userViewModel.userInfo.value?.id ?: 0,

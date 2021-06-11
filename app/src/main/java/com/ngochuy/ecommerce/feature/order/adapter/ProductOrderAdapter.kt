@@ -12,7 +12,7 @@ import com.ngochuy.ecommerce.databinding.ItemProductOrderBinding
 
 class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listProductSale: MutableList<OrderItem> = arrayListOf()
+    private var listProductSale: MutableList<Product> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ProductConfirmViewHolder(
             ItemProductOrderBinding.inflate(
@@ -28,7 +28,7 @@ class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         (holder as ProductConfirmViewHolder).bind(listProductSale[position])
     }
 
-    fun setProductList(list: ArrayList<OrderItem>) {
+    fun setProductList(list: ArrayList<Product>) {
         listProductSale.apply {
             clear()
             addAll(list)
@@ -40,7 +40,7 @@ class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val binding: ItemProductOrderBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: OrderItem) {
+        fun bind(item: Product) {
             binding.apply {
                 product = item
                 executePendingBindings()

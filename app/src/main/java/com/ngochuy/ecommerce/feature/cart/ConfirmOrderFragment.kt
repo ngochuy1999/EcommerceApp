@@ -93,14 +93,7 @@ class ConfirmOrderFragment :Fragment(){
     }
 
     private fun addOrder() {
-        orderViewModel.addOrder(
-                USER_ID,
-                cartViewModel.name.value.toString(),
-                cartViewModel.phone.value.toString(),
-                cartViewModel.email.value.toString(),
-                cartViewModel.address.value.toString(),
-                cartViewModel.note.value.toString()
-        )
+        orderViewModel.addOrder(USER_ID)
     }
 
     private fun bindViewModel() {

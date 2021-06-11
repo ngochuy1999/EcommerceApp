@@ -23,6 +23,7 @@ import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.FragmentUserBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
+import com.ngochuy.ecommerce.feature.authentication.ChangePassActivity
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.authentication.EditProfileActivity
 import com.ngochuy.ecommerce.feature.order.OrderDetailActivity
@@ -104,6 +105,9 @@ class UserFragment : Fragment() {
 
         binding.llInfoLogged.setOnClickListener {
             startActivity<EditProfileActivity>()
+        }
+        binding.btnChangePass.setOnClickListener {
+            startActivity<ChangePassActivity>()
         }
 
         binding.btnChangeMode.setOnClickListener{

@@ -17,6 +17,7 @@ import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import org.jetbrains.anko.support.v4.startActivity
+import com.ngochuy.ecommerce.ext.hideSoftKeyboard
 
 class LoginFragment : Fragment() {
 
@@ -94,7 +95,7 @@ class LoginFragment : Fragment() {
             check = false
         }
         if (pass.isEmpty()) {
-            binding.edtPasswordSignIn.error = getString(R.string.error_old_passwords_is_empty)
+            binding.edtPasswordSignIn.error = getString(R.string.err_pass_empty)
             check = false
         }
         if (check) {
