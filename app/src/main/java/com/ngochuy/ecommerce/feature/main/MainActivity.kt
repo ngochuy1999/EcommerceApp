@@ -11,8 +11,6 @@ import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityMainBinding
 import com.ngochuy.ecommerce.ext.USER_ID
-import com.ngochuy.ecommerce.ext.hideSoftKeyboard
-import com.ngochuy.ecommerce.ext.showKeyBoard
 import com.ngochuy.ecommerce.feature.cart.CartActivity
 import com.ngochuy.ecommerce.feature.category.CategoryFragment
 import com.ngochuy.ecommerce.feature.home.HomeFragment

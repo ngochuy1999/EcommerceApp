@@ -38,9 +38,9 @@
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="125dp"
                 android:gravity="center"
                 android:text="@string/sign_in"
                 android:textColor="@android:color/white"
@@ -112,6 +112,26 @@
                 android:onClick="@{()->fragment.onClickLogin()}"
                 android:text="@string/sign_in"
                 android:textColor="@android:color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_signup"
+                android:textSize="14dp"
+                android:textColor="@color/colorBlueDark"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:onClick="@{()->fragment.onClickSignUp()}"/>
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_baseline_fingerprint_24"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/fingerprint_iv"
+                android:onClick="@{()->fragment.onClickFigger()}"/>
+
 
         </LinearLayout>
 
@@ -125,5 +145,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/myCoordinatorLayout"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Here are the existing layout elements, now wrapped in
+                 a CoordinatorLayout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- …Toolbar, other layouts, other elements… -->
+
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

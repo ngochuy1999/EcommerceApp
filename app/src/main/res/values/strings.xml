@@ -220,5 +220,12 @@
     <string name="err_change_pass">Password change failed. Old password is not correct</string>
     <string name="status_order">Waiting for delivery</string>
     <string name="err_pass_empty">Password is not empty</string>
+    <string name="no_signup">You don\'t have an account? Please sign up</string>
+    <string name="done_signup">Sign Up Success</string>
+    <string name="touchid">Setting Touch ID</string>
+    <string name="use_touchId">Sign in with TouchID</string>
+    <string name="use_touchid2">Use your TouchID to sign in instead of a password</string>
+    <string name="set_touchid">Set up your TouchID to sign in instead of a password</string>
+    <string name="wrong_fingerprint">Wrong fingerprint</string>
 
 </resources>

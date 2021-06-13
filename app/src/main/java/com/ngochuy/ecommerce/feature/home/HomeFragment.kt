@@ -3,7 +3,6 @@ package com.ngochuy.ecommerce.feature.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_home.*
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.Slide
 import com.ngochuy.ecommerce.data.Status
@@ -25,8 +24,9 @@ import com.ngochuy.ecommerce.feature.product.ProductDetailActivity
 import com.ngochuy.ecommerce.viewmodel.HomeViewModel
 import com.ngochuy.ecommerce.widget.GridItemDecoration
 import com.ngochuy.ecommerce.widget.SlidingImageAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
-import kotlin.math.log
+
 
 class HomeFragment : Fragment() {
 
@@ -51,14 +51,14 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel = ViewModelProvider(
-            this,
-            Injection.provideHomeViewModelFactory()
+                this,
+                Injection.provideHomeViewModelFactory()
         )[HomeViewModel::class.java]
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -71,8 +71,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun playSlide() {
-        pagerHome.adapter= SlidingImageAdapter(requireContext(), arrSlide){
-                productID -> showProductDetail(productID)
+        pagerHome.adapter= SlidingImageAdapter(requireContext(), arrSlide){ productID -> showProductDetail(productID)
         }
         indicator.setViewPager(pagerHome)
 
@@ -105,7 +104,7 @@ class HomeFragment : Fragment() {
         })
 
         homeViewModel.networkStateProSale.observe(viewLifecycleOwner, Observer {
-            when(it.status){
+            when (it.status) {
                 Status.RUNNING -> progressHome.visible()
                 Status.SUCCESS -> progressHome.gone()
                 Status.FAILED -> {
@@ -129,7 +128,11 @@ class HomeFragment : Fragment() {
         rv_product_home.setHasFixedSize(true)
         rv_product_home.setItemViewCacheSize(20)
         rv_product_home.layoutManager = GridLayoutManager(requireContext(), 2)
-        rv_product_home.addItemDecoration(GridItemDecoration(10, 2))
+        val dividerHorizontal = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        rv_product_home.addItemDecoration(dividerHorizontal)
+        val dividerVertical = DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
+        rv_product_home.addItemDecoration(dividerVertical)
+       // rv_product_home.addItemDecoration(GridItemDecoration(10, 2))
 
 //        pagerHome.adapter= slideAdapter
 //        indicator.setViewPager(pagerHome)

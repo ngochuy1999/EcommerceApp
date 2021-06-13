@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.ngochuy.ecommerce.ext.setAutoHideKeyboard
+
 
 abstract class BaseActivity<ViewBinding : ViewDataBinding> : AppCompatActivity(){
     lateinit var viewBinding: ViewBinding
@@ -31,7 +31,6 @@ abstract class BaseActivity<ViewBinding : ViewDataBinding> : AppCompatActivity()
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
         viewBinding = DataBindingUtil.setContentView(this, layoutId)
         viewBinding.lifecycleOwner = this
-        viewBinding.root.setAutoHideKeyboard(this)
         bindView()
         bindViewModel()
     }

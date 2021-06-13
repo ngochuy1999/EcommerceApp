@@ -23,6 +23,9 @@
             android:name=".feature.cart.CartActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".feature.authentication.TouchIDActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".feature.authentication.ChangePassActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity

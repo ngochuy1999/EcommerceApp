@@ -106,8 +106,8 @@ interface ApiManager {
     @GET("brands")
     fun getListCategory(): Call<ArrayList<String>>
 
-    @GET("")
-    fun getListProductOfCategory(@Header("") cateId: Int): Call<ArrayList<Product>>
+    @GET("getByBrand")
+    fun getListProductOfCategory(@Header("filter") cateId: Int): Call<ArrayList<Product>>
 
     // cart
     @GET("countCarts/{id}")

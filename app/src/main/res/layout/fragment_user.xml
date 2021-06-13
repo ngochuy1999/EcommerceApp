@@ -98,11 +98,24 @@
                     android:textSize="@dimen/ts_name" />
 
                 <TextView
-                    android:id="@+id/btnChangePass"
+                    android:id="@+id/btnSetFinger"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/white"
+                    android:drawableStart="@drawable/ic_finger"
+                    android:drawableEnd="@drawable/ic_gray_right_arrow"
+                    android:drawablePadding="10dp"
+                    android:padding="16dp"
+                    android:text="@string/touchid"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/ts_name" />
+                <TextView
+                    android:id="@+id/btnChangePass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:drawableStart="@drawable/ic_baseline_sync_24"
                     android:drawableEnd="@drawable/ic_gray_right_arrow"
                     android:drawablePadding="10dp"
                     android:padding="16dp"
@@ -114,6 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
+                    android:drawableStart="@drawable/ic_baseline_color_lens_24"
                     android:drawableEnd="@drawable/ic_gray_right_arrow"
                     android:drawablePadding="10dp"
                     android:padding="16dp"

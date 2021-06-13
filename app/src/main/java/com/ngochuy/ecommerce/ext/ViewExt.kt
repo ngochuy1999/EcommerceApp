@@ -26,24 +26,6 @@ fun View.disable() {
     this.isEnabled = false
 }
 
-@SuppressLint("ClickableViewAccessibility")
-fun View.setAutoHideKeyboard(activity: Activity) {
-    // Set up touch listener for non-text box views to hide keyboard.
-    if (this !is EditText) {
-        setOnTouchListener { _, _ ->
-            activity.hideSoftKeyboard()
-            false
-        }
-    }
-
-    //If a layout container, iterate over children and seed recursion.
-    if (this is ViewGroup) {
-        for (i in 0 until childCount) {
-            val innerView = getChildAt(i)
-            innerView.setAutoHideKeyboard(activity)
-        }
-    }
-}
 /*
 fun <T> ViewGroup.addViewExt(
     context: Context, @LayoutRes layoutItem: Int,
