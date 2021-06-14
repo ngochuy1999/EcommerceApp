@@ -35,7 +35,7 @@ class ChangePassActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change_pass)
-        userViewModel.getInfoUser((USER_ID) ?: 0)
+        userViewModel.getInfoUser(getIntPref(USER_ID) ?: 0)
         bindViewModel()
     }
 
@@ -96,6 +96,6 @@ class ChangePassActivity : AppCompatActivity() {
                 binding.edtReNewPass.error = getString(R.string.error_passwords_do_not_match)
                 check = false
             }
-            if (check) userViewModel.changePass(USER_ID, pass, newPass)
+            if (check) userViewModel.changePass(getIntPref(USER_ID), pass, newPass)
     }
 }

@@ -50,8 +50,8 @@ class ProductsViewModel(private val repository: ProductRepository) : ViewModel()
         it.networkState
     }
 
-    fun getProductCategory(cateId: Int) {
-        requestAllProductOfCategory.value = repository.getProductCategory(cateId)
+    fun getProductCategory(cate: String) {
+        requestAllProductOfCategory.value = repository.getProductCategory(cate)
     }
 
     val product = Transformations.switchMap(requestProduct) {

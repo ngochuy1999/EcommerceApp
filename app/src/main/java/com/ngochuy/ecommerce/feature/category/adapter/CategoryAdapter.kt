@@ -7,7 +7,7 @@ import com.ngochuy.ecommerce.data.Category
 import com.ngochuy.ecommerce.databinding.ItemCategoryBinding
 
 class CategoryAdapter(
-    private var onCategoryClick: (id:Int) -> Unit
+    private var onCategoryClick: (id:String) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listCategory: ArrayList<String> = arrayListOf()
@@ -43,7 +43,7 @@ class CategoryAdapter(
             binding.apply {
                 category = item
                 executePendingBindings()
-              //  itemCategory.setOnClickListener { item?.let { it1 -> onCategoryClick(it1) } }
+                itemCategory.setOnClickListener { item?.let { it1 -> onCategoryClick(it1) } }
             }
         }
     }

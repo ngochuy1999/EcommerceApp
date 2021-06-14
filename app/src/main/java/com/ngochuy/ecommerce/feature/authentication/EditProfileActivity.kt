@@ -37,7 +37,7 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile)
-        userViewModel.getInfoUser((USER_ID) ?: 0)
+        userViewModel.getInfoUser(getIntPref(USER_ID) ?: 0)
         bindViewModel()
     }
 

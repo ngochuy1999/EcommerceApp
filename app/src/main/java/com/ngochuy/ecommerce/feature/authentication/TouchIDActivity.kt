@@ -31,20 +31,20 @@ class TouchIDActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_touchid)
-        userViewModel.getInfoUser((USER_ID) ?: 0)
+        userViewModel.getInfoUser(getIntPref(USER_ID) ?: 0)
         bindViewModel()
-        swTouch.isChecked = CHECK_FINGER
+        swTouch.isChecked = getBooleanPref("CHECK_FINGER")
         swTouch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                CHECK_FINGER = true
-                USER_TOUCHID = responseUser.value?.email.toString()
-                PASS_TOUCHID = responseUser.value?.password.toString()
-                Toast.makeText(this , USER_TOUCHID, Toast.LENGTH_SHORT).show()
-
+                setBooleanPref("CHECK_FINGER",true)
+                setStringPref("USER_TOUCHID",responseUser.value?.email.toString())
+                setStringPref("PASS_TOUCHID",responseUser.value?.password.toString())
+                Toast.makeText(this,getStringPref("USER_TOUCHID"),Toast.LENGTH_LONG).show()
+                Toast.makeText(this,getStringPref("PASS_TOUCHID"),Toast.LENGTH_LONG).show()
             } else {
-                CHECK_FINGER = false
-                USER_TOUCHID = ""
-                PASS_TOUCHID = ""
+                setBooleanPref("CHECK_FINGER",false)
+                setStringPref("USER_TOUCHID","")
+                setStringPref("PASS_TOUCHID","")
             }
         }
 

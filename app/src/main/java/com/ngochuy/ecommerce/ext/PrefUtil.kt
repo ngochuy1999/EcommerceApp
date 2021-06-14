@@ -1,6 +1,7 @@
 package com.ngochuy.ecommerce.ext
 
 import android.app.Activity
+import android.app.Fragment
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.SharedPreferences
@@ -46,10 +47,7 @@ class PrefUtil constructor(
 }
 
 const val PREFS_NAME = "PREFERENCES"
-var USER_ID = -1
-var CHECK_FINGER = false
-var USER_TOUCHID = ""
-var PASS_TOUCHID = ""
+const val USER_ID = "USER_ID"
 
 fun Context.removeValueSharePrefs(KEY_NAME: String) {
     val pref: SharedPreferences = getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)

@@ -95,11 +95,11 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun getProductCategory(cateId: Int): Result<ArrayList<Product>> {
+    override fun getProductCategory(cate: String): Result<ArrayList<Product>> {
         val networkState = MutableLiveData<NetworkState>()
         val responseProducts = MutableLiveData<ArrayList<Product>>()
         apiService.getListProductCategory(
-                cateId,
+                cate,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },

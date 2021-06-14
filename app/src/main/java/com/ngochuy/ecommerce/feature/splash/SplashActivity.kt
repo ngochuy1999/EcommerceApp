@@ -5,10 +5,10 @@ import android.os.Bundle
 import org.jetbrains.anko.startActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.core.view.doOnLayout
 import com.ngochuy.ecommerce.R
-import com.ngochuy.ecommerce.ext.USER_ID
-import com.ngochuy.ecommerce.ext.getIntPref
+import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -34,7 +34,11 @@ class SplashActivity : AppCompatActivity() , Animation.AnimationListener{
     }
 
     private fun openNextScreen() {
-        if(USER_ID==-1)startActivity<LoginActivity>()
+        val pref = getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
+        if(!pref.contains(USER_ID)) {
+            setIntPref(USER_ID,-1)
+        }
+        if(getIntPref(USER_ID)==-1)startActivity<LoginActivity>()
         else startActivity<MainActivity>()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()

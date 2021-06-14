@@ -18,10 +18,7 @@ import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityOrderDetailBinding
 import com.ngochuy.ecommerce.di.Injection
-import com.ngochuy.ecommerce.ext.ORDER
-import com.ngochuy.ecommerce.ext.USER_ID
-import com.ngochuy.ecommerce.ext.gone
-import com.ngochuy.ecommerce.ext.visible
+import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
 import com.ngochuy.ecommerce.feature.cart.adapter.ProductCartConfirmAdapter
@@ -60,7 +57,7 @@ class OrderDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail)
         order = intent.getParcelableExtra(ORDER)
-        val userId = USER_ID
+        val userId = getIntPref(USER_ID)
         binding.cartCount = 0
         if (userId != -1)
             cartViewModel.getCartCount(userId)
@@ -70,8 +67,8 @@ class OrderDetailActivity : AppCompatActivity() {
         binding.tranFee = 20000
         binding.totalPrice = 0L
         //}
-        orderViewModel.getAllOrderItem(USER_ID)
-        userViewModel.getInfoUser((USER_ID) ?: 0)
+        orderViewModel.getAllOrderItem(getIntPref(USER_ID))
+        userViewModel.getInfoUser((getIntPref(USER_ID)) ?: 0)
         setEvents()
         initViews()
         bindViewModel()
@@ -127,7 +124,7 @@ class OrderDetailActivity : AppCompatActivity() {
     private fun setEvents() {
         binding.cartProductDetail.setOnClickListener {
             // Check user login
-            if (USER_ID != -1) startActivity<CartActivity>()
+            if (getIntPref(USER_ID) != -1) startActivity<CartActivity>()
             else startActivity<LoginActivity>()
         }
         btnBack.setOnClickListener { finish() }

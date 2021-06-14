@@ -1,5 +1,6 @@
 package com.ngochuy.ecommerce.feature.category
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.di.Injection
+import com.ngochuy.ecommerce.ext.CATEGORY_ID
 import com.ngochuy.ecommerce.feature.category.adapter.CategoryAdapter
+import com.ngochuy.ecommerce.feature.product.ProductsOfCategoryActivity
 import com.ngochuy.ecommerce.viewmodel.CategoryViewModel
 import com.ngochuy.ecommerce.widget.GridItemDecoration
 import kotlinx.android.synthetic.main.fragment_category.*
@@ -22,12 +25,12 @@ import kotlinx.android.synthetic.main.fragment_category.*
 class CategoryFragment : Fragment() {
 
     private val categoryAdapter by lazy {
-        CategoryAdapter { categoryID -> showProductsOfCategory(categoryID) }
+        CategoryAdapter { category -> showProductsOfCategory(category) }
     }
-    private fun showProductsOfCategory(categoryID: Int) {
-//        val intent = Intent(context, ProductsOfCategoryActivity::class.java)
-//        intent.putExtra(CATEGORY_ID, categoryID)
-//        requireActivity().startActivity(intent)
+    private fun showProductsOfCategory(category: String) {
+        val intent = Intent(context, ProductsOfCategoryActivity::class.java)
+        intent.putExtra(CATEGORY_ID, category)
+       requireActivity().startActivity(intent)
     }
 
 

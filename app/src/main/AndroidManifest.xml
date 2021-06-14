@@ -35,6 +35,9 @@
             android:name=".feature.authentication.LoginActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
+        android:name=".feature.product.ProductsOfCategoryActivity"
+        android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".feature.product.ProductDetailActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity

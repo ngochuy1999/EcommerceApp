@@ -18,6 +18,7 @@ import com.ngochuy.ecommerce.feature.main.adapter.MyFragmentPagerAdapter
 import com.ngochuy.ecommerce.feature.user.UserFragment
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.PRODUCT_ID
+import com.ngochuy.ecommerce.ext.getIntPref
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.search.SearchActivity
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
@@ -66,10 +67,9 @@ class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
             // Set cart count, check user is login yet? check by get userID from Shared pref
-        val userId = USER_ID
         binding.cartCount = 0
-        if (userId != -1)
-            cartViewModel.getCartCount(userId)
+        if (getIntPref(USER_ID) != -1)
+            cartViewModel.getCartCount(getIntPref(USER_ID))
         addViewPager()
         bindViewModel()
         addBotNavEvents()
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener {
         }
         binding.cartProductDetail.setOnClickListener {
             // Check user login
-            if (USER_ID != -1) startActivity<CartActivity>()
+            if (getIntPref(USER_ID) != -1) startActivity<CartActivity>()
             else startActivity<LoginActivity>()
         }
     }

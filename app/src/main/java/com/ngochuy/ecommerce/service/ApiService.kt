@@ -46,12 +46,12 @@ class ApiService(private val apiApi: ApiManager) {
     }
 
     fun getListProductCategory(
-            cateId: Int,
+            cate: String,
             onPrepared: () -> Unit,
             onSuccess: (ArrayList<Product>?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.getListProductOfCategory(cateId)
+        val request = apiApi.getListProductOfCategory(cate)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }

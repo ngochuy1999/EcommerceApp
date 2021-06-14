@@ -51,23 +51,23 @@ class CartFragment : Fragment() {
     }
 
     private fun minusItemCart(id: Int) {
-        cartViewModel.plusCart(USER_ID,id, -1)
-        cartViewModel.getProductsCart(USER_ID)
+        cartViewModel.plusCart(requireContext().getIntPref(USER_ID),id, -1)
+        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
     }
 
     private fun plusItemCart(id: Int) {
-        cartViewModel.plusCart(USER_ID,id, 1)
-        cartViewModel.getProductsCart(USER_ID)
+        cartViewModel.plusCart(requireContext().getIntPref(USER_ID),id, 1)
+        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
     }
 
     private fun delItemCart(id: Int) {
-        cartViewModel.delCartItem(USER_ID, id)
-        cartViewModel.getProductsCart(USER_ID)
+        cartViewModel.delCartItem(requireContext().getIntPref(USER_ID), id)
+        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
 }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        cartViewModel.getProductsCart(USER_ID)
+        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
     }
 
     override fun onCreateView(
@@ -96,7 +96,7 @@ class CartFragment : Fragment() {
         btn_continue_shopping_cart.setOnClickListener { startActivity<MainActivity>() ; requireActivity().finish()}
         btnOrderCart.setOnClickListener { showAddress() }
         swCart.setOnRefreshListener {
-            cartViewModel.getProductsCart(USER_ID)
+            cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
             swCart.isRefreshing = false
         }
     }

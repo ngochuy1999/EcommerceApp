@@ -48,7 +48,7 @@ class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userViewModel.getInfoUser(USER_ID)
+        userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
     }
 
     override fun onCreateView(
@@ -160,7 +160,7 @@ class UserFragment : Fragment() {
         {
             setMessage(getString(R.string.dialogLogOut))
             setPositiveButton(getString(R.string.dialogOk)) { dialog, _ ->
-                requireContext().removeValueSharePrefs(USER_EMAIL)
+                requireContext().removeValueSharePrefs("USER_ID")
                 startActivity<LoginActivity>()
                 requireActivity().finish()
                 dialog.dismiss()

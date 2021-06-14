@@ -50,8 +50,8 @@ class ConfirmOrderFragment :Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userViewModel.getInfoUser(USER_ID)
-        cartViewModel.getProductsCart(USER_ID)
+        userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
+        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
     }
 
     override fun onCreateView(
@@ -93,7 +93,7 @@ class ConfirmOrderFragment :Fragment(){
     }
 
     private fun addOrder() {
-        orderViewModel.addOrder(USER_ID)
+        orderViewModel.addOrder(requireContext().getIntPref(USER_ID))
     }
 
     private fun bindViewModel() {
