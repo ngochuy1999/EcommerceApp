@@ -88,7 +88,7 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/ns"
             android:layout_width="match_parent"
-            android:layout_height="617dp"
+            android:layout_height="0dp"
             android:background="@color/colorWhiteBG"
             app:layout_constraintBottom_toTopOf="@+id/ln"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16sp"
-                    android:textColor="@color/colorTextHint"
+                    android:textColor="@color/colorBlue"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +157,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16sp"
-                    android:textColor="@color/colorTextHint"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/edit_btn_sign_in"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_price_discount_product_detail"
                     app:layout_constraintStart_toEndOf="@id/tv_price_product_detail"
@@ -266,8 +267,8 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@drawable/shadow_top"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView

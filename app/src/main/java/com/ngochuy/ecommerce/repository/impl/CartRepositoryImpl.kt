@@ -127,5 +127,25 @@ class CartRepositoryImpl(private val apiService: ApiService) : CartRepository {
         )
     }
 
-
+    override fun getOtp(email: String): Result<String> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseOTP = MutableLiveData<String>()
+        apiService.getCode(
+                email,
+                onPrepared = {
+                    networkState.postValue(NetworkState.LOADING)
+                },
+                onSuccess = { response ->
+                    responseOTP.value =response
+                    networkState.postValue(NetworkState.LOADED)
+                },
+                onError = { errMessage ->
+                    networkState.postValue(NetworkState.error(errMessage))
+                }
+        )
+        return  Result(
+                data = responseOTP,
+                networkState = networkState
+        )
+    }
 }

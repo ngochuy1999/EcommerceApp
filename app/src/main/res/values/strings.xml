@@ -227,5 +227,11 @@
     <string name="use_touchid2">Use your TouchID to sign in instead of a password</string>
     <string name="set_touchid">Set up your TouchID to sign in instead of a password</string>
     <string name="wrong_fingerprint">Wrong fingerprint</string>
+    <string name="verify_OTP" translatable="false">Verify OTP</string>
+    <string name="otp">OTP Verification</string>
+    <string name="enter_otp">Enter the OTP sent to email</string>
+    <string name="not_receive">Didn\'t receive the OTP?</string>
+    <string name="resent_otp">RESENT OTP</string>
+    <string name="get_otp">GET OTP</string>
 
 </resources>

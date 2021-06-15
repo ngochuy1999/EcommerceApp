@@ -5,6 +5,7 @@ import com.ngochuy.ecommerce.data.Result
 import com.ngochuy.ecommerce.data.ResultApi
 
 interface CartRepository {
+    fun getOtp(email: String): Result<String>
     fun getCartCount(userID: Int):  Result<Int>
     fun getProductCart(userID: Int): Result<ArrayList<Product>>
     fun plusCart(userID: Int, productID: Int,quantity: Int): Result<ResultApi>

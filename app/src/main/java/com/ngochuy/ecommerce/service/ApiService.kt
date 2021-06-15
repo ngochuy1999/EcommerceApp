@@ -251,5 +251,16 @@ class ApiService(private val apiApi: ApiManager) {
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
 
+    fun getCode(
+        email: String,
+        onPrepared: () -> Unit,
+        onSuccess: (String?) -> Unit,
+        onError: (String) -> Unit
+    ){
+        val  request = apiApi.getOtp(email)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request,onSuccess,onError)
+    }
+
 
 }

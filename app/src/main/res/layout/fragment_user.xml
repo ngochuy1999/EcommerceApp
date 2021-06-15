@@ -74,28 +74,82 @@
                             android:id="@+id/tv_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableEnd="@drawable/ic_blue_right_arrow"
                             android:singleLine="true"
                             android:text="@{user.phone}"
                             android:textColor="@android:color/darker_gray"
                             android:textSize="@dimen/ts_name"
-                            tools:text="Email" />
+                            tools:text="Email"
+                            app:drawableEndCompat="@drawable/ic_blue_right_arrow" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <!-- Order management-->
-                <TextView
-                    android:id="@+id/tv_manage_order"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:drawableStart="@drawable/ic_order_list"
-                    android:drawablePadding="10dp"
-                    android:padding="16dp"
-                    android:text="@string/tv_order_management"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/ts_name" />
+                    android:orientation="vertical"
+                    android:background="@color/white">
+                    <TextView
+                        android:id="@+id/tv_manage_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:drawablePadding="10dp"
+                        android:padding="10dp"
+                        android:text="@string/tv_order_management"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/ts_name"
+                        app:drawableStartCompat="@drawable/ic_order_list" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:columnCount="4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white"
+                            android:padding="10dp"
+                            android:drawablePadding="4dp"
+                            android:text="Đã hoàn thành"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            app:drawableTopCompat="@drawable/ic_baseline_verified_24" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:background="@android:color/white"
+                            android:drawablePadding="4dp"
+                            android:text="Chờ xác nhận"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            app:drawableTopCompat="@drawable/ic_baseline_inventory_24" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:background="@android:color/white"
+                            android:drawablePadding="4dp"
+                            android:text="Đang giao hàng"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            app:drawableTopCompat="@drawable/ic_twotone_delivery_dining_24" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:background="@android:color/white"
+                            android:drawablePadding="4dp"
+                            android:text="Chờ lấy hàng"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            app:drawableTopCompat="@drawable/ic_baseline_attach_money_24" />
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/btnSetFinger"
@@ -103,49 +157,49 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/white"
-                    android:drawableStart="@drawable/ic_finger"
-                    android:drawableEnd="@drawable/ic_gray_right_arrow"
                     android:drawablePadding="10dp"
                     android:padding="16dp"
                     android:text="@string/touchid"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/ts_name" />
+                    android:textSize="@dimen/ts_name"
+                    app:drawableEndCompat="@drawable/ic_gray_right_arrow"
+                    app:drawableStartCompat="@drawable/ic_finger" />
                 <TextView
                     android:id="@+id/btnChangePass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:drawableStart="@drawable/ic_baseline_sync_24"
-                    android:drawableEnd="@drawable/ic_gray_right_arrow"
                     android:drawablePadding="10dp"
                     android:padding="16dp"
                     android:text="@string/change_password"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/ts_name" />
+                    android:textSize="@dimen/ts_name"
+                    app:drawableStartCompat="@drawable/ic_baseline_sync_24"
+                    app:drawableEndCompat="@drawable/ic_gray_right_arrow" />
                 <TextView
                     android:id="@+id/btnChangeMode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:drawableStart="@drawable/ic_baseline_color_lens_24"
-                    android:drawableEnd="@drawable/ic_gray_right_arrow"
                     android:drawablePadding="10dp"
                     android:padding="16dp"
                     android:text="@string/change_theme"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/ts_name" />
+                    android:textSize="@dimen/ts_name"
+                    app:drawableStartCompat="@drawable/ic_baseline_color_lens_24"
+                    app:drawableEndCompat="@drawable/ic_gray_right_arrow" />
                 <TextView
                     android:id="@+id/tv_hot_line"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:drawableStart="@drawable/ic_headphones"
-                    android:drawableEnd="@drawable/ic_gray_right_arrow"
                     android:drawablePadding="10dp"
                     android:padding="16dp"
                     android:text="@string/hot_line_1800_6963_free"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/ts_name" />
+                    android:textSize="@dimen/ts_name"
+                    app:drawableStartCompat="@drawable/ic_headphones"
+                    app:drawableEndCompat="@drawable/ic_gray_right_arrow" />
 
                 <Button
                     android:id="@+id/btn_sign_out"

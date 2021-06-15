@@ -4,11 +4,13 @@ import android.app.Activity
 import android.app.Fragment
 import android.app.KeyguardManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -48,6 +50,7 @@ class PrefUtil constructor(
 
 const val PREFS_NAME = "PREFERENCES"
 const val USER_ID = "USER_ID"
+var OTP = ""
 
 fun Context.removeValueSharePrefs(KEY_NAME: String) {
     val pref: SharedPreferences = getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
@@ -117,4 +120,16 @@ fun deviceHasPasswordPinLock(con: Context):Boolean {
     if(keymgr.isKeyguardSecure)
         return true
     return false
+}
+
+fun showAlert(con: Context, title: String, message: String, error: Boolean) {
+    val builder = AlertDialog.Builder(con)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, which ->
+                dialog.cancel()
+                // don't forget to change the line below with the names of your Activities
+            }
+    val ok = builder.create()
+    ok.show()
 }

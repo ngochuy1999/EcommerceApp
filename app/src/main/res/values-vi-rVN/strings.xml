@@ -189,5 +189,10 @@
     <string name="use_touchid2">Sử dụng TouchID của bạn để đăng nhập thay cho mật khẩu</string>
     <string name="set_touchid">Cài đặt TouchID của bạn để đăng nhập thay cho mật khẩu</string>
     <string name="wrong_fingerprint">Sai vân tay</string>
+    <string name="otp">" Xác minh OTP"</string>
+    <string name="enter_otp">Nhập mã OTP được gửi đến email</string>
+    <string name="not_receive">Bạn không nhận được OTP?</string>
+    <string name="resent_otp">RESENT OTP</string>
+    <string name="get_otp">GET OTP</string>
 
 </resources>

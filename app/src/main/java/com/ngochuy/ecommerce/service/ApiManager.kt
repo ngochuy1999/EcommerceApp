@@ -51,6 +51,11 @@ interface ApiManager {
 
         }
     }
+
+    // getOTP
+    @GET("getCode")
+    fun getOtp(@Header("email") email:String): Call<String>
+
     //user
     @POST("login")
     fun login(

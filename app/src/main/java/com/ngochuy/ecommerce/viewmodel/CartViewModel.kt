@@ -17,6 +17,7 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
     private val requestPlusCart = MutableLiveData<Result<ResultApi>>()
     private val requestMinusCart = MutableLiveData<Result<Boolean>>()
     private val requestDelCart = MutableLiveData<Result<ResultApi>>()
+    private val requestOTP = MutableLiveData<Result<String>>()
     val name = MutableLiveData<String>().apply { value = "" }
     val phone = MutableLiveData<String>().apply { value = "" }
     val address = MutableLiveData<String>().apply { value = "" }
@@ -68,6 +69,15 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
 
     fun delCartItem(userID: Int, productId: Int) {
         requestDelCart.value = repository.delCart(userID, productId)
+    }
+    fun getOTP(email: String) {
+        requestOTP.value = repository.getOtp(email)
+    }
+    val codeOTP = Transformations.switchMap(requestOTP) {
+        it.data
+    }
+    val networkCodeOTP = Transformations.switchMap(requestOTP) {
+        it.networkState
     }
 
 }
