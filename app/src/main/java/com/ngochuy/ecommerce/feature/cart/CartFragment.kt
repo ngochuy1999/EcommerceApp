@@ -137,14 +137,13 @@ class CartFragment : Fragment() {
         // Add events
         bindingDialog.btnGetOTP.setOnClickListener() {
             if( OTP == bindingDialog.otpView.otp.toString()) {
-                requireActivity().replaceFragment(
-                        id = R.id.frmCart,
-                        fragment = ConfirmOrderFragment(),
-                        addToBackStack = true
-                )
+                bindingDialog.otpView.showSuccess()
                 mBottomSheetDialog.dismiss()
+                showAddress()
             }else{
-                Toast.makeText(requireContext(), "Sai OTP", Toast.LENGTH_LONG).show()
+                bindingDialog.otpView.showError()
+                Toast.makeText(requireContext(),"SAI OTP", Toast.LENGTH_LONG).show()
+                bindingDialog.otpView.resetState()
             }
 
         }

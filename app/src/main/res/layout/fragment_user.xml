@@ -113,7 +113,7 @@
                             android:background="@android:color/white"
                             android:padding="10dp"
                             android:drawablePadding="4dp"
-                            android:text="Đã hoàn thành"
+                            android:text="@string/accomplished"
                             android:textColor="@android:color/black"
                             android:textSize="12sp"
                             app:drawableTopCompat="@drawable/ic_baseline_verified_24" />
@@ -123,7 +123,7 @@
                             android:padding="10dp"
                             android:background="@android:color/white"
                             android:drawablePadding="4dp"
-                            android:text="Chờ xác nhận"
+                            android:text="@string/wait_confirmation"
                             android:textColor="@android:color/black"
                             android:textSize="12sp"
                             app:drawableTopCompat="@drawable/ic_baseline_inventory_24" />
@@ -133,20 +133,20 @@
                             android:padding="10dp"
                             android:background="@android:color/white"
                             android:drawablePadding="4dp"
-                            android:text="Đang giao hàng"
+                            android:text="@string/delivery"
                             android:textColor="@android:color/black"
                             android:textSize="12sp"
-                            app:drawableTopCompat="@drawable/ic_twotone_delivery_dining_24" />
+                            app:drawableTopCompat="@drawable/outline_local_shipping_24" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
                             android:background="@android:color/white"
                             android:drawablePadding="4dp"
-                            android:text="Chờ lấy hàng"
+                            android:text="@string/payment"
                             android:textColor="@android:color/black"
                             android:textSize="12sp"
-                            app:drawableTopCompat="@drawable/ic_baseline_attach_money_24" />
+                            app:drawableTopCompat="@drawable/outline_paid_24" />
 
                     </LinearLayout>
                 </LinearLayout>

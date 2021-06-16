@@ -194,5 +194,9 @@
     <string name="not_receive">Bạn không nhận được OTP?</string>
     <string name="resent_otp">RESENT OTP</string>
     <string name="get_otp">GET OTP</string>
+    <string name="accomplished">Đã hoành thành</string>
+    <string name="wait_confirmation">Chờ xác nhận</string>
+    <string name="delivery">Đang giao hàng</string>
+    <string name="pay">Chờ lấy hàng</string>
 
 </resources>

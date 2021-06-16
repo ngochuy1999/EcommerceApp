@@ -233,5 +233,9 @@
     <string name="not_receive">Didn\'t receive the OTP?</string>
     <string name="resent_otp">RESENT OTP</string>
     <string name="get_otp">GET OTP</string>
+    <string name="accomplished">Accomplished</string>
+    <string name="wait_confirmation">Confirmation</string>
+    <string name="delivery">Delivering</string>
+    <string name="pay">Payment</string>
 
 </resources>

@@ -27,6 +27,7 @@ import com.ngochuy.ecommerce.feature.authentication.ChangePassActivity
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.authentication.EditProfileActivity
 import com.ngochuy.ecommerce.feature.authentication.TouchIDActivity
+import com.ngochuy.ecommerce.feature.order.ListOrderActivity
 import com.ngochuy.ecommerce.feature.order.OrderDetailActivity
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
@@ -95,7 +96,7 @@ class UserFragment : Fragment() {
              error()
          }*/
         binding.tvManageOrder.setOnClickListener {
-            startActivity<OrderDetailActivity>()
+            startActivity<ListOrderActivity>()
         }
 
         binding.btnSignOut.setOnClickListener { confirmSignOut() }
