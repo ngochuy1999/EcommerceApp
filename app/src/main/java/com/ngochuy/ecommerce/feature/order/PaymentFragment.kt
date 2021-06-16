@@ -72,7 +72,7 @@ class PaymentFragment :Fragment(){
     }
 
     private fun bindViewModel() {
-        orderViewModel.orderItem.observe(viewLifecycleOwner) {
+        orderViewModel.paymentOrderItem.observe(viewLifecycleOwner) {
             productAdapter.setProductList(it.result ?: arrayListOf())
         }
 

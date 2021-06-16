@@ -72,7 +72,7 @@ class DeliveringFragment :Fragment(){
     }
 
     private fun bindViewModel() {
-        orderViewModel.orderItem.observe(viewLifecycleOwner) {
+        orderViewModel.deliverOrderItem.observe(viewLifecycleOwner) {
             productAdapter.setProductList(it.result ?: arrayListOf())
         }
 
