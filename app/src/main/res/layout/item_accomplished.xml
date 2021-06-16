@@ -21,8 +21,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/shadow_bottom"
             android:padding="10dp"
-            android:text="Đang vận chuyển"
-            android:textColor="@color/greenColor"/>
+            android:text="Giao hàng thành công"
+            android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product_conf_order"

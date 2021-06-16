@@ -55,6 +55,72 @@ class OrderRepositoryImpl(private val apiService: ApiService) : OrderRepository 
                 networkState = networkState
         )
     }
+    override fun getConfirmOrderItem(orderID: Int): Result<ResultOrder> {
+        val networkState = MutableLiveData<NetworkState>()
+        val response = MutableLiveData<ResultOrder>()
+        apiService.getConfirmOrderItem(
+            orderID,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { data ->
+                response.value = data
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = response,
+            networkState = networkState
+        )
+    }
+    override fun getPaymentOrderItem(orderID: Int): Result<ResultOrder> {
+        val networkState = MutableLiveData<NetworkState>()
+        val response = MutableLiveData<ResultOrder>()
+        apiService.getPaymentOrderItem(
+            orderID,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { data ->
+                response.value = data
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = response,
+            networkState = networkState
+        )
+    }
+    override fun getDeliverOrderItem(orderID: Int): Result<ResultOrder> {
+        val networkState = MutableLiveData<NetworkState>()
+        val response = MutableLiveData<ResultOrder>()
+        apiService.getDeliverOrderItem(
+            orderID,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { data ->
+                response.value = data
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = response,
+            networkState = networkState
+        )
+    }
 
 
 }

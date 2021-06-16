@@ -3,6 +3,7 @@ package com.ngochuy.ecommerce.feature.order.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.feature.order.AccomplishedFragment
 import com.ngochuy.ecommerce.feature.order.DeliveringFragment
 import com.ngochuy.ecommerce.feature.order.ItemConfirmFragment
@@ -36,16 +37,16 @@ class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence? {
         when(position) {
             0 -> {
-                return "Tab 1"
+                return "Accomplished"
             }
             1 -> {
-                return "Tab 2"
+                return "Wait Confirm"
             }
             2 -> {
-                return "Tab 3"
+                return "Delivering"
             }
             3-> {
-                return "Tab 4"
+                return "Wait Receive"
             }
         }
         return super.getPageTitle(position)

@@ -236,6 +236,6 @@
     <string name="accomplished">Accomplished</string>
     <string name="wait_confirmation">Confirmation</string>
     <string name="delivery">Delivering</string>
-    <string name="pay">Payment</string>
+    <string name="waiting_receive">Wait receive</string>
 
 </resources>

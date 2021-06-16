@@ -27,8 +27,8 @@ import com.ngochuy.ecommerce.feature.authentication.ChangePassActivity
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.authentication.EditProfileActivity
 import com.ngochuy.ecommerce.feature.authentication.TouchIDActivity
-import com.ngochuy.ecommerce.feature.order.ListOrderActivity
-import com.ngochuy.ecommerce.feature.order.OrderDetailActivity
+import com.ngochuy.ecommerce.feature.cart.ConfirmOrderFragment
+import com.ngochuy.ecommerce.feature.order.*
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import org.jetbrains.anko.support.v4.startActivity
@@ -96,7 +96,7 @@ class UserFragment : Fragment() {
              error()
          }*/
         binding.tvManageOrder.setOnClickListener {
-            startActivity<ListOrderActivity>()
+            startActivity<AccomplishedActivity>()
         }
 
         binding.btnSignOut.setOnClickListener { confirmSignOut() }
@@ -118,6 +118,19 @@ class UserFragment : Fragment() {
         binding.btnSetFinger.setOnClickListener {
             startActivity<TouchIDActivity>()
         }
+        binding.accomplished.setOnClickListener {
+            startActivity<AccomplishedActivity>()
+        }
+        binding.confirm.setOnClickListener {
+            startActivity<ComfirmActivity>()
+        }
+        binding.delivering.setOnClickListener {
+            startActivity<DeliveringActivity>()
+        }
+        binding.payment.setOnClickListener {
+            startActivity<PaymentActivity>()
+        }
+
     }
 
 

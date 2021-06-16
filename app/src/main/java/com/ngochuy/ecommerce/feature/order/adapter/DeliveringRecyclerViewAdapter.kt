@@ -6,37 +6,55 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.ngochuy.ecommerce.R
+import com.ngochuy.ecommerce.data.Product
+import com.ngochuy.ecommerce.databinding.ItemDeliveringBinding
 
-import com.ngochuy.ecommerce.feature.order.dummy.DummyContent.DummyItem
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class DeliveringRecyclerViewAdapter(
-    private val values: List<DummyItem>
-) : RecyclerView.Adapter<DeliveringRecyclerViewAdapter.ViewHolder>() {
+    private var onProductClick: (id:Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_delivering, parent, false)
-        return ViewHolder(view)
+    private var listProductSale: ArrayList<Product> = arrayListOf()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        ProductCartViewHolder(
+            ItemDeliveringBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+
+    override fun getItemCount(): Int = listProductSale.size
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as ProductCartViewHolder).bind(listProductSale[position])
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+    fun setProductList(list: List<Product>) {
+        listProductSale.apply {
+            clear()
+            addAll(list)
+        }
+
+        notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = values.size
+    inner class ProductCartViewHolder(
+        private val binding: ItemDeliveringBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
-
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+        fun bind(item: Product) {
+            binding.apply {
+                product = item
+                executePendingBindings()
+                itemAccomplishOrder.setOnClickListener { item?.let { it1 -> it1.id?.let { it2 ->
+                    onProductClick(
+                        it2
+                    )
+                } }
+                }
+            }
         }
     }
 }

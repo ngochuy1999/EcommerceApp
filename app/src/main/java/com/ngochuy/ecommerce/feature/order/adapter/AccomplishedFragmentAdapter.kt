@@ -1,17 +1,14 @@
 package com.ngochuy.ecommerce.feature.order.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.ngochuy.ecommerce.R
+import androidx.recyclerview.widget.RecyclerView
+import com.ngochuy.ecommerce.data.CartType
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.databinding.ItemAccomplishedBinding
-import com.ngochuy.ecommerce.databinding.ItemConfirmBinding
+import com.ngochuy.ecommerce.databinding.ItemProductCartBinding
 
-
-class ItemConfirmRecyclerViewAdapter(
+class AccomplishedFragmentAdapter(
     private var onProductClick: (id:Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -19,7 +16,7 @@ class ItemConfirmRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ProductCartViewHolder(
-            ItemConfirmBinding.inflate(
+            ItemAccomplishedBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -42,7 +39,7 @@ class ItemConfirmRecyclerViewAdapter(
     }
 
     inner class ProductCartViewHolder(
-        private val binding: ItemConfirmBinding
+        private val binding: ItemAccomplishedBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Product) {

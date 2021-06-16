@@ -25,7 +25,6 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
         requestOrder.value = repository.order(userID)
     }
 
-
     /*         ITEM ORDER   */
     private val requestItemOrder = MutableLiveData<Result<ResultOrder>>()
 
@@ -39,6 +38,52 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
     fun getAllOrderItem(orderId: Int) {
         requestItemOrder.value = repository.getAllOrderItem(orderId)
     }
+
+
+    /*         ITEM ORDER CONFIRM   */
+    private val requestConfirmItemOrder = MutableLiveData<Result<ResultOrder>>()
+
+    val confirmOrderItem = Transformations.switchMap(requestConfirmItemOrder) {
+        it.data
+    }
+    val networkConfirmOrderItem = Transformations.switchMap(requestConfirmItemOrder) {
+        it.networkState
+    }
+
+    fun getConfirmOrderItem(orderId: Int) {
+        requestConfirmItemOrder.value = repository.getConfirmOrderItem(orderId)
+    }
+
+
+    /*         ITEM ORDER PAYMENT   */
+    private val requestPaymentItemOrder = MutableLiveData<Result<ResultOrder>>()
+
+    val paymentOrderItem = Transformations.switchMap(requestPaymentItemOrder) {
+        it.data
+    }
+    val networkPaymentOrderItem = Transformations.switchMap(requestPaymentItemOrder) {
+        it.networkState
+    }
+
+    fun getPaymentOrderItem(orderId: Int) {
+        requestPaymentItemOrder.value = repository.getPaymentOrderItem(orderId)
+    }
+
+
+    /*         ITEM ORDER DELIVER  */
+    private val requestDeliverItemOrder = MutableLiveData<Result<ResultOrder>>()
+
+    val deliverOrderItem = Transformations.switchMap(requestDeliverItemOrder) {
+        it.data
+    }
+    val networkDeliverOrderItem = Transformations.switchMap(requestDeliverItemOrder) {
+        it.networkState
+    }
+
+    fun getDeliverOrderItem(orderId: Int) {
+        requestDeliverItemOrder.value = repository.getDeliverOrderItem(orderId)
+    }
+
 }
 
 

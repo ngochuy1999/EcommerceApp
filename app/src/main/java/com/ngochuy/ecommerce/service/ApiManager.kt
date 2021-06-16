@@ -139,5 +139,14 @@ interface ApiManager {
     fun addOrder(@Header("id") orderId: Int): Call<ResultApi>
 
     @GET("sold")
-    fun getAllOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+    fun getAccomplishOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+
+    @GET("confirm")
+    fun getConfirmOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+
+    @GET("getSold")
+    fun getPaymentOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+
+    @GET("delivering")
+    fun getDeliverOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
 }

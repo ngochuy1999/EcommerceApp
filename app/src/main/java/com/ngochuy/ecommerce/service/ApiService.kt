@@ -246,7 +246,37 @@ class ApiService(private val apiApi: ApiManager) {
             onSuccess: (ResultOrder?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request =  apiApi.getAllOrderItem(orderID)
+        val request =  apiApi.getAccomplishOrderItem(orderID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+    fun getConfirmOrderItem(
+        orderID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ResultOrder?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getConfirmOrderItem(orderID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+    fun getPaymentOrderItem(
+        orderID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ResultOrder?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getPaymentOrderItem(orderID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+    fun getDeliverOrderItem(
+        orderID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ResultOrder?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getDeliverOrderItem(orderID)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
