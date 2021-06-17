@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="id"
+            type="Integer" />
+
+        <variable
             name="cartCount"
             type="Integer" />
 
@@ -20,8 +24,8 @@
             type="Long" />
 
         <variable
-            name="order"
-            type="com.ngochuy.ecommerce.data.Order" />
+            name="product"
+            type="com.ngochuy.ecommerce.data.Product" />
         <variable
             name="user"
             type="com.ngochuy.ecommerce.data.User" />
@@ -132,7 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{order.id.toString()}"
+                        android:text="@{product.id.toString()}"
                         android:textColor="@color/colorTextHint"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -154,7 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{order.buyDate}"
+                        android:text="@{product.date}"
                         app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_date"
                         app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_date"
                         tools:text="@string/order_id" />
@@ -278,15 +282,83 @@
                     android:textStyle="bold" />
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_product_order_detail"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ll_product_confirm_order"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorWhiteBG"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_product_confirm" />
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorWhiteBG">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_product_conf_order"
+                        imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(0)}"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/colorWhiteBG"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tv_name_product_conf_order"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="@{product.name}"
+                        android:textColor="@color/colorTextHint"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_product_conf_order"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/tv_name" />
+
+
+                    <TextView
+                        android:id="@+id/tv_price_product_conf_order"
+                        discount="@{product.sale}"
+                        price="@{product.price}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorTextHint"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/iv_product_conf_order"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name_product_conf_order"
+                        tools:text="@string/_1_290_000" />
+
+                    <TextView
+                        android:id="@+id/tv_number_product_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:text="@{`x`+product.quantityOrder.toString()}"
+                        android:textColor="@color/colorTextHint"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/tv_price_product_conf_order"
+                        app:layout_constraintTop_toTopOf="@id/tv_price_product_conf_order"
+                        tools:text="@string/_1" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorGrayBg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -407,8 +479,7 @@
                     android:text="@string/cancel_order"
                     android:textAllCaps="true"
                     android:textColor="@color/colorWhite"
-                    android:textSize="16sp"
-                    android:visibility="@{order.statusID !=-1? View.VISIBLE : View.GONE}" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

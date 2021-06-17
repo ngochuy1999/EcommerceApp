@@ -12,8 +12,6 @@ import kotlinx.android.synthetic.main.activity_order_detail.view.*
 import kotlinx.android.synthetic.main.ll_cart.*
 import org.jetbrains.anko.startActivity
 import com.ngochuy.ecommerce.R
-import com.ngochuy.ecommerce.data.Order
-import com.ngochuy.ecommerce.data.OrderItem
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityOrderDetailBinding
@@ -22,19 +20,14 @@ import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
 import com.ngochuy.ecommerce.feature.cart.adapter.ProductCartConfirmAdapter
-import com.ngochuy.ecommerce.feature.order.adapter.ProductOrderAdapter
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
+import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import java.util.ArrayList
 
 class OrderDetailActivity : AppCompatActivity() {
-    private val orderViewModel: OrderViewModel by lazy {
-        ViewModelProvider(
-            this,
-            Injection.provideOrderViewModelFactory()
-        )[OrderViewModel::class.java]
-    }
+
     private val userViewModel: UserViewModel by lazy {
         ViewModelProvider(
                 this,
@@ -47,38 +40,37 @@ class OrderDetailActivity : AppCompatActivity() {
             Injection.provideCartViewModelFactory()
         )[CartViewModel::class.java]
     }
-    private val productAdapter: ProductOrderAdapter by lazy {
-        ProductOrderAdapter()
+    private val productViewModel: ProductsViewModel by lazy {
+        ViewModelProvider(
+                this,
+                Injection.provideProductsViewModelFactory()
+        )[ProductsViewModel::class.java]
     }
 
+
     private lateinit var binding: ActivityOrderDetailBinding
-    private var order: Order? = null
+    private var productId: Int? = null
+    private var poistiion: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail)
-        order = intent.getParcelableExtra(ORDER)
+        productId = intent.getIntExtra(PRODUCT_ID, -1)
+        if (productId != -1 && productId != null) {
+            productViewModel.getProductById(productId!!)
+        }
         val userId = getIntPref(USER_ID)
         binding.cartCount = 0
         if (userId != -1)
             cartViewModel.getCartCount(userId)
-        //order?.id?.let {
-            //orderViewModel.getAllOrder(it)
-        binding.order = order
+
         binding.tranFee = 20000
         binding.totalPrice = 0L
-        //}
-        orderViewModel.getAllOrderItem(getIntPref(USER_ID))
         userViewModel.getInfoUser((getIntPref(USER_ID)) ?: 0)
         setEvents()
-        initViews()
         bindViewModel()
     }
 
-    private fun initViews() {
-        binding.rvProductOrderDetail.adapter = productAdapter
-        binding.rvProductOrderDetail.setHasFixedSize(true)
-        binding.rvProductOrderDetail.setItemViewCacheSize(20)
-    }
 
     private fun bindViewModel() {
 
@@ -89,12 +81,12 @@ class OrderDetailActivity : AppCompatActivity() {
         userViewModel.userInfo.observe(this) {
             binding.user = it
         }
-        orderViewModel.orderItem.observe(this) {
-            productAdapter.setProductList(it.result ?: arrayListOf())
-            getTotalPrice(it.result ?: arrayListOf())
-        }
+        productViewModel.product.observe(this, Observer {
+            binding.product = it
+            getTotalPrice(it)
+        })
 
-        orderViewModel.networkOrderItem.observe(this) {
+        userViewModel.networkUserInfo.observe(this, Observer {
             when (it.status) {
                 Status.RUNNING -> progressOrderDetail.visible()
                 Status.SUCCESS -> {
@@ -105,19 +97,17 @@ class OrderDetailActivity : AppCompatActivity() {
                     Toast.makeText(this, it.msg, Toast.LENGTH_LONG).show()
                 }
             }
-        }
+        })
     }
 
-    private fun getTotalPrice(list: ArrayList<Product>) {
+    private fun getTotalPrice(pro: Product) {
         var totalPriceCart = 0L
         var discount = 0
         var price = 0L
-        for (pro in list) {
             discount = pro.sale ?: 0
             price = pro.price ?: 0
             val priceSale = (price?.minus(((discount * 0.01) * price))).times(pro.quantityOrder?: 1)
             totalPriceCart += priceSale.toLong()
-        }
         binding.totalPrice = totalPriceCart
     }
 

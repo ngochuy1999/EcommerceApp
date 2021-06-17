@@ -135,7 +135,7 @@ interface ApiManager {
     fun getProductsCart(@Header("id") userID: Int): Call<ArrayList<Product>>
 
     //order
-    @POST("sold")
+    @POST("soldCopy")
     fun addOrder(@Header("id") orderId: Int): Call<ResultApi>
 
     @GET("sold")

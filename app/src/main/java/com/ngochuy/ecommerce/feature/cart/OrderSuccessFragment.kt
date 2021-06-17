@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.feature.main.MainActivity
+import com.ngochuy.ecommerce.feature.order.ComfirmActivity
 import com.ngochuy.ecommerce.feature.order.OrderDetailActivity
 import kotlinx.android.synthetic.main.fragment_order_success.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -30,7 +31,7 @@ class OrderSuccessFragment : Fragment() {
         btnBackOrderSuccess.setOnClickListener { startActivity<MainActivity>() }
         btn_continue_shopping_dialog.setOnClickListener { startActivity<MainActivity>() }
         btn_view_order.setOnClickListener {
-            startActivity<OrderDetailActivity>()
+            startActivity<ComfirmActivity>()
             requireActivity().finish()
         }
     }

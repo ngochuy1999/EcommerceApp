@@ -18,7 +18,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.R
-import com.ngochuy.ecommerce.data.OrderStatus
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.FragmentUserBinding
 import com.ngochuy.ecommerce.di.Injection

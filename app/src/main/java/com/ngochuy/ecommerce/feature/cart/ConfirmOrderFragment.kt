@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.R
-import com.ngochuy.ecommerce.data.OrderItem
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.FragmentConfirmOrderBinding
@@ -41,8 +40,6 @@ class ConfirmOrderFragment :Fragment(){
         )[UserViewModel::class.java]
     }
 
-    private var listProducts: ArrayList<Product> = arrayListOf()
-    private var listItemOrder: ArrayList<OrderItem> = arrayListOf()
     private lateinit var binding: FragmentConfirmOrderBinding
     private val productAdapter: ProductCartConfirmAdapter by lazy {
         ProductCartConfirmAdapter()

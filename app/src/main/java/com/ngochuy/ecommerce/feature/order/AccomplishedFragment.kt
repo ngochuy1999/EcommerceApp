@@ -10,13 +10,16 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.ngochuy.ecommerce.R
+import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
+import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.feature.order.adapter.AccomplishedFragmentAdapter
 import com.ngochuy.ecommerce.feature.product.ProductDetailActivity
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_accomplished_list.*
-
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 
 /**
@@ -37,7 +40,7 @@ class AccomplishedFragment :Fragment(){
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), ProductDetailActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailActivity::class.java)
         intent.putExtra(PRODUCT_ID, id)
         startActivity(intent)
     }
@@ -59,6 +62,14 @@ class AccomplishedFragment :Fragment(){
         super.onViewCreated(view, savedInstanceState)
         bindViewModel()
         initViews()
+        setEvent()
+    }
+
+    private fun setEvent() {
+        btn_continue_shopping_order.setOnClickListener {
+            startActivity<MainActivity>()
+            requireActivity().finish()
+        }
     }
 
     private fun initViews() {
@@ -69,21 +80,24 @@ class AccomplishedFragment :Fragment(){
 
     private fun bindViewModel() {
         orderViewModel.orderItem.observe(viewLifecycleOwner) {
-            productAdapter.setProductList(it.result ?: arrayListOf())
+            if (it.result?.size != 0 ) {
+                productAdapter.setProductList(it.result ?: arrayListOf())
+                ll_order_empty.gone()
+            }else ll_order_empty.visible()
         }
 
-//        orderViewModel.networkOrderItem.observe(viewLifecycleOwner) {
-//            when (it.status) {
-//                Status.RUNNING -> progressOrderDetail.visible()
-//                Status.SUCCESS -> {
-//                    progressOrderDetail.gone()
-//                }
-//                Status.FAILED -> {
-//                    progressOrderDetail.gone()
-//                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        }
+        orderViewModel.networkOrderItem.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.RUNNING -> progressOrder.visible()
+                Status.SUCCESS -> {
+                    progressOrder.gone()
+                }
+                Status.FAILED -> {
+                    progressOrder.gone()
+                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
     }
 
