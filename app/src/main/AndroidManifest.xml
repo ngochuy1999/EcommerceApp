@@ -19,7 +19,16 @@
         <activity android:name=".feature.order.DeliveringActivity" />
         <activity android:name=".feature.order.PaymentActivity" />
         <activity
-            android:name=".feature.order.OrderDetailActivity"
+            android:name=".feature.order.OrderDetailAccomplishActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".feature.order.OrderDetailConfirmActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".feature.order.OrderDetailPaymentActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".feature.order.OrderDetailDeliveryActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".feature.search.SearchActivity"

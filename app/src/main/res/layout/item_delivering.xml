@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/shadow_bottom"
             android:padding="10dp"
-            android:text="Đang vận chuyển"
+            android:text="@string/delivery"
             android:textColor="@color/greenColor"/>
 
         <androidx.appcompat.widget.AppCompatImageView

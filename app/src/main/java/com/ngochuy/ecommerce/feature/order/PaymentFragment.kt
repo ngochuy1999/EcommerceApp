@@ -44,7 +44,7 @@ class PaymentFragment :Fragment(){
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), ProductDetailActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailPaymentActivity::class.java)
         intent.putExtra(PRODUCT_ID, id)
         startActivity(intent)
     }

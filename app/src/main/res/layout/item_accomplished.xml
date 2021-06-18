@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/shadow_bottom"
             android:padding="10dp"
-            android:text="Giao hàng thành công"
+            android:text="@string/accomplished"
             android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatImageView

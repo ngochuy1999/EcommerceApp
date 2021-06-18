@@ -43,7 +43,7 @@ class DeliveringFragment :Fragment(){
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), ProductDetailActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailDeliveryActivity::class.java)
         intent.putExtra(PRODUCT_ID, id)
         startActivity(intent)
     }

@@ -104,7 +104,8 @@ class LoginFragment : Fragment() {
                                 R.string.btn_ok_verifi,
                                 Snackbar.LENGTH_SHORT
                         ).show()
-                        requireContext().getStringPref("USER_TOUCHID")?.let { requireContext().getStringPref("PASS_TOUCHID")?.let { it1 -> userViewModel.login(it, it1) } }
+                        requireContext().getStringPref(USER_TOUCHID)?.let {
+                            requireContext().getStringPref(PASS_TOUCHID)?.let { it1 -> userViewModel.login(it, it1) } }
                     }
 
                     override fun onAuthenticationFailed() {
@@ -160,8 +161,8 @@ class LoginFragment : Fragment() {
                 }
                 1 -> {
                     Toast.makeText(requireContext(), getString(R.string.login), Toast.LENGTH_LONG).show()
-                    if(requireContext().getStringPref("USER_TOUCHID") != binding.edtUserSignIn.textTrim())
-                        requireContext().setBooleanPref("CHECK_FINGER",false)
+                    if(requireContext().getStringPref(USER_TOUCHID) != binding.edtUserSignIn.textTrim())
+                        requireContext().setBooleanPref(CHECK_FINGER,false)
                     requireContext().setIntPref(USER_ID,it.id)
                     startActivity<MainActivity>()
                     requireActivity().finish()
@@ -207,7 +208,7 @@ class LoginFragment : Fragment() {
         requireActivity().addFragment(fragment = SignUpFragment())
     }
     fun onClickFigger(){
-        if (requireContext().getBooleanPref("CHECK_FINGER")){
+        if (requireContext().getBooleanPref(CHECK_FINGER)){
             biometricPrompt.authenticate(promptInfo)
         }else{
             Snackbar.make(

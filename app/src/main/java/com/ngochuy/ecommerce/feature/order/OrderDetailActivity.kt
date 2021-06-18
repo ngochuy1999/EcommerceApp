@@ -2,15 +2,9 @@ package com.ngochuy.ecommerce.feature.order
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.observe
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.activity_order_detail.*
-import kotlinx.android.synthetic.main.activity_order_detail.view.*
-import kotlinx.android.synthetic.main.ll_cart.*
-import org.jetbrains.anko.startActivity
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.Status
@@ -19,14 +13,14 @@ import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
-import com.ngochuy.ecommerce.feature.cart.adapter.ProductCartConfirmAdapter
+import com.ngochuy.ecommerce.feature.order.adapter.ProductOrderAdapter
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
-import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_order_detail.*
+import org.jetbrains.anko.startActivity
 
-class OrderDetailActivity : AppCompatActivity() {
+open class OrderDetailActivity : AppCompatActivity() {
 
     private val userViewModel: UserViewModel by lazy {
         ViewModelProvider(
@@ -40,25 +34,24 @@ class OrderDetailActivity : AppCompatActivity() {
             Injection.provideCartViewModelFactory()
         )[CartViewModel::class.java]
     }
-    private val productViewModel: ProductsViewModel by lazy {
+    val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
                 this,
-                Injection.provideProductsViewModelFactory()
-        )[ProductsViewModel::class.java]
+                Injection.provideOrderViewModelFactory()
+        )[OrderViewModel::class.java]
     }
 
 
-    private lateinit var binding: ActivityOrderDetailBinding
-    private var productId: Int? = null
-    private var poistiion: Int? = null
+    lateinit var binding: ActivityOrderDetailBinding
+    var productId: Int? = null
+    val productAdapter: ProductOrderAdapter by lazy {
+        ProductOrderAdapter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail)
         productId = intent.getIntExtra(PRODUCT_ID, -1)
-        if (productId != -1 && productId != null) {
-            productViewModel.getProductById(productId!!)
-        }
         val userId = getIntPref(USER_ID)
         binding.cartCount = 0
         if (userId != -1)
@@ -66,27 +59,31 @@ class OrderDetailActivity : AppCompatActivity() {
 
         binding.tranFee = 20000
         binding.totalPrice = 0L
-        userViewModel.getInfoUser((getIntPref(USER_ID)) ?: 0)
+        userViewModel.getInfoUser((getIntPref(USER_ID)))
+        initViews()
         setEvents()
         bindViewModel()
+    }
+
+    private fun initViews() {
+        binding.rvProductOrderDetail.adapter = productAdapter
+        binding.rvProductOrderDetail.setHasFixedSize(true)
+        binding.rvProductOrderDetail.setItemViewCacheSize(20)
     }
 
 
     private fun bindViewModel() {
 
-        cartViewModel.cartCount.observe(this, Observer {
+        cartViewModel.cartCount.observe(this, {
             binding.cartCount = it ?: 0
         })
 
-        userViewModel.userInfo.observe(this) {
+        userViewModel.userInfo.observe(this, {
             binding.user = it
-        }
-        productViewModel.product.observe(this, Observer {
-            binding.product = it
-            getTotalPrice(it)
         })
 
-        userViewModel.networkUserInfo.observe(this, Observer {
+
+        userViewModel.networkUserInfo.observe(this, {
             when (it.status) {
                 Status.RUNNING -> progressOrderDetail.visible()
                 Status.SUCCESS -> {
@@ -100,14 +97,14 @@ class OrderDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun getTotalPrice(pro: Product) {
+    fun getTotalPrice(pro: Product) {
         var totalPriceCart = 0L
-        var discount = 0
-        var price = 0L
-            discount = pro.sale ?: 0
-            price = pro.price ?: 0
-            val priceSale = (price?.minus(((discount * 0.01) * price))).times(pro.quantityOrder?: 1)
+
+        val discount: Int = pro.sale ?: 0
+        val price: Long = pro.price ?: 0
+            val priceSale = (price.minus(((discount * 0.01) * price))).times(pro.quantityOrder?: 1)
             totalPriceCart += priceSale.toLong()
+
         binding.totalPrice = totalPriceCart
     }
 
@@ -118,11 +115,108 @@ class OrderDetailActivity : AppCompatActivity() {
             else startActivity<LoginActivity>()
         }
         btnBack.setOnClickListener { finish() }
-//        btnCancelOrder.setOnClickListener {
-//            order?.id?.let { it1 -> orderViewModel.cancelOrder(it1) }
-//            order?.id = 4
-//            binding.tvStatusOrder.text="Da huy"
-//            binding.btnCancelOrder.gone()
-//        }
+        btnCancelOrder.setOnClickListener {
+            binding.tvStatusOrder.setText(R.string.cancelled)
+            binding.btnCancelOrder.gone()
+        }
+    }
+}
+class OrderDetailAccomplishActivity : OrderDetailActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        orderViewModel.getAllOrderItem(getIntPref(USER_ID))
+        bindAccViewModel()
+    }
+
+    private fun bindAccViewModel(){
+        orderViewModel.orderItem.observe(this, {
+            var i = 0
+            var poistiion = 0
+            while (i < it.result?.size!!)
+            {
+                if( it.result[i].id == productId ) poistiion = i
+                i++
+            }
+
+            it.result[poistiion].let { it1 -> productAdapter.setProductList(it1) }
+            binding.product = it.result[poistiion]
+            getTotalPrice(it.result[poistiion])
+        })
+        binding.tvStatusOrder.setText(R.string.accomplished)
+        binding.btnCancelOrder.gone()
+    }
+}
+class OrderDetailConfirmActivity : OrderDetailActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        orderViewModel.getConfirmOrderItem(getIntPref(USER_ID))
+        bindConViewModel()
+    }
+
+    private fun bindConViewModel(){
+        orderViewModel.confirmOrderItem.observe(this, {
+            var i = 0
+            var poistiion = 0
+            while (i < it.result?.size!!)
+            {
+                if( it.result[i].id == productId ) poistiion = i
+                i++
+            }
+
+            it.result[poistiion].let { it1 -> productAdapter.setProductList(it1) }
+            binding.product = it.result[poistiion]
+            getTotalPrice(it.result[poistiion])
+        })
+        binding.tvStatusOrder.setText(R.string.confirm)
+    }
+}
+class OrderDetailDeliveryActivity : OrderDetailActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        orderViewModel.getDeliverOrderItem(getIntPref(USER_ID))
+        bindDeViewModel()
+    }
+
+    private fun bindDeViewModel(){
+        orderViewModel.deliverOrderItem.observe(this, {
+            var i = 0
+            var poistiion = 0
+            while (i < it.result?.size!!)
+            {
+                if( it.result[i].id == productId ) poistiion = i
+                i++
+            }
+
+            it.result[poistiion].let { it1 -> productAdapter.setProductList(it1) }
+            binding.product = it.result[poistiion]
+            getTotalPrice(it.result[poistiion])
+        })
+        binding.tvStatusOrder.setText(R.string.delivery)
+        binding.btnCancelOrder.gone()
+    }
+}
+class OrderDetailPaymentActivity : OrderDetailActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        orderViewModel.getPaymentOrderItem(getIntPref(USER_ID))
+        bindPaViewModel()
+    }
+
+    private fun bindPaViewModel(){
+        orderViewModel.paymentOrderItem.observe(this, {
+            var i = 0
+            var poistiion = 0
+            while (i < it.result?.size!!)
+            {
+                if( it.result[i].id == productId ) poistiion = i
+                i++
+            }
+
+            it.result[poistiion].let { it1 -> productAdapter.setProductList(it1) }
+            binding.product = it.result[poistiion]
+            getTotalPrice(it.result[poistiion])
+        })
+        binding.tvStatusOrder.setText(R.string.payment)
+        binding.btnCancelOrder.gone()
     }
 }

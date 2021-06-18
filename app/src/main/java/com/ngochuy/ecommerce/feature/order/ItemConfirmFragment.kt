@@ -44,7 +44,7 @@ class ItemConfirmFragment :Fragment(){
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), ProductDetailActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailConfirmActivity::class.java)
         intent.putExtra(PRODUCT_ID, id)
         startActivity(intent)
     }

@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/shadow_bottom"
             android:padding="10dp"
-            android:text="Chờ Xác Nhận"
+            android:text="@string/wait_confirmation"
             android:textColor="#C8B933"/>
 
         <androidx.appcompat.widget.AppCompatImageView

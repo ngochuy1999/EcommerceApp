@@ -237,5 +237,6 @@
     <string name="wait_confirmation">Confirmation</string>
     <string name="delivery">Delivering</string>
     <string name="waiting_receive">Wait receive</string>
+    <string name="cancelled">Cancelled</string>
 
 </resources>

@@ -173,7 +173,7 @@ class UserFragment : Fragment() {
         {
             setMessage(getString(R.string.dialogLogOut))
             setPositiveButton(getString(R.string.dialogOk)) { dialog, _ ->
-                requireContext().removeValueSharePrefs("USER_ID")
+                requireContext().removeValueSharePrefs(USER_ID)
                 startActivity<LoginActivity>()
                 requireActivity().finish()
                 dialog.dismiss()

@@ -37,16 +37,16 @@ class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence? {
         when(position) {
             0 -> {
-                return "Accomplished"
+                return "Đã giao hàng"
             }
             1 -> {
-                return "Wait Confirm"
+                return "Chờ xác nhận"
             }
             2 -> {
-                return "Delivering"
+                return "Đang vận chuyển"
             }
             3-> {
-                return "Wait Receive"
+                return "Chờ lấy hàng"
             }
         }
         return super.getPageTitle(position)

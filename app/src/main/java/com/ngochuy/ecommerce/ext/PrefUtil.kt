@@ -50,6 +50,9 @@ class PrefUtil constructor(
 
 const val PREFS_NAME = "PREFERENCES"
 const val USER_ID = "USER_ID"
+const val CHECK_FINGER = "CHECK_FINGER"
+const val USER_TOUCHID = "USER_TOUCHID"
+const val PASS_TOUCHID = "PASS_TOUCHID"
 var OTP = ""
 
 fun Context.removeValueSharePrefs(KEY_NAME: String) {
