@@ -104,8 +104,9 @@ class LoginFragment : Fragment() {
                                 R.string.btn_ok_verifi,
                                 Snackbar.LENGTH_SHORT
                         ).show()
-                        requireContext().getStringPref(USER_TOUCHID)?.let {
-                            requireContext().getStringPref(PASS_TOUCHID)?.let { it1 -> userViewModel.login(it, it1) } }
+                        startActivity<MainActivity>()
+                        requireActivity().finish()
+                        requireContext().setIntPref(USER_ID,requireContext().getIntPref(USERID_TOUCHID))
                     }
 
                     override fun onAuthenticationFailed() {
@@ -161,7 +162,7 @@ class LoginFragment : Fragment() {
                 }
                 1 -> {
                     Toast.makeText(requireContext(), getString(R.string.login), Toast.LENGTH_LONG).show()
-                    if(requireContext().getStringPref(USER_TOUCHID) != binding.edtUserSignIn.textTrim())
+                    if(requireContext().getIntPref(USERID_TOUCHID) != it.id)
                         requireContext().setBooleanPref(CHECK_FINGER,false)
                     requireContext().setIntPref(USER_ID,it.id)
                     startActivity<MainActivity>()

@@ -37,12 +37,10 @@ class TouchIDActivity : AppCompatActivity() {
         swTouch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 setBooleanPref(CHECK_FINGER,true)
-                Toast.makeText(this,getStringPref(USER_TOUCHID),Toast.LENGTH_LONG).show()
-                Toast.makeText(this,getStringPref(PASS_TOUCHID),Toast.LENGTH_LONG).show()
+                setIntPref(USERID_TOUCHID,getIntPref(USER_ID))
             } else {
                 setBooleanPref(CHECK_FINGER,false)
-                setStringPref(USER_TOUCHID,"")
-                setStringPref(PASS_TOUCHID,"")
+                removeValueSharePrefs(USERID_TOUCHID)
             }
         }
 
