@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
 
     private val slideAdapter: SlidingImageAdapter by lazy {
         SlidingImageAdapter(requireContext(), arrSlide){
-               // productID -> showProductDetail(productID)
+                productID -> showProductDetail(productID)
         }
     }
 
@@ -132,13 +132,6 @@ class HomeFragment : Fragment() {
         rv_product_home.addItemDecoration(dividerHorizontal)
         val dividerVertical = DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
         rv_product_home.addItemDecoration(dividerVertical)
-       // rv_product_home.addItemDecoration(GridItemDecoration(10, 2))
-
-//        pagerHome.adapter= slideAdapter
-//        indicator.setViewPager(pagerHome)
-//
-//        val density = resources.displayMetrics.density
-//        indicator.radius = 5 * density
     }
 
     private fun addEvents() {

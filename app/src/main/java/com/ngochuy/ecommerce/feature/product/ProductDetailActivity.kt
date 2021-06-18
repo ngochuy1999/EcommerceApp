@@ -1,7 +1,6 @@
 package com.ngochuy.ecommerce.feature.product
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialog
 import org.jetbrains.anko.startActivity
 import com.ngochuy.ecommerce.R
+import com.ngochuy.ecommerce.data.Slide
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityProductDetailBinding
 import com.ngochuy.ecommerce.databinding.BottomSheetAddCartBinding
@@ -18,11 +18,13 @@ import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
-import com.ngochuy.ecommerce.feature.main.MainActivity
+import com.ngochuy.ecommerce.feature.product.adapter.SlidingImageProductDetailAdapter
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
+import com.ngochuy.ecommerce.widget.SlidingImageAdapter
 import kotlinx.android.synthetic.main.fragment_cart.*
-import org.jetbrains.anko.support.v4.startActivity
+import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.ArrayList
 
 class ProductDetailActivity : AppCompatActivity() {
 
@@ -41,6 +43,11 @@ class ProductDetailActivity : AppCompatActivity() {
         )[CartViewModel::class.java]
     }
 
+    private val slideAdapter: SlidingImageProductDetailAdapter by lazy {
+        SlidingImageProductDetailAdapter(this, arrSlide)
+    }
+
+    private var arrSlide: ArrayList<String> = arrayListOf()
     private var productId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,6 +116,14 @@ class ProductDetailActivity : AppCompatActivity() {
 
         productViewModel.product.observe(this, Observer {
             binding.product = it
+            arrSlide = it.images!!
+            slideAdapter.notifyDataSetChanged()
+            binding.ivProductDetail.adapter= SlidingImageProductDetailAdapter(this, arrSlide)
+
+            binding.indicatorPd.setViewPager(binding.ivProductDetail)
+
+            val density = resources.displayMetrics.density
+            binding.indicatorPd.radius = 3 * density
         })
         productViewModel.resultAddCart.observe(this, Observer {
             when (it.isStatus) {

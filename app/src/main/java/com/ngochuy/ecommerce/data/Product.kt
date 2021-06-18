@@ -17,7 +17,7 @@ data class Product(
         @SerializedName("idProduct")
         val idProduct: String? = null,
         @SerializedName("images")
-        val images: List<String>? = null,
+        val images: ArrayList<String>? = null,
         @SerializedName("name")
         val name: String? = null,
         @SerializedName("price")
