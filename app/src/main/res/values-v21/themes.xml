@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Ecommerce" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:configChanges">keyboardHidden|orientation|screenSize</item>
+        <item name="colorPrimary">@color/colorBlueLight</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:statusBarColor">#05A9DF</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="autoCompleteTextViewStyle">@style/cursorColor</item>
+        <item name="colorAccent">@color/colorBlueDark</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+
+</resources>

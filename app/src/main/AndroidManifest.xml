@@ -57,7 +57,6 @@
         <activity
             android:name=".feature.splash.SplashActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.SplashScreen"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

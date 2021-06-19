@@ -18,13 +18,10 @@ import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
+import com.ngochuy.ecommerce.feature.product.adapter.ProductDetailAdapter
 import com.ngochuy.ecommerce.feature.product.adapter.SlidingImageProductDetailAdapter
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
-import com.ngochuy.ecommerce.widget.SlidingImageAdapter
-import kotlinx.android.synthetic.main.fragment_cart.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import java.util.ArrayList
 
 class ProductDetailActivity : AppCompatActivity() {
 
@@ -45,6 +42,9 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private val slideAdapter: SlidingImageProductDetailAdapter by lazy {
         SlidingImageProductDetailAdapter(this, arrSlide)
+    }
+    private val productDetailsAdapter by lazy {
+        ProductDetailAdapter()
     }
 
     private var arrSlide: ArrayList<String> = arrayListOf()
@@ -116,6 +116,12 @@ class ProductDetailActivity : AppCompatActivity() {
 
         productViewModel.product.observe(this, Observer {
             binding.product = it
+
+            it.details?.let { it1 -> productDetailsAdapter.setListProductDetail(it1) }
+            binding.rvProductDetail.adapter = productDetailsAdapter
+            binding.rvProductDetail.setHasFixedSize(true)
+            binding.rvProductDetail.setItemViewCacheSize(20)
+
             arrSlide = it.images!!
             slideAdapter.notifyDataSetChanged()
             binding.ivProductDetail.adapter= SlidingImageProductDetailAdapter(this, arrSlide)

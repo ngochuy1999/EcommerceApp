@@ -94,6 +94,7 @@
         android:id="@+id/botNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shadow_top"
         app:itemIconSize="20dp"
         app:itemIconTint="@color/colorNavIconSelected"
         app:itemTextColor="@color/colorNavIconSelected"

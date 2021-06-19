@@ -238,5 +238,6 @@
     <string name="delivery">Delivering</string>
     <string name="waiting_receive">Wait receive</string>
     <string name="cancelled">Cancelled</string>
+    <string name="product_configuration">Configuration</string>
 
 </resources>

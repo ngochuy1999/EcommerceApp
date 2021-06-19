@@ -199,5 +199,6 @@
     <string name="delivery">Đang vận chuyển</string>
     <string name="waiting_receive">Chờ lấy hàng</string>
     <string name="cancelled">Đã hủy</string>
+    <string name="product_configuration">Thông số kỹ thuật</string>
 
 </resources>
