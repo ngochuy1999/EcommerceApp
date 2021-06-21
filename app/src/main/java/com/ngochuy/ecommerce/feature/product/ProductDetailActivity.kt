@@ -131,6 +131,21 @@ class ProductDetailActivity : AppCompatActivity() {
             val density = resources.displayMetrics.density
             binding.indicatorPd.radius = 3 * density
         })
+
+        productViewModel.networkProduct.observe(this,{
+            when(it.status){
+                Status.RUNNING -> {
+                    binding.shimmerViewContainer.startShimmer()
+                }
+                Status.FAILED -> {
+                    binding.shimmerViewContainer.hideShimmer()
+                }
+                Status.SUCCESS -> {
+                    binding.shimmerViewContainer.hideShimmer()
+                }
+            }
+        })
+
         productViewModel.resultAddCart.observe(this, Observer {
             when (it.isStatus) {
                 0 -> {

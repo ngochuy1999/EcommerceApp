@@ -77,12 +77,21 @@ class UserFragment : Fragment() {
 
         userViewModel.networkUserInfo.observe(viewLifecycleOwner) {
             when (it.status) {
-                Status.RUNNING -> binding.progressUser.visible()
+                Status.RUNNING ->{
+                    binding.shimmerViewContainer.startShimmer()
+                    binding.shimmerViewContainer2.startShimmer()
+                    binding.shimmerViewContainer3.startShimmer()
+                }
                 Status.SUCCESS -> {
-                    binding.progressUser.gone()
+                    binding.shimmerViewContainer.hideShimmer()
+                    binding.shimmerViewContainer2.hideShimmer()
+                    binding.shimmerViewContainer3.hideShimmer()
+
                 }
                 Status.FAILED -> {
-                    binding.progressUser.gone()
+                    binding.shimmerViewContainer.hideShimmer()
+                    binding.shimmerViewContainer2.hideShimmer()
+                    binding.shimmerViewContainer3.hideShimmer()
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()
                 }
             }
