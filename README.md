@@ -56,22 +56,54 @@ Third-party:
   
 # Screenshots
 ### Sign In/Up
-![7cfa2553084afc14a55b](https://user-images.githubusercontent.com/32425168/122702612-f8160300-d279-11eb-93f5-e74745a18c86.jpg)
+![7cfa2553084afc14a55b](https://user-images.githubusercontent.com/32425168/122703090-06b0ea00-d27b-11eb-9248-ac7a8a1c513d.jpg)
+![6d146eba43a3b7fdeeb2](https://user-images.githubusercontent.com/32425168/122703096-09abda80-d27b-11eb-9f9d-f7106b6f6d7f.jpg)
+![aa391c82319bc5c59c8a](https://user-images.githubusercontent.com/32425168/122703100-0c0e3480-d27b-11eb-9473-c678075b0a08.jpg)
+![6bdeed9fc78633d86a97](https://user-images.githubusercontent.com/32425168/122703110-0fa1bb80-d27b-11eb-8b3a-dc9db30774d4.jpg)
 
 
 ### Home
+![a57cc53eef271b794236](https://user-images.githubusercontent.com/32425168/122703126-14ff0600-d27b-11eb-8eca-375ae87f9c56.jpg)
+
+### Category
+![d0e02db807a1f3ffaab0](https://user-images.githubusercontent.com/32425168/122703221-47106800-d27b-11eb-946e-adb38adb6f9d.jpg)
+
+### Search
+![62b8aea084b970e729a8](https://user-images.githubusercontent.com/32425168/122703235-4d064900-d27b-11eb-8186-19aa8a32d10c.jpg)
 
 
-### Account
+### Account & Setting
+![aaef4feb65f291acc8e3](https://user-images.githubusercontent.com/32425168/122703242-51cafd00-d27b-11eb-9655-a3c7fb8e0e4b.jpg)
+![2e080eeb24f2d0ac89e3](https://user-images.githubusercontent.com/32425168/122703274-64453680-d27b-11eb-8d56-99c910fa8018.jpg)
+![c466459b6f829bdcc293](https://user-images.githubusercontent.com/32425168/122703280-66a79080-d27b-11eb-8c5f-0d134c672df2.jpg)
+![bd90896ba372572c0e63](https://user-images.githubusercontent.com/32425168/122703286-6ad3ae00-d27b-11eb-958a-dfe9c0378135.jpg)
+![f2ec281b0202f65caf13](https://user-images.githubusercontent.com/32425168/122703294-6f986200-d27b-11eb-844f-385809e9ba5d.jpg)
+![6775a9e883f177af2ee0](https://user-images.githubusercontent.com/32425168/122703298-71622580-d27b-11eb-8acf-eee1b7a86787.jpg)
 
 
 ### Product Details
+![dbb4f9aad3b327ed7ea2](https://user-images.githubusercontent.com/32425168/122703323-7cb55100-d27b-11eb-9f99-9228a5a0ee34.jpg)
+![398cf1a3dbba2fe476ab](https://user-images.githubusercontent.com/32425168/122703330-8048d800-d27b-11eb-8b0a-e1cdb7593df5.jpg)
 
 
 ### Cart
+![383ef71cdd05295b7014](https://user-images.githubusercontent.com/32425168/122703337-83dc5f00-d27b-11eb-963c-4755cdfc36c1.jpg)
+
+### Order
+![13473c7d1664e23abb75](https://user-images.githubusercontent.com/32425168/122703348-8b9c0380-d27b-11eb-8cd4-21e9edf58f1a.jpg)
+![ba28fbe0d1f925a77ce8](https://user-images.githubusercontent.com/32425168/122703373-9e163d00-d27b-11eb-8afd-454018c50877.jpg)
+![d692ed58c741331f6a50](https://user-images.githubusercontent.com/32425168/122703382-a1a9c400-d27b-11eb-9630-7cf3caec5344.jpg)
+![52a15a7170688436dd79](https://user-images.githubusercontent.com/32425168/122703391-a5d5e180-d27b-11eb-867f-43029bade235.jpg)
+
+### Status Order
+![a662b0899a906ece3781](https://user-images.githubusercontent.com/32425168/122703433-c140ec80-d27b-11eb-84ba-b8c2eb909709.jpg)
+![47edbe03941a6044390b](https://user-images.githubusercontent.com/32425168/122703446-c9992780-d27b-11eb-9abe-ad697374a3a7.jpg)
+![b9b613293930cd6e9421](https://user-images.githubusercontent.com/32425168/122703447-cb62eb00-d27b-11eb-87ff-599799298798.jpg)
+
+
 
 # Test apk
-
+[PhoneShop](https://drive.google.com/file/d/12M6lyHLr3UgKvxV6tEClNPtke-nGq6OM/view?usp=sharing) 
 
 
 
