@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.data.Result
 import com.ngochuy.ecommerce.data.ResultApi
+import com.ngochuy.ecommerce.data.ResultUser
 import com.ngochuy.ecommerce.data.User
 import com.ngochuy.ecommerce.repository.AuthRepository
 
@@ -76,7 +77,7 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
     }
 
     /*--------------- get user info---------------*/
-    private val requestUserInfo = MutableLiveData<Result<User>>()
+    private val requestUserInfo = MutableLiveData<Result<ResultUser>>()
 
     val networkUserInfo = Transformations.switchMap(requestUserInfo) {
         it.networkState

@@ -79,7 +79,7 @@ open class OrderDetailActivity : AppCompatActivity() {
         })
 
         userViewModel.userInfo.observe(this, {
-            binding.user = it
+            binding.user = it.result
         })
 
 

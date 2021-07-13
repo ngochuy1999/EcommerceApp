@@ -1,10 +1,7 @@
 package com.ngochuy.ecommerce.repository.impl
 
 import androidx.lifecycle.MutableLiveData
-import com.ngochuy.ecommerce.data.NetworkState
-import com.ngochuy.ecommerce.data.Result
-import com.ngochuy.ecommerce.data.ResultApi
-import com.ngochuy.ecommerce.data.User
+import com.ngochuy.ecommerce.data.*
 import com.ngochuy.ecommerce.repository.AuthRepository
 import com.ngochuy.ecommerce.service.ApiService
 import retrofit2.http.Query
@@ -139,9 +136,9 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
         )
     }
 
-    override fun getUserInfoByUserID(userId: Int): Result<User> {
+    override fun getUserInfoByUserID(userId: Int): Result<ResultUser> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseUser = MutableLiveData<User>()
+        val responseUser = MutableLiveData<ResultUser>()
         apiService.getUserInfoByUserID(
                 userId,
                 onPrepared = {

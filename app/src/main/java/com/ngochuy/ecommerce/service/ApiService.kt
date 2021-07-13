@@ -165,7 +165,7 @@ class ApiService(private val apiApi: ApiManager) {
     fun getUserInfoByUserID(
             userId: Int,
             onPrepared: () -> Unit,
-            onSuccess: (User?) -> Unit,
+            onSuccess: (ResultUser?) -> Unit,
             onError: (String) -> Unit
     ) {
         val request = apiApi.getUserInfoByUserID(userId)

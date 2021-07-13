@@ -48,7 +48,7 @@ class TouchIDActivity : AppCompatActivity() {
 
     private fun bindViewModel() {
         userViewModel.userInfo.observe(this) {
-            responseUser.value = it
+            responseUser.value = it.result
         }
     }
 

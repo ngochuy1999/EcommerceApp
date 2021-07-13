@@ -111,46 +111,14 @@ class CartFragment : Fragment() {
     private fun addEvents() {
         btnBackCart.setOnClickListener { requireActivity().onBackPressed() }
         btn_continue_shopping_cart.setOnClickListener { startActivity<MainActivity>() ; requireActivity().finish()}
-        btnOrderCart.setOnClickListener { showBottomDialogAddCart() }
+        btnOrderCart.setOnClickListener { showConfirmOrderFragment() }
         swCart.setOnRefreshListener {
             cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
             swCart.isRefreshing = false
         }
     }
 
-    private fun showBottomDialogAddCart() {
-        val mBottomSheetDialog = BottomSheetDialog(requireContext())
-        val bindingDialog : DialogOtpBinding = DataBindingUtil
-                .inflate(LayoutInflater.from(requireContext()), R.layout.dialog_otp, null, false)
-        userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
-        bindingDialog.user = userViewModel.userInfo.value
-        mBottomSheetDialog.setContentView(bindingDialog.root)
-        userViewModel.userInfo.observe(viewLifecycleOwner) {
-            bindingDialog.user = it
-            it.email?.let { it1 -> cartViewModel.getOTP(it1) }
-        }
-        cartViewModel.codeOTP.observe(viewLifecycleOwner) {
-             OTP = it
-        }
-
-
-        // Add events
-        bindingDialog.btnGetOTP.setOnClickListener() {
-            if( OTP == bindingDialog.otpView.otp.toString()) {
-                bindingDialog.otpView.showSuccess()
-                mBottomSheetDialog.dismiss()
-                showAddress()
-            }else{
-                bindingDialog.otpView.showError()
-                Toast.makeText(requireContext(),"SAI OTP", Toast.LENGTH_LONG).show()
-                bindingDialog.otpView.resetState()
-            }
-
-        }
-        mBottomSheetDialog.show()
-    }
-
-    private fun showAddress() {
+    private fun showConfirmOrderFragment() {
         requireActivity().replaceFragment(
                 id = R.id.frmCart,
                 fragment = ConfirmOrderFragment(),

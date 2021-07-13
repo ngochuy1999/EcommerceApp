@@ -23,3 +23,10 @@ data class User(
         @SerializedName("email")
         val email: String? = null
 )
+
+data class ResultUser(
+        @SerializedName("user")
+        val result: User? = null,
+        @SerializedName("isStatus")
+        val isStatus: Int? = null
+)

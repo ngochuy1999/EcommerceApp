@@ -92,7 +92,7 @@ interface ApiManager {
     fun forgotPassword(email: String): Call<Int>
 
     @GET("users")
-    fun getUserInfoByUserID(@Header("id") userId: Int): Call<User>
+    fun getUserInfoByUserID(@Header("id") userId: Int): Call<ResultUser>
 
     //product
     @GET("products")

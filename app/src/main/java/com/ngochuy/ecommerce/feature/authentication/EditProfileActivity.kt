@@ -43,7 +43,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun bindViewModel() {
         userViewModel.userInfo.observe(this) {
-            binding.user = it
+            binding.user = it.result
         }
 
         userViewModel.statusChangeInfo.observe(this) {
@@ -121,7 +121,7 @@ class EditProfileActivity : AppCompatActivity() {
         }
         if (check) {
             userViewModel.changeInfo(
-                    userViewModel.userInfo.value?.id ?: 0,
+                    userViewModel.userInfo.value?.result?.id ?: 0,
                     name,
                     mail,
                     phone,

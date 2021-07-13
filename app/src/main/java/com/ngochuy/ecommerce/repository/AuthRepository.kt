@@ -2,6 +2,7 @@ package com.ngochuy.ecommerce.repository
 
 import com.ngochuy.ecommerce.data.Result
 import com.ngochuy.ecommerce.data.ResultApi
+import com.ngochuy.ecommerce.data.ResultUser
 import com.ngochuy.ecommerce.data.User
 
 interface AuthRepository {
@@ -30,5 +31,5 @@ interface AuthRepository {
             newPass: String
     ): Result<ResultApi>
 
-    fun getUserInfoByUserID(userId: Int): Result<User>
+    fun getUserInfoByUserID(userId: Int): Result<ResultUser>
 }
