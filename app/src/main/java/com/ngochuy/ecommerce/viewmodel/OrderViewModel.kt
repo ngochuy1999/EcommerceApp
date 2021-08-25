@@ -26,7 +26,7 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
     }
 
     /*         ITEM ORDER   */
-    private val requestItemOrder = MutableLiveData<Result<ResultOrder>>()
+    private val requestItemOrder = MutableLiveData<Result<ArrayList<Invoice>>>()
 
     val orderItem = Transformations.switchMap(requestItemOrder) {
         it.data
@@ -41,7 +41,7 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
 
 
     /*         ITEM ORDER CONFIRM   */
-    private val requestConfirmItemOrder = MutableLiveData<Result<ResultOrder>>()
+    private val requestConfirmItemOrder = MutableLiveData<Result<ArrayList<Invoice>>>()
 
     val confirmOrderItem = Transformations.switchMap(requestConfirmItemOrder) {
         it.data
@@ -56,7 +56,7 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
 
 
     /*         ITEM ORDER PAYMENT   */
-    private val requestPaymentItemOrder = MutableLiveData<Result<ResultOrder>>()
+    private val requestPaymentItemOrder = MutableLiveData<Result<ArrayList<Invoice>>>()
 
     val paymentOrderItem = Transformations.switchMap(requestPaymentItemOrder) {
         it.data
@@ -71,7 +71,7 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
 
 
     /*         ITEM ORDER DELIVER  */
-    private val requestDeliverItemOrder = MutableLiveData<Result<ResultOrder>>()
+    private val requestDeliverItemOrder = MutableLiveData<Result<ArrayList<Invoice>>>()
 
     val deliverOrderItem = Transformations.switchMap(requestDeliverItemOrder) {
         it.data
@@ -82,6 +82,20 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
 
     fun getDeliverOrderItem(orderId: Int) {
         requestDeliverItemOrder.value = repository.getDeliverOrderItem(orderId)
+    }
+
+    /*         ITEM DETAIL INVOICE  */
+    private val requestDetailInvoice = MutableLiveData<Result<ArrayList<InvoiceDetail>>>()
+
+    val invoiceDetailItem = Transformations.switchMap(requestDetailInvoice) {
+        it.data
+    }
+    val networkInvoiceDetailItem = Transformations.switchMap(requestDetailInvoice) {
+        it.networkState
+    }
+
+    fun getDetailInvoiceItem(invoiceId: Int) {
+        requestDetailInvoice.value = repository.getDetailInvoice(invoiceId)
     }
 
 }

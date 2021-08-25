@@ -23,6 +23,7 @@ import com.ngochuy.ecommerce.feature.product.ProductDetailActivity
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_accomplished_list.*
 import kotlinx.android.synthetic.main.fragment_delivering.*
+import kotlinx.android.synthetic.main.fragment_item_confirm.*
 import org.jetbrains.anko.support.v4.startActivity
 
 /**
@@ -44,7 +45,7 @@ class DeliveringFragment :Fragment(){
 
     private fun showProduct(id: Int) {
         val intent = Intent(requireContext(), OrderDetailDeliveryActivity::class.java)
-        intent.putExtra(PRODUCT_ID, id)
+        intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
 
@@ -83,8 +84,8 @@ class DeliveringFragment :Fragment(){
 
     private fun bindViewModel() {
         orderViewModel.deliverOrderItem.observe(viewLifecycleOwner) {
-            if (it.result?.size != 0 ) {
-                productAdapter.setProductList(it.result ?: arrayListOf())
+            if (it?.size != 0 ) {
+                productAdapter.setProductList(it ?: arrayListOf())
                 ll_deliver_empty.gone()
             }else ll_deliver_empty.visible()
         }

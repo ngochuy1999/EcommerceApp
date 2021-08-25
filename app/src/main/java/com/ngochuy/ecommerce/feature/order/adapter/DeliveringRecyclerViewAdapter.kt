@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.ngochuy.ecommerce.R
+import com.ngochuy.ecommerce.data.Invoice
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.databinding.ItemDeliveringBinding
 
@@ -14,7 +15,7 @@ class DeliveringRecyclerViewAdapter(
     private var onProductClick: (id:Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listProductSale: ArrayList<Product> = arrayListOf()
+    private var listProductSale: ArrayList<Invoice> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ProductCartViewHolder(
@@ -31,7 +32,7 @@ class DeliveringRecyclerViewAdapter(
         (holder as ProductCartViewHolder).bind(listProductSale[position])
     }
 
-    fun setProductList(list: List<Product>) {
+    fun setProductList(list: List<Invoice>) {
         listProductSale.apply {
             clear()
             addAll(list)
@@ -44,16 +45,15 @@ class DeliveringRecyclerViewAdapter(
         private val binding: ItemDeliveringBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Product) {
+        fun bind(itemDe: Invoice) {
             binding.apply {
-                product = item
+                item = itemDe
                 executePendingBindings()
-                itemAccomplishOrder.setOnClickListener { item?.let { it1 -> it1.id?.let { it2 ->
+                itemDeliveryOrder.setOnClickListener { item?.invoiceId?.let { it ->
                     onProductClick(
-                        it2
+                        it
                     )
                 } }
-                }
             }
         }
     }

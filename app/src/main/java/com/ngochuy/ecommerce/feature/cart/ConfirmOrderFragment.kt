@@ -54,6 +54,7 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
     }
 
     private lateinit var binding: FragmentConfirmOrderBinding
+    private var totalPrice: Long = 0
     private val productAdapter: ProductCartConfirmAdapter by lazy {
         ProductCartConfirmAdapter()
     }
@@ -151,7 +152,7 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
                     pro.quantityInCart?.let { ProductInCart(pro.productId, it) }?.let { list.add(it) }
                 }
             }
-            val invoiceRequest = InvoiceRequest(requireContext().getIntPref(USER_ID),list)
+            val invoiceRequest = InvoiceRequest(requireContext().getIntPref(USER_ID),totalPrice,list)
             orderViewModel.addOrder(invoiceRequest)
         }
     }
@@ -206,5 +207,6 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
             totalPriceCart += priceSale.toLong()
         }
         binding.price = totalPriceCart
+        totalPrice = totalPriceCart
     }
 }

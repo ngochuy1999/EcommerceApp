@@ -1,6 +1,7 @@
 package com.ngochuy.ecommerce.ext
 
 const val EMPTY_STRING = ""
+const val INVOICE_ID = "INVOICE_ID"
 const val PRODUCT_ID = "PRODUCT_ID"
 const val CATEGORY_ID = "CATEGORY_ID"
 const val USER_EMAIL = "email"

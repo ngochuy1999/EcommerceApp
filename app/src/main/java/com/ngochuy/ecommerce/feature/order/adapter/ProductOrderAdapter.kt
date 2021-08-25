@@ -3,12 +3,13 @@ package com.ngochuy.ecommerce.feature.order.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ngochuy.ecommerce.data.InvoiceDetail
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.databinding.ItemProductOrderBinding
 
 class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listProductSale: MutableList<Product> = arrayListOf()
+    private var listProductSale: ArrayList<InvoiceDetail> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
             ProductConfirmViewHolder(
                     ItemProductOrderBinding.inflate(
@@ -24,10 +25,10 @@ class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         (holder as ProductConfirmViewHolder).bind(listProductSale[position])
     }
 
-    fun setProductList(list: Product) {
+    fun setProductList(list: List<InvoiceDetail>) {
         listProductSale.apply {
             clear()
-            add(list)
+            addAll(list)
             notifyDataSetChanged()
         }
     }
@@ -36,9 +37,9 @@ class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             private val binding: ItemProductOrderBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Product) {
+        fun bind(itemInvocie: InvoiceDetail) {
             binding.apply {
-                product = item
+                item = itemInvocie
                 executePendingBindings()
             }
         }

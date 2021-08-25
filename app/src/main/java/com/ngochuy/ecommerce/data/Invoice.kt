@@ -5,14 +5,15 @@ import com.google.gson.annotations.SerializedName
 
 data class Invoice(
     val active: Int,
-    val address: Any,
+    val address: String?,
     val buyDate: String,
     val customer: Customer,
     val deliveryDate: String,
-    val invoiceId: Int,
+    val invoiceId: Int?,
     val invoiceStatus: InvoiceStatus,
-    val name: Any,
+    val name: String?,
     val note: String,
-    val phone: Any,
+    val phone: String?,
+    val totalPrice: Long?,
     val updateDate: Any
 )

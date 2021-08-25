@@ -241,7 +241,7 @@ class ApiService(private val apiApi: ApiManager) {
     fun getAllOrderItem(
             orderID : Int,
             onPrepared: () -> Unit,
-            onSuccess: (ResultOrder?) -> Unit,
+            onSuccess: (ArrayList<Invoice>?) -> Unit,
             onError: (String) -> Unit
     ) {
         val request =  apiApi.getAccomplishOrderItem(orderID)
@@ -251,7 +251,7 @@ class ApiService(private val apiApi: ApiManager) {
     fun getConfirmOrderItem(
         orderID : Int,
         onPrepared: () -> Unit,
-        onSuccess: (ResultOrder?) -> Unit,
+        onSuccess: (ArrayList<Invoice>?) -> Unit,
         onError: (String) -> Unit
     ) {
         val request =  apiApi.getConfirmOrderItem(orderID)
@@ -261,7 +261,7 @@ class ApiService(private val apiApi: ApiManager) {
     fun getPaymentOrderItem(
         orderID : Int,
         onPrepared: () -> Unit,
-        onSuccess: (ResultOrder?) -> Unit,
+        onSuccess: (ArrayList<Invoice>?) -> Unit,
         onError: (String) -> Unit
     ) {
         val request =  apiApi.getPaymentOrderItem(orderID)
@@ -271,13 +271,25 @@ class ApiService(private val apiApi: ApiManager) {
     fun getDeliverOrderItem(
         orderID : Int,
         onPrepared: () -> Unit,
-        onSuccess: (ResultOrder?) -> Unit,
+        onSuccess: (ArrayList<Invoice>?) -> Unit,
         onError: (String) -> Unit
     ) {
         val request =  apiApi.getDeliverOrderItem(orderID)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
+
+    fun getDetailInvoiceItem(
+        invoiceID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ArrayList<InvoiceDetail>?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getDetailInvoice(invoiceID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+
 
 //    fun getCode(
 //        email: String,

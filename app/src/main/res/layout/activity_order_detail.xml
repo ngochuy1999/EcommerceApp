@@ -7,28 +7,18 @@
 
         <import type="android.view.View" />
 
-        <variable
-            name="id"
-            type="Integer" />
 
         <variable
             name="cartCount"
             type="Integer" />
 
         <variable
-            name="totalPrice"
-            type="Long" />
-
-        <variable
             name="tranFee"
             type="Long" />
 
         <variable
-            name="product"
-            type="com.ngochuy.ecommerce.data.Product" />
-        <variable
-            name="user"
-            type="com.ngochuy.ecommerce.data.User" />
+            name="invoice"
+            type="com.ngochuy.ecommerce.data.Invoice" />
 
     </data>
 
@@ -136,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{product.id.toString()}"
+                        android:text="@{invoice.invoiceId.toString()}"
                         android:textColor="@color/colorTextHint"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -158,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{product.date}"
+                        android:text="@{invoice.buyDate}"
                         app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_date"
                         app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_date"
                         tools:text="@string/order_id" />
@@ -179,7 +169,7 @@
                         android:layout_marginStart="10dp"
                         app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_status"
                         app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_status"
-                        android:text="@string/status_order" />
+                        android:text="@{invoice.invoiceStatus.statusName}" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -206,7 +196,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{`Name: `+user.name}"
+                    android:text="@{`Name: `+invoice.name}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp"
                     tools:text="@string/name_sign_up" />
@@ -218,7 +208,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{`Phone: `+user.phone}"
+                    android:text="@{`Phone: `+invoice.phone}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp"
                     tools:text="@string/phone" />
@@ -231,7 +221,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@{`Address: `+user.address}"
+                    android:text="@{`Address: `+invoice.address}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp"
                     tools:text="@string/add_address" />
@@ -316,7 +306,7 @@
 
                     <TextView
                         android:id="@+id/tv_price_temp_order_detail"
-                        txtPrice="@{totalPrice}"
+                        txtPrice="@{invoice.totalPrice}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -378,7 +368,7 @@
 
                     <TextView
                         android:id="@+id/tv_price_amount_order_detail"
-                        txtPrice="@{totalPrice+tranFee}"
+                        txtPrice="@{invoice.totalPrice+tranFee}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"

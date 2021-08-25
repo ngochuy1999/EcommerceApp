@@ -137,15 +137,25 @@ interface ApiManager {
     @POST("invoices")
     fun addOrder(@Body invoiceRequest: InvoiceRequest): Call<ResultApi>
 
+    //get invoice
     @GET("sold")
-    fun getAccomplishOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+    fun getAllOrder (@Header("userId") orderId: Int): Call<ResultOrder>
+
+    @GET("accomplish")
+    fun getAccomplishOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
 
     @GET("confirm")
-    fun getConfirmOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+    fun getConfirmOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
 
-    @GET("getSold")
-    fun getPaymentOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+    @GET("payment")
+    fun getPaymentOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
 
-    @GET("delivering")
-    fun getDeliverOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
+    @GET("delivery")
+    fun getDeliverOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
+
+    @GET("cancel")
+    fun getCancelOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
+
+    @GET("invoiceDetail")
+    fun getDetailInvoice( @Header("invoiceId") invoiceId: Int): Call<ArrayList<InvoiceDetail>>
 }

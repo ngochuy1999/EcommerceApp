@@ -4,94 +4,197 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="product"
-            type="com.ngochuy.ecommerce.data.Product" />
+            name="item"
+            type="com.ngochuy.ecommerce.data.Invoice" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_accomplish_order"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_delivery_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorWhiteBG">
-        <TextView
-            android:id="@+id/status"
+        android:layout_marginTop="@dimen/layout_margin_12dp"
+        app:cardCornerRadius="@dimen/layout_margin_8dp"
+        app:cardElevation="@dimen/layout_margin_4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/shadow_bottom"
-            android:padding="10dp"
-            android:text="@string/delivery"
-            android:textColor="@color/greenColor"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_product_conf_order"
-            imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(0)}"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/colorWhiteBG"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/status" />
-
-
-        <TextView
-            android:id="@+id/tv_name_product_conf_order"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{product.name}"
-            android:textColor="@color/colorTextHint"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_product_conf_order"
-            app:layout_constraintTop_toTopOf="@id/iv_product_conf_order"
-            tools:text="@string/tv_name" />
+            android:background="?android:attr/selectableItemBackground">
 
+            <View
+                android:id="@+id/vTag"
+                android:layout_width="@dimen/size_32dp"
+                android:layout_height="0dp"
+                android:background="#4CAF50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_price_product_conf_order"
-            discount="@{product.sale}"
-            price="@{product.price}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorTextHint"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_product_conf_order"
-            app:layout_constraintTop_toBottomOf="@id/tv_name_product_conf_order"
-            tools:text="@string/_1_290_000" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="29dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="@dimen/layout_margin_10dp"
+                android:padding="@dimen/layout_margin_4dp"
+                android:tint="@color/white"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@id/vTag"
+                app:layout_constraintStart_toStartOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="@id/vTag"
+                app:srcCompat="@drawable/ic_flash" />
 
-        <TextView
-            android:id="@+id/tv_number_product_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:text="@{`x`+product.quantityOrder.toString()}"
-            android:textColor="@color/colorTextHint"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/tv_price_product_conf_order"
-            app:layout_constraintTop_toTopOf="@id/tv_price_product_conf_order"
-            tools:text="@string/_1" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_margin_32dp"
+                android:gravity="bottom"
+                android:includeFontPadding="false"
+                android:rotation="-90"
+                android:text="Delivery"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/vTag"
+                app:layout_constraintEnd_toEndOf="@id/vTag"
+                app:layout_constraintStart_toStartOf="@id/vTag" />
 
+            <TextView
+                android:id="@+id/tvBoughtDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_margin_12dp"
+                android:text="@{item.buyDate}"
+                android:textAlignment="textEnd"
+                android:textColor="#cc0066"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="30/09/2021" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGrayBg"
-            app:layout_constraintTop_toTopOf="parent" />
+            <include
+                layout="@layout/divider_header"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/layout_margin_1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/vTag"
+                app:layout_constraintTop_toBottomOf="@id/tvBoughtDate" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivName"
+                android:layout_width="@dimen/size_18dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_person"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="@id/tvName" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_4dp"
+                android:layout_marginTop="@dimen/layout_margin_12dp"
+                android:layout_marginEnd="@dimen/layout_margin_12dp"
+                android:text="@{item.name}"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivName"
+                app:layout_constraintTop_toBottomOf="@id/tvBoughtDate"
+                tools:text="Name" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPhone"
+                android:layout_width="@dimen/size_18dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:adjustViewBounds="true"
+                android:padding="@dimen/layout_margin_2dp"
+                android:src="@drawable/ic_phone"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="@id/tvPhone" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_4dp"
+                android:layout_marginTop="@dimen/layout_margin_4dp"
+                android:layout_marginEnd="@dimen/layout_margin_12dp"
+                android:text="@{item.phone}"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivPhone"
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+                tools:text="Phone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivAddress"
+                android:layout_width="@dimen/size_18dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_location"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="@id/tvAddress" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_4dp"
+                android:layout_marginTop="@dimen/layout_margin_4dp"
+                android:layout_marginEnd="@dimen/layout_margin_12dp"
+                android:text="@{item.address}"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivAddress"
+                app:layout_constraintTop_toBottomOf="@id/tvPhone"
+                tools:text="Address" />
+
+            <include
+                android:id="@+id/vDividerInfo"
+                layout="@layout/divider_header"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/layout_margin_1dp"
+                android:layout_marginTop="@dimen/layout_margin_12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/vTag"
+                app:layout_constraintTop_toBottomOf="@id/tvAddress" />
+
+            <TextView
+                android:id="@+id/tvInvoiceStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_margin_12dp"
+                android:text="@{item.invoiceStatus.statusName}"
+                android:textAlignment="textStart"
+                android:textColor="#00a770"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/tvPrice"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toBottomOf="@id/vDividerInfo"
+                tools:text="Đã thanh toán" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice"
+                txtPrice="@{item.totalPrice}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:padding="@dimen/layout_margin_12dp"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vDividerInfo"
+                tools:text="32.323.333 d" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </layout>

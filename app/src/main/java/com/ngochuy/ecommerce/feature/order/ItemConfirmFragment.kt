@@ -45,7 +45,7 @@ class ItemConfirmFragment :Fragment(){
 
     private fun showProduct(id: Int) {
         val intent = Intent(requireContext(), OrderDetailConfirmActivity::class.java)
-        intent.putExtra(PRODUCT_ID, id)
+        intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
 
@@ -83,8 +83,8 @@ class ItemConfirmFragment :Fragment(){
 
     private fun bindViewModel() {
         orderViewModel.confirmOrderItem.observe(viewLifecycleOwner) {
-            if (it.result?.size != 0 ) {
-                productAdapter.setProductList(it.result ?: arrayListOf())
+            if (it?.size != 0 ) {
+                productAdapter.setProductList(it ?: arrayListOf())
                 ll_co_empty.gone()
             }else ll_co_empty.visible()
         }
