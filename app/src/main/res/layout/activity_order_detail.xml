@@ -206,7 +206,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{`Name: `+user.username}"
+                    android:text="@{`Name: `+user.name}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp"
                     tools:text="@string/name_sign_up" />

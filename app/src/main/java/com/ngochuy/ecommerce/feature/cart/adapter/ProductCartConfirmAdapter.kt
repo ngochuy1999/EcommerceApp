@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.databinding.ItemProductConfirmBinding
+import com.ngochuy.ecommerce.roomdb.ProductEntity
 
 class ProductCartConfirmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listProductSale: ArrayList<Product> = arrayListOf()
+    private var listProductSale: ArrayList<ProductEntity> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
             ProductViewHolder(
@@ -25,7 +26,7 @@ class ProductCartConfirmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         (holder as ProductViewHolder).bind(listProductSale[position])
     }
 
-    fun setProductList(list: List<Product>) {
+    fun setProductList(list: List<ProductEntity>) {
         listProductSale.apply {
             clear()
             addAll(list)
@@ -37,7 +38,7 @@ class ProductCartConfirmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             private val binding: ItemProductConfirmBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Product) {
+        fun bind(item: ProductEntity) {
             binding.apply {
                 product = item
                 executePendingBindings()

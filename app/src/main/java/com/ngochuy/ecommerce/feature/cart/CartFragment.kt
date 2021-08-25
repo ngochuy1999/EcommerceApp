@@ -24,67 +24,108 @@ import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.cart.adapter.ProductCartAdapter
 import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.feature.product.ProductDetailActivity
+import com.ngochuy.ecommerce.roomdb.CartDatabase
+import com.ngochuy.ecommerce.roomdb.ProductEntity
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.dialog_otp.*
 import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.uiThread
+import kotlin.coroutines.CoroutineContext
 
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), CoroutineScope {
 
-    private val cartViewModel: CartViewModel by lazy {
-        ViewModelProvider(
-                requireActivity(),
-                Injection.provideCartViewModelFactory()
-        )[CartViewModel::class.java]
-    }
-
-    private val userViewModel: UserViewModel by lazy {
-        ViewModelProvider(
-                this,
-                Injection.provideAuthViewModelFactory()
-        )[UserViewModel::class.java]
-    }
+//    private val cartViewModel: CartViewModel by lazy {
+//        ViewModelProvider(
+//                requireActivity(),
+//                Injection.provideCartViewModelFactory()
+//        )[CartViewModel::class.java]
+//    }
 
     private val cartAdapter: ProductCartAdapter by lazy {
-        ProductCartAdapter { id, type -> eventsCart(id, type) }
+        ProductCartAdapter { item, type -> eventsCart(item, type) }
     }
+    private var cartDB: CartDatabase? = null
+    private lateinit var mJob: Job
+    override val coroutineContext: CoroutineContext
+        get() = mJob + Dispatchers.Main
 
-    private fun eventsCart(id: Int, type: CartType) {
+    private fun eventsCart(item: ProductEntity, type: CartType) {
         when (type) {
-            CartType.DEL -> delItemCart(id)
-            CartType.PLUS -> plusItemCart(id)
-            CartType.MINUS -> minusItemCart(id)
-            CartType.CLICK -> onClickItemCart(id)
+            CartType.DEL -> delItemCart(item)
+            CartType.PLUS -> plusItemCart(item)
+            CartType.MINUS -> minusItemCart(item)
+            CartType.CLICK -> onClickItemCart(item)
         }
     }
 
-    private fun onClickItemCart(id: Int) {
+    private fun onClickItemCart(item: ProductEntity) {
         val intent = Intent(requireContext(), ProductDetailActivity::class.java)
-        intent.putExtra(PRODUCT_ID, id)
+        intent.putExtra(PRODUCT_ID, item.productId)
         startActivity(intent)
     }
 
-    private fun minusItemCart(id: Int) {
-        cartViewModel.plusCart(requireContext().getIntPref(USER_ID), id, -1)
-        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
+    private fun minusItemCart(item: ProductEntity) {
+//        cartViewModel.plusCart(requireContext().getIntPref(USER_ID), id, -1)
+//        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
+        launch {
+            item?.let {
+                ProductEntity(
+                    it.productId,
+                    it.title,
+                    it.sale,
+                    it.price,
+                    it.quantity,
+                    it.imageDetail,
+                    it.quantityInCart?.plus(-1)
+                )
+            }
+                ?.let { cartDB?.productDao()?.update(it) }
+            // Get cart again
+            bindViewModel()
+        }
     }
 
-    private fun plusItemCart(id: Int) {
-        cartViewModel.plusCart(requireContext().getIntPref(USER_ID), id, 1)
-        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
+    private fun plusItemCart(item: ProductEntity) {
+//        cartViewModel.plusCart(requireContext().getIntPref(USER_ID), id, 1)
+//        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
+        launch {
+            item?.let {
+                ProductEntity(
+                    it.productId,
+                    it.title,
+                    it.sale,
+                    it.price,
+                    it.quantity,
+                    it.imageDetail,
+                    it.quantityInCart?.plus(1)
+                )
+            }.let { cartDB?.productDao()?.update(it) }
+            // Get cart again
+            bindViewModel()
+        }
     }
 
-    private fun delItemCart(id: Int) {
-        cartViewModel.delCartItem(requireContext().getIntPref(USER_ID), id)
-        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
+    private fun delItemCart(item: ProductEntity) {
+//        cartViewModel.delCartItem(requireContext().getIntPref(USER_ID), id)
+//        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
+        launch {
+            cartDB?.productDao()?.delete(item)
+            // Get cart again
+            bindViewModel()
+        }
 }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
-        userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
+        bindViewModel()
     }
 
     override fun onCreateView(
@@ -97,7 +138,6 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindViewModel()
         addEvents()
         initViews()
     }
@@ -113,7 +153,7 @@ class CartFragment : Fragment() {
         btn_continue_shopping_cart.setOnClickListener { startActivity<MainActivity>() ; requireActivity().finish()}
         btnOrderCart.setOnClickListener { showConfirmOrderFragment() }
         swCart.setOnRefreshListener {
-            cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
+            bindViewModel()
             swCart.isRefreshing = false
         }
     }
@@ -127,17 +167,20 @@ class CartFragment : Fragment() {
     }
 
     private fun bindViewModel() {
-        cartViewModel.productsCart.observe(viewLifecycleOwner, Observer {
-            if (it.size != 0) {
-                cartAdapter.setProductList(it)
-                setPriceCart(it)
-                cartEmpty.gone()
-            } else cartEmpty.visible()
-        })
+                mJob = Job()
+                cartDB = CartDatabase.getDatabase(requireContext())
+                launch {
+                    val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
+                    if (products?.size != 0) {
+                            cartAdapter.setProductList(products!!)
+                            setPriceCart(products!!)
+                            cartEmpty.gone()
+                    }else cartEmpty.visible()
+                }
 
-        cartViewModel.networkProductsCart.observe(viewLifecycleOwner, Observer {
-            progressCart.visibility = if (it.status == Status.RUNNING) View.VISIBLE else View.GONE
-        })
+//        cartViewModel.networkProductsCart.observe(viewLifecycleOwner, Observer {
+//            progressCart.visibility = if (it.status == Status.RUNNING) View.VISIBLE else View.GONE
+//        })
 
         /*cartViewModel.networkPlusCart.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
@@ -150,14 +193,14 @@ class CartFragment : Fragment() {
         })*/
     }
 
-    private fun setPriceCart(prosCart: ArrayList<Product>) {
+    private fun setPriceCart(prosCart: List<ProductEntity>) {
         var totalPriceCart = 0L
         var discount = 0
         var price = 0L
         for (pro in prosCart) {
             discount = pro.sale ?: 0
             price = pro.price ?: 0
-            val priceSale = (price?.minus(((discount * 0.01) * price))).times(pro.quantityOrder
+            val priceSale = (price?.minus(((discount * 0.01) * price))).times(pro.quantityInCart
                     ?: 1)
             totalPriceCart += priceSale.toLong()
         }

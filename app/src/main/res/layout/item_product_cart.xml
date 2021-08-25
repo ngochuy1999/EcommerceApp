@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="product"
-            type="com.ngochuy.ecommerce.data.Product" />
+            type="com.ngochuy.ecommerce.roomdb.ProductEntity" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(0)}"
+        imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.imageDetail}"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -39,7 +39,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         tools:text="@string/tv_name"
-        android:text="@{product.name}"
+        android:text="@{product.title}"
         android:textColor="@color/colorTextHint"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/btnDelCart"
@@ -94,7 +94,7 @@
         android:paddingEnd="16dp"
         android:paddingBottom="5dp"
         android:text="@string/btn_minus"
-        android:visibility="@{(product.quantityOrder>1) ? View.VISIBLE : View.GONE}"
+        android:visibility="@{(product.quantityInCart>1) ? View.VISIBLE : View.GONE}"
         android:textColor="@color/colorGrayStar"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/tv_price_product_cart"
@@ -110,7 +110,7 @@
         android:paddingTop="5dp"
         android:paddingEnd="20dp"
         android:paddingBottom="5dp"
-        android:text="@{product.quantityOrder.toString()}"
+        android:text="@{product.quantityInCart.toString()}"
         android:textColor="@color/colorGrayStar"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/btnMinus"
@@ -128,7 +128,7 @@
         android:paddingEnd="16dp"
         android:paddingBottom="5dp"
         android:text="@string/btn_plus"
-        android:visibility="@{(product.quantityOrder&lt;product.quantity) ? View.VISIBLE : View.GONE}"
+        android:visibility="@{(product.quantityInCart&lt;product.quantity) ? View.VISIBLE : View.GONE}"
         android:textColor="@color/colorGrayStar"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/tv_number_pr_cart"

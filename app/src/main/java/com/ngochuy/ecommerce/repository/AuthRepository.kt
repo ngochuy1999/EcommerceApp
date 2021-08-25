@@ -1,9 +1,6 @@
 package com.ngochuy.ecommerce.repository
 
-import com.ngochuy.ecommerce.data.Result
-import com.ngochuy.ecommerce.data.ResultApi
-import com.ngochuy.ecommerce.data.ResultUser
-import com.ngochuy.ecommerce.data.User
+import com.ngochuy.ecommerce.data.*
 
 interface AuthRepository {
     fun login(username: String, password: String): Result<ResultApi>
@@ -17,7 +14,6 @@ interface AuthRepository {
 
     fun changeInfo(
             userId: Int,
-            email: String,
             name: String,
             phone: String,
             address: String
@@ -31,5 +27,5 @@ interface AuthRepository {
             newPass: String
     ): Result<ResultApi>
 
-    fun getUserInfoByUserID(userId: Int): Result<ResultUser>
+    fun getUserInfoByUserID(userId: Int): Result<User>
 }

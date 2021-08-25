@@ -1,16 +1,13 @@
 package com.ngochuy.ecommerce.repository
 
-import com.ngochuy.ecommerce.data.Product
-import com.ngochuy.ecommerce.data.Result
-import com.ngochuy.ecommerce.data.ResultApi
-import com.ngochuy.ecommerce.data.Slide
+import com.ngochuy.ecommerce.data.*
 
 interface ProductRepository {
-    fun getListProductSale(): Result<ArrayList<Product>>
+    fun getListProductSale(): Result<ArrayList<ProductDetail>>
     fun getListSlide(): Result<ArrayList<Slide>>
-    fun getAllListProductSale(): Result<ArrayList<Product>>
-    fun getAllListProduct(): Result<ArrayList<Product>>
-    fun getProductCategory(cate: String): Result<ArrayList<Product>>
-    fun getProductByID(productID: Int): Result<Product>
-    fun addCart(userId: Int,productID: Int, quantity: Int): Result<ResultApi>
+    fun getAllListProductSale(): Result<ArrayList<ProductDetail>>
+    fun getAllListProduct(): Result<ArrayList<ProductDetail>>
+    fun getProductCategory(cate: String): Result<ArrayList<ProductDetail>>
+    fun getProductByID(productID: Int): Result<ProductDetail>
+//    fun addCart(userId: Int,productID: Int, quantity: Int): Result<ResultApi>
 }

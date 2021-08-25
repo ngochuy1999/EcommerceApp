@@ -14,25 +14,25 @@ import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
 import com.ngochuy.ecommerce.feature.order.adapter.ProductOrderAdapter
-import com.ngochuy.ecommerce.viewmodel.CartViewModel
+import com.ngochuy.ecommerce.roomdb.CartDatabase
+import com.ngochuy.ecommerce.roomdb.ProductEntity
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_order_detail.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
+import kotlin.coroutines.CoroutineContext
 
-open class OrderDetailActivity : AppCompatActivity() {
+open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
 
     private val userViewModel: UserViewModel by lazy {
         ViewModelProvider(
                 this,
                 Injection.provideAuthViewModelFactory()
         )[UserViewModel::class.java]
-    }
-    private val cartViewModel: CartViewModel by lazy {
-        ViewModelProvider(
-            this,
-            Injection.provideCartViewModelFactory()
-        )[CartViewModel::class.java]
     }
     val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
@@ -41,6 +41,11 @@ open class OrderDetailActivity : AppCompatActivity() {
         )[OrderViewModel::class.java]
     }
 
+    private var cartDB: CartDatabase?= null
+
+    private lateinit var mJob: Job
+    override val coroutineContext: CoroutineContext
+        get() = mJob + Dispatchers.Main
 
     lateinit var binding: ActivityOrderDetailBinding
     var productId: Int? = null
@@ -54,9 +59,14 @@ open class OrderDetailActivity : AppCompatActivity() {
         productId = intent.getIntExtra(PRODUCT_ID, -1)
         val userId = getIntPref(USER_ID)
         binding.cartCount = 0
-        if (userId != -1)
-            cartViewModel.getCartCount(userId)
-
+        if (userId != -1){
+            mJob = Job()
+            cartDB = CartDatabase.getDatabase(this)
+            launch {
+                val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
+                binding.cartCount= products?.size
+            }
+        }
         binding.tranFee = 20000
         binding.totalPrice = 0L
         userViewModel.getInfoUser((getIntPref(USER_ID)))
@@ -74,12 +84,9 @@ open class OrderDetailActivity : AppCompatActivity() {
 
     private fun bindViewModel() {
 
-        cartViewModel.cartCount.observe(this, {
-            binding.cartCount = it ?: 0
-        })
 
         userViewModel.userInfo.observe(this, {
-            binding.user = it.result
+            binding.user = it
         })
 
 

@@ -20,9 +20,9 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
     }
 
     fun addOrder(
-            userID: Int,
+            invoiceRequest: InvoiceRequest,
     ) {
-        requestOrder.value = repository.order(userID)
+        requestOrder.value = repository.order(invoiceRequest)
     }
 
     /*         ITEM ORDER   */

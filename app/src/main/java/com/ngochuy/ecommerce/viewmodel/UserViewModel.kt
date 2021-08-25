@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ngochuy.ecommerce.data.Result
-import com.ngochuy.ecommerce.data.ResultApi
-import com.ngochuy.ecommerce.data.ResultUser
-import com.ngochuy.ecommerce.data.User
+import com.ngochuy.ecommerce.data.*
 import com.ngochuy.ecommerce.repository.AuthRepository
 
 class UserViewModel(private val repository: AuthRepository) : ViewModel() {
@@ -77,7 +74,7 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
     }
 
     /*--------------- get user info---------------*/
-    private val requestUserInfo = MutableLiveData<Result<ResultUser>>()
+    private val requestUserInfo = MutableLiveData<Result<User>>()
 
     val networkUserInfo = Transformations.switchMap(requestUserInfo) {
         it.networkState
@@ -106,12 +103,11 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
     fun changeInfo(
         userId: Int,
         name: String,
-        email: String,
         phone: String,
         address: String,
     ) {
         requestChangeInfo.value =
-            repository.changeInfo(userId, email, name, phone, address)
+            repository.changeInfo(userId, name, phone, address)
     }
 
     /*---------------Change pass --------------*/

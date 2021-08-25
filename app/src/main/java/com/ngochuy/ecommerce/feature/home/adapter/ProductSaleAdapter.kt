@@ -3,14 +3,14 @@ package com.ngochuy.ecommerce.feature.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ngochuy.ecommerce.data.Product
+import com.ngochuy.ecommerce.data.ProductDetail
 import com.ngochuy.ecommerce.databinding.ItemProductSaleBinding
 
 class ProductSaleAdapter(
         private var onProductClick: (id:Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listProductSale: ArrayList<Product> = arrayListOf()
+    private var listProductSale: ArrayList<ProductDetail> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
             PlantViewHolder(
@@ -27,7 +27,7 @@ class ProductSaleAdapter(
         (holder as PlantViewHolder).bind(listProductSale[position])
     }
 
-    fun setProductList(list: List<Product>) {
+    fun setProductList(list: List<ProductDetail>) {
         listProductSale.apply {
             clear()
             addAll(list)
@@ -39,11 +39,11 @@ class ProductSaleAdapter(
             private val binding: ItemProductSaleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Product) {
+        fun bind(item: ProductDetail) {
             binding.apply {
                 product = item
                 executePendingBindings()
-                itemProductSale.setOnClickListener { item.id?.let { it1 -> onProductClick(it1) } }
+                itemProductSale.setOnClickListener { item.productId?.let { it1 -> onProductClick(it1) } }
             }
         }
     }

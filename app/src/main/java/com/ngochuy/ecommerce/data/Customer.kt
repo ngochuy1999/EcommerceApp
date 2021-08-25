@@ -3,11 +3,11 @@ package com.ngochuy.ecommerce.data
 
 import com.google.gson.annotations.SerializedName
 
-data class User(
+data class Customer(
     val account: Account,
     val address: String,
     val dateCreate: String,
-    val imageUrl: String? =null,
+    val imageUrl: String,
     val name: String,
     val phone: String,
     val userId: Int

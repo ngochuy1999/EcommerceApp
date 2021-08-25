@@ -10,7 +10,7 @@ import com.ngochuy.ecommerce.repository.CategoryRepository
 
 class CategoryViewModel(private val repository: CategoryRepository) : ViewModel() {
 
-    private val requestCategories = MutableLiveData<Result<ArrayList<String>>>()
+    private val requestCategories = MutableLiveData<Result<ArrayList<Category>>>()
 
     init {
         getListCategories()

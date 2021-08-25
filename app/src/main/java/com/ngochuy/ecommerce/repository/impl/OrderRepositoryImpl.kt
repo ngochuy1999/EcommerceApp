@@ -7,12 +7,12 @@ import com.ngochuy.ecommerce.service.ApiService
 
 class OrderRepositoryImpl(private val apiService: ApiService) : OrderRepository {
     override fun order(
-            userID: Int,
+            invoiceRequest: InvoiceRequest,
     ): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
         val response = MutableLiveData<ResultApi>()
         apiService.addOrder(
-                userID,
+                invoiceRequest,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },

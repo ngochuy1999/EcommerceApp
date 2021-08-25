@@ -18,12 +18,19 @@ import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.cart.CartActivity
 import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.feature.product.adapter.ProductAdapter
+import com.ngochuy.ecommerce.roomdb.CartDatabase
+import com.ngochuy.ecommerce.roomdb.ProductEntity
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
 import kotlinx.android.synthetic.main.activity_product_in_category.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
+import kotlin.coroutines.CoroutineContext
 
-class ProductsOfCategoryActivity : AppCompatActivity() {
+class ProductsOfCategoryActivity : AppCompatActivity(),CoroutineScope {
 
     private var categoryID: String? = null
 
@@ -32,12 +39,11 @@ class ProductsOfCategoryActivity : AppCompatActivity() {
         ProductAdapter { productID -> showProductDetail(productID) }
     }
 
-    private val cartViewModel: CartViewModel by lazy {
-        ViewModelProvider(
-            this,
-            Injection.provideCartViewModelFactory()
-        )[CartViewModel::class.java]
-    }
+    private var cartDB: CartDatabase?= null
+
+    private lateinit var mJob: Job
+    override val coroutineContext: CoroutineContext
+        get() = mJob + Dispatchers.Main
 
     private fun showProductDetail(id: Int) {
         val intent = Intent(this, ProductDetailActivity::class.java)
@@ -66,8 +72,14 @@ class ProductsOfCategoryActivity : AppCompatActivity() {
             // Set cart count, check user is login yet? check by get userID from Shared pref
             val userId = getIntPref(USER_ID)
             binding.cartCount = 0
-            if (userId != -1)
-                cartViewModel.getCartCount(userId)
+            if (userId != -1){
+                mJob = Job()
+                cartDB = CartDatabase.getDatabase(this)
+                launch {
+                    val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
+                    binding.cartCount= products?.size
+                }
+            }
 
         } else {
             Toast
@@ -119,8 +131,5 @@ class ProductsOfCategoryActivity : AppCompatActivity() {
                 if (it.status == Status.RUNNING) View.VISIBLE else View.GONE
         })
 
-        cartViewModel.cartCount.observe(this, Observer {
-            binding.cartCount = it ?: 0
-        })
     }
 }

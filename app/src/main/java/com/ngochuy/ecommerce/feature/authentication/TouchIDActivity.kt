@@ -2,21 +2,17 @@ package com.ngochuy.ecommerce.feature.authentication
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.User
 import com.ngochuy.ecommerce.databinding.ActivityTouchidBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
-import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_touchid.*
-import org.jetbrains.anko.startActivity
 
 class TouchIDActivity : AppCompatActivity() {
 
@@ -26,7 +22,7 @@ class TouchIDActivity : AppCompatActivity() {
             Injection.provideAuthViewModelFactory()
         )[UserViewModel::class.java]
     }
-    val responseUser = MutableLiveData<User>()
+    var responseUser = MutableLiveData<User>()
     private lateinit var binding: ActivityTouchidBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +44,7 @@ class TouchIDActivity : AppCompatActivity() {
 
     private fun bindViewModel() {
         userViewModel.userInfo.observe(this) {
-            responseUser.value = it.result
+            responseUser.value = it
         }
     }
 

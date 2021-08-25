@@ -3,7 +3,7 @@
     <data>
         <variable
             name="product"
-            type="com.ngochuy.ecommerce.data.Product" />
+            type="com.ngochuy.ecommerce.data.ProductDetail" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,7 +41,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product_add_cart"
             android:layout_width="100dp"
-            imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(0)}"
+            imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.imageDetail.imageUrl1}"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{product.name}"
+            android:text="@{product.title}"
             android:textColor="@color/colorTextHint"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"

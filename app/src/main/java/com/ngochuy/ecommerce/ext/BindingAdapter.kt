@@ -44,7 +44,7 @@ fun bindTextPrice(view: TextView, price: Long?, discount: Int) {
 fun bindPrice(view: TextView, price: Long?) {
     val localeVN = Locale("vi", "VN")
     val currencyVN = NumberFormat.getCurrencyInstance(localeVN)
-    view.text = currencyVN.format(price)
+    view.text = currencyVN.format(price?:0)
 }
 
 @BindingAdapter("txtPriceDiscount")

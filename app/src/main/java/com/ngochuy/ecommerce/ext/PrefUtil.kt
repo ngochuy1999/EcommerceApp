@@ -1,28 +1,24 @@
 package com.ngochuy.ecommerce.ext
 
-import android.app.Activity
-import android.app.Fragment
 import android.app.KeyguardManager
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
-import android.view.Gravity
-import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
-import com.ngochuy.ecommerce.R
-import com.ngochuy.ecommerce.data.User
+import java.lang.NullPointerException
 
 
 //KEY WORD
 
 const val USER_PROFILE = "USER"
+const val CART = "CART"
+const val PREFS_NAME = "PREFERENCES"
+const val USER_ID = "USER_ID"
+const val CHECK_FINGER = "CHECK_FINGER"
+const val USERID_TOUCHID = "USERID_TOUCHID"
+var OTP = ""
 
 class PrefUtil constructor(
     private val context: Context,
@@ -30,29 +26,8 @@ class PrefUtil constructor(
     private val gSon: Gson
 ) {
     fun clearAllData() = prefs.edit().clear().commit()
-
-    var user: User?
-        get() {
-            return try {
-                gSon.fromJson(
-                    prefs.getString(USER_PROFILE, null),
-                    User::class.java
-                )
-            } catch (e: Exception) {
-                null
-            }
-        }
-        set(value) = prefs.edit().putString(
-            USER_PROFILE,
-            gSon.toJson(value)
-        ).apply()
 }
 
-const val PREFS_NAME = "PREFERENCES"
-const val USER_ID = "USER_ID"
-const val CHECK_FINGER = "CHECK_FINGER"
-const val USERID_TOUCHID = "USERID_TOUCHID"
-var OTP = ""
 
 fun Context.removeValueSharePrefs(KEY_NAME: String) {
     val pref: SharedPreferences = getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)

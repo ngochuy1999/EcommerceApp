@@ -5,7 +5,7 @@
     <data>
         <variable
             name="category"
-            type="String" />
+            type="com.ngochuy.ecommerce.data.Category" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -28,7 +28,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_image_category"
             android:layout_width="70dp"
-            imageFromUrl="@{`https://cdn.iconscout.com/icon/free/png-256/apple-853-675472.png`}"
+            imageFromUrl="@{category.imageUrl}"
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:background="@color/colorWhiteBG"
@@ -43,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:text="@{category}"
+            android:text="@{category.branchName}"
             android:textColor="@color/colorTextHint"
             android:textSize="14sp" />
         </LinearLayout>

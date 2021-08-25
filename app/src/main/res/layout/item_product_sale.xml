@@ -5,7 +5,7 @@
 
         <variable
             name="product"
-            type="com.ngochuy.ecommerce.data.Product" />
+            type="com.ngochuy.ecommerce.data.ProductDetail" />
     </data>
 
 
@@ -30,7 +30,7 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
-                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.images.get(0)}"
+                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.imageDetail.imageUrl1}"
                 android:background="@color/colorWhiteBG"
                 android:scaleType="centerCrop" />
 
@@ -57,7 +57,7 @@
             android:layout_marginBottom="6dp"
             android:gravity="center"
             android:maxLines="1"
-            android:text="@{product.name}"
+            android:text="@{product.title}"
             android:textColor="@color/colorTextHint"
             android:textSize="14sp" />
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

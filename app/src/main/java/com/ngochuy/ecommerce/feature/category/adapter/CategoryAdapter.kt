@@ -10,7 +10,7 @@ class CategoryAdapter(
     private var onCategoryClick: (id:String) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listCategory: ArrayList<String> = arrayListOf()
+    private var listCategory: ArrayList<Category> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         PlantViewHolder(
@@ -27,7 +27,7 @@ class CategoryAdapter(
         (holder as PlantViewHolder).bind(listCategory[position])
     }
 
-    fun setListCategory(list: ArrayList<String>) {
+    fun setListCategory(list: ArrayList<Category>) {
         listCategory.apply {
             clear()
             addAll(list)
@@ -39,11 +39,11 @@ class CategoryAdapter(
         private val binding: ItemCategoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: String) {
+        fun bind(item: Category) {
             binding.apply {
                 category = item
                 executePendingBindings()
-                itemCategory.setOnClickListener { item?.let { it1 -> onCategoryClick(it1) } }
+                itemCategory.setOnClickListener { item?.let { it1 -> onCategoryClick(it1.branchName.toString()) } }
             }
         }
     }

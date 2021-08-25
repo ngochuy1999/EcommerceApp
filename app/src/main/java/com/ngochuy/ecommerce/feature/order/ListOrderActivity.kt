@@ -12,18 +12,24 @@ import com.ngochuy.ecommerce.ext.getIntPref
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
 import com.ngochuy.ecommerce.feature.order.adapter.PageAdapter
+import com.ngochuy.ecommerce.roomdb.CartDatabase
+import com.ngochuy.ecommerce.roomdb.ProductEntity
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import kotlinx.android.synthetic.main.activity_list_order.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
+import kotlin.coroutines.CoroutineContext
 
-open class OrderActivity : AppCompatActivity()  {
+open class OrderActivity : AppCompatActivity(),CoroutineScope  {
 
-    private val cartViewModel: CartViewModel by lazy {
-        ViewModelProvider(
-                this,
-                Injection.provideCartViewModelFactory()
-        )[CartViewModel::class.java]
-    }
+    private var cartDB: CartDatabase?= null
+
+    private lateinit var mJob: Job
+    override val coroutineContext: CoroutineContext
+        get() = mJob + Dispatchers.Main
 
     private lateinit var binding: ActivityListOrderBinding
 
@@ -34,11 +40,14 @@ open class OrderActivity : AppCompatActivity()  {
 
         val userId = getIntPref(USER_ID)
         binding.cartCount = 0
-        if (userId != -1) cartViewModel.getCartCount(userId)
-
-        cartViewModel.cartCount.observe(this, {
-            binding.cartCount = it ?: 0
-        })
+        if (userId != -1){
+            mJob = Job()
+            cartDB = CartDatabase.getDatabase(this)
+            launch {
+                val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
+                binding.cartCount= products?.size
+            }
+        }
         binding.cartProductDetail.setOnClickListener {
             // Check user login
             if (getIntPref(USER_ID) != -1) startActivity<CartActivity>()

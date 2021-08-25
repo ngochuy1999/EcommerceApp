@@ -42,7 +42,7 @@ class ChangePassActivity : AppCompatActivity() {
 
         userViewModel.dataChangePass.observe(this) {
             when (it.isStatus) {
-                2 -> {
+                0 -> {
                     Toast.makeText(this, getString(R.string.err_change_pass), Toast.LENGTH_LONG).show()
                 }
                 1 -> {

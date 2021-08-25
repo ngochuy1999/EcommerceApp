@@ -21,20 +21,27 @@ import com.ngochuy.ecommerce.ext.PRODUCT_ID
 import com.ngochuy.ecommerce.ext.getIntPref
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.search.SearchActivity
+import com.ngochuy.ecommerce.roomdb.CartDatabase
+import com.ngochuy.ecommerce.roomdb.ProductEntity
 import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import kotlinx.android.synthetic.main.ll_cart.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.truncate
 
-class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener {
+class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener,CoroutineScope {
     private lateinit var binding: ActivityMainBinding
 
-    private val cartViewModel: CartViewModel by lazy {
-        ViewModelProvider(
-                this,
-                Injection.provideCartViewModelFactory()
-        )[CartViewModel::class.java]
-    }
+    private var cartDB: CartDatabase?= null
+
+    private lateinit var mJob: Job
+    override val coroutineContext: CoroutineContext
+        get() = mJob + Dispatchers.Main
+
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
     override fun onPageScrollStateChanged(state: Int) {}
@@ -68,8 +75,14 @@ class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
             // Set cart count, check user is login yet? check by get userID from Shared pref
         binding.cartCount = 0
-        if (getIntPref(USER_ID) != -1)
-            cartViewModel.getCartCount(getIntPref(USER_ID))
+        if (getIntPref(USER_ID) != -1){
+            mJob = Job()
+            cartDB = CartDatabase.getDatabase(this)
+            launch {
+                val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
+                binding.cartCount= products?.size
+            }
+        }
         addViewPager()
         bindViewModel()
         addBotNavEvents()
@@ -118,9 +131,6 @@ class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener {
     }
     private fun bindViewModel() {
 
-        cartViewModel.cartCount.observe(this, Observer {
-            binding.cartCount = it ?: 0
-        })
     }
 
 }

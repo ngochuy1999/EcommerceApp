@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ngochuy.ecommerce.base.DynamicSearchAdapter
-import com.ngochuy.ecommerce.data.Product
+import com.ngochuy.ecommerce.data.ProductDetail
 import com.ngochuy.ecommerce.databinding.ItemProductBinding
 
 class ProductAdapter(
-        private var listProductSale: MutableList<Product> = arrayListOf(),
-        private var onProductClick: (id: Int) -> Unit
-) : DynamicSearchAdapter<Product>(listProductSale) {
+    private var listProductSale: MutableList<ProductDetail> = arrayListOf(),
+    private var onProductClick: (id: Int) -> Unit
+) : DynamicSearchAdapter<ProductDetail>(listProductSale) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -28,7 +28,7 @@ class ProductAdapter(
         (holder as PlantViewHolder).bind(listProductSale[position])
     }
 
-    fun setProductList(list: ArrayList<Product>) {
+    fun setProductList(list: ArrayList<ProductDetail>) {
         listProductSale.apply {
             clear()
             addAll(list)
@@ -37,7 +37,7 @@ class ProductAdapter(
         }
     }
 
-    fun addDataSearch(arr: MutableList<Product>) {
+    fun addDataSearch(arr: MutableList<ProductDetail>) {
         listProductSale.apply {
             clear()
             addAll(arr)
@@ -56,11 +56,11 @@ class ProductAdapter(
             private val binding: ItemProductBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Product) {
+        fun bind(item: ProductDetail) {
             binding.apply {
                 product = item
                 executePendingBindings()
-                itemProduct.setOnClickListener { item.id?.let { it1 -> onProductClick(it1) } }
+                itemProduct.setOnClickListener { item.productId?.let { it1 -> onProductClick(it1) } }
             }
         }
     }

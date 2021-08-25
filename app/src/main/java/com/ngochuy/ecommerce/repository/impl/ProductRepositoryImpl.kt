@@ -1,6 +1,5 @@
 package com.ngochuy.ecommerce.repository.impl
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ngochuy.ecommerce.data.*
 import com.ngochuy.ecommerce.repository.ProductRepository
@@ -9,9 +8,9 @@ import com.ngochuy.ecommerce.service.ApiService
 
 class ProductRepositoryImpl(private val apiService: ApiService) : ProductRepository {
 
-    override fun getListProductSale(): Result<ArrayList<Product>> {
+    override fun getListProductSale(): Result<ArrayList<ProductDetail>> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseProducts = MutableLiveData<ArrayList<Product>>()
+        val responseProducts = MutableLiveData<ArrayList<ProductDetail>>()
         apiService.getListProductSale(
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
@@ -51,9 +50,9 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun getAllListProductSale(): Result<ArrayList<Product>> {
+    override fun getAllListProductSale(): Result<ArrayList<ProductDetail>> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseProducts = MutableLiveData<ArrayList<Product>>()
+        val responseProducts = MutableLiveData<ArrayList<ProductDetail>>()
         apiService.getAllListProductSale(
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
@@ -73,9 +72,9 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun getAllListProduct(): Result<ArrayList<Product>> {
+    override fun getAllListProduct(): Result<ArrayList<ProductDetail>> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseProducts = MutableLiveData<ArrayList<Product>>()
+        val responseProducts = MutableLiveData<ArrayList<ProductDetail>>()
         apiService.getAllPros(
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
@@ -95,9 +94,9 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun getProductCategory(cate: String): Result<ArrayList<Product>> {
+    override fun getProductCategory(cate: String): Result<ArrayList<ProductDetail>> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseProducts = MutableLiveData<ArrayList<Product>>()
+        val responseProducts = MutableLiveData<ArrayList<ProductDetail>>()
         apiService.getListProductCategory(
                 cate,
                 onPrepared = {
@@ -118,9 +117,9 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun getProductByID(productID: Int): Result<Product> {
+    override fun getProductByID(productID: Int): Result<ProductDetail> {
         val networkState = MutableLiveData<NetworkState>()
-        val responseProduct = MutableLiveData<Product>()
+        val responseProduct = MutableLiveData<ProductDetail>()
         apiService.getProductDetailByID(
                 productID,
                 onPrepared = {
@@ -142,27 +141,27 @@ class ProductRepositoryImpl(private val apiService: ApiService) : ProductReposit
         )
     }
 
-    override fun addCart(userId: Int, productID: Int, quantity: Int): Result<ResultApi> {
-        val networkState = MutableLiveData<NetworkState>()
-        val responseAddCart = MutableLiveData<ResultApi>()
-        apiService.addCart(
-                userId,
-                productID,
-                quantity,
-                onPrepared = {
-                    networkState.postValue(NetworkState.LOADING)
-                },
-                onSuccess = { response ->
-                    responseAddCart.value = response
-                    networkState.postValue(NetworkState.LOADED)
-                },
-                onError = { errMessage ->
-                    networkState.postValue(NetworkState.error(errMessage))
-                }
-        )
-        return Result(
-                data = responseAddCart,
-                networkState = networkState
-        )
-    }
+//    override fun addCart(userId: Int, productID: Int, quantity: Int): Result<ResultApi> {
+//        val networkState = MutableLiveData<NetworkState>()
+//        val responseAddCart = MutableLiveData<ResultApi>()
+//        apiService.addCart(
+//                userId,
+//                productID,
+//                quantity,
+//                onPrepared = {
+//                    networkState.postValue(NetworkState.LOADING)
+//                },
+//                onSuccess = { response ->
+//                    responseAddCart.value = response
+//                    networkState.postValue(NetworkState.LOADED)
+//                },
+//                onError = { errMessage ->
+//                    networkState.postValue(NetworkState.error(errMessage))
+//                }
+//        )
+//        return Result(
+//                data = responseAddCart,
+//                networkState = networkState
+//        )
+//    }
 }

@@ -12,10 +12,10 @@
         android:id="@+id/rvCategory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:itemCount="3"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:padding="20dp"
         android:scrollbarStyle="outsideOverlay"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:itemCount="3"
         tools:listitem="@layout/item_category" />
 
     <ProgressBar

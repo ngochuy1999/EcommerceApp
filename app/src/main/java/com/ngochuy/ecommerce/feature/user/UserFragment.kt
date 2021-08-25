@@ -72,7 +72,7 @@ class UserFragment : Fragment() {
 
     private fun bindViewModel() {
         userViewModel.userInfo.observe(viewLifecycleOwner) {
-            binding.user = it.result
+            binding.user = it
         }
 
         userViewModel.networkUserInfo.observe(viewLifecycleOwner) {

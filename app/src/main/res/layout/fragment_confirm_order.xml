@@ -76,7 +76,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     tools:text="@string/name_sign_up"
-                    android:text="@{`Name: `+user.username}"
+                    android:text="@{`Name: `+user.name}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp" />
 
@@ -99,7 +99,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     tools:text="@string/email"
-                    android:text="@{`Email: `+user.email}"
+                    android:text="@{`Email: `+user.account.email}"
                     android:textColor="@color/colorTextHint"
                     android:textSize="14sp" />
 

@@ -95,6 +95,9 @@ class SignUpFragment : Fragment() {
         if (phone.isEmpty()) {
             binding.edtPhone.error = getString(R.string.error_input_phone_not_entered)
             check = false
+        } else if (!isValidPhoneNumber(phone)) {
+            binding.edtPhone.error = getString(R.string.error_input_phone_not_correct)
+            check = false
         }
         if (mail.isEmpty()) {
             binding.edtMail.error = getString(R.string.error_input_email_not_entered)

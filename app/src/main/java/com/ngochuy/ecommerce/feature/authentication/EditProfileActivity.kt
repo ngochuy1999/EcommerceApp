@@ -43,7 +43,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun bindViewModel() {
         userViewModel.userInfo.observe(this) {
-            binding.user = it.result
+            binding.user = it
         }
 
         userViewModel.statusChangeInfo.observe(this) {
@@ -97,7 +97,6 @@ class EditProfileActivity : AppCompatActivity() {
         var check = true
         val name = binding.edtNameEdit.textTrim()
         val phone = binding.edtPhoneEdit.textTrim()
-        val mail = binding.edtEmailEdit.textTrim()
         val address = binding.edtAddress.textTrim()
 
         if (name.isEmpty()) {
@@ -108,22 +107,14 @@ class EditProfileActivity : AppCompatActivity() {
             binding.edtPhoneEdit.error = getString(R.string.error_input_phone_not_entered)
             check = false
         }
-        if (mail.isEmpty()) {
-            binding.edtEmailEdit.error = getString(R.string.error_input_email_not_entered)
-            check = false
-        } else if (!isValidEmail(mail)) {
-            binding.edtEmailEdit.error = getString(R.string.err_email_not_valid)
-            check = false
-        }
         if (address.isEmpty()) {
             binding.edtAddress.error = getString(R.string.error_input_email_not_entered)
             check = false
         }
         if (check) {
             userViewModel.changeInfo(
-                    userViewModel.userInfo.value?.result?.id ?: 0,
+                    userViewModel.userInfo.value?.userId ?: 0,
                     name,
-                    mail,
                     phone,
                     address
             )

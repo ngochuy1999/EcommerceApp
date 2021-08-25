@@ -1,21 +1,20 @@
 package com.ngochuy.ecommerce.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ngochuy.ecommerce.data.Product
+import com.ngochuy.ecommerce.data.ProductDetail
 import com.ngochuy.ecommerce.data.Result
 import com.ngochuy.ecommerce.data.ResultApi
 import com.ngochuy.ecommerce.repository.ProductRepository
 
 class ProductsViewModel(private val repository: ProductRepository) : ViewModel() {
 
-    private val requestAllProductSale = MutableLiveData<Result<ArrayList<Product>>>()
-    private val requestAllProducts = MutableLiveData<Result<ArrayList<Product>>>()
-    private val requestAllProductOfCategory = MutableLiveData<Result<ArrayList<Product>>>()
-    private val requestProduct = MutableLiveData<Result<Product>>()
+    private val requestAllProductSale = MutableLiveData<Result<ArrayList<ProductDetail>>>()
+    private val requestAllProducts = MutableLiveData<Result<ArrayList<ProductDetail>>>()
+    private val requestAllProductOfCategory = MutableLiveData<Result<ArrayList<ProductDetail>>>()
+    private val requestProduct = MutableLiveData<Result<ProductDetail>>()
     private val requestAddCart = MutableLiveData<Result<ResultApi>>()
 
     val listProductSale = Transformations.switchMap(requestAllProductSale) {
@@ -73,9 +72,9 @@ class ProductsViewModel(private val repository: ProductRepository) : ViewModel()
     val resultAddCart = Transformations.switchMap(requestAddCart) {
         it.data
     }
-    fun addCart( userId: Int,productId: Int, quantity: Int) {
-        requestAddCart.value = repository.addCart(userId,productId,quantity)
-    }
+//    fun addCart( userId: Int,productId: Int, quantity: Int) {
+//        requestAddCart.value = repository.addCart(userId,productId,quantity)
+//    }
 
 
 }

@@ -1,11 +1,10 @@
 package com.ngochuy.ecommerce.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ngochuy.ecommerce.data.Product
+import com.ngochuy.ecommerce.data.ProductDetail
 import com.ngochuy.ecommerce.data.Result
 import com.ngochuy.ecommerce.data.Slide
 import com.ngochuy.ecommerce.repository.ProductRepository
@@ -14,7 +13,7 @@ import com.ngochuy.ecommerce.repository.ProductRepository
 class HomeViewModel(private val repository: ProductRepository) : ViewModel() {
 
     private val requestSlide = MutableLiveData<Result<ArrayList<Slide>>>()
-    private val requestProductSale = MutableLiveData<Result<ArrayList<Product>>>()
+    private val requestProductSale = MutableLiveData<Result<ArrayList<ProductDetail>>>()
 
     init {
         getListSlide()

@@ -78,7 +78,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:text="@{user.username}"
+                            android:text="@{user.name}"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/ts_name"
                             tools:text="User name" />

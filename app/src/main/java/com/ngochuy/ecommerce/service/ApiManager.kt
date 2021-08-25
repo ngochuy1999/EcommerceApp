@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 interface ApiManager {
     companion object {
 
-        private const val BASE_URL = "https://api-phone-shop.herokuapp.com/"
+        private const val BASE_URL = "http://192.168.1.3:8080/rest/"
 
         fun create(): ApiManager {
             val requestInterceptor = Interceptor { chain ->
@@ -53,90 +53,89 @@ interface ApiManager {
     }
 
     // getOTP
-    @GET("getCode")
-    fun getOtp(@Header("email") email:String): Call<String>
+//    @GET("getCode")
+//    fun getOtp(@Header("email") email:String): Call<String>
 
     //user
     @POST("login")
     fun login(
-            @Header("email") username: String,
-            @Header("password") password: String
+        @Query("email") username: String,
+        @Query("password") password: String
     ): Call<ResultApi>
 
-    @POST("users")
+    @POST("signup")
     fun signUp(
-            @Header("email") email: String,
-            @Header("name") name: String,
-            @Header("password") password: String,
-            @Header("phone") phone: String,
-            @Header("address") address: String
+        @Query("email") email: String,
+        @Query("name") name: String,
+        @Query("password") password: String,
+        @Query("phone") phone: String,
+        @Query("address") address: String
     ): Call<ResultApi>
 
     @PUT("users")
     fun changeInfoAcc(
-            @Header("id") userId: Int,
-            @Header("email") email: String,
-            @Header("name") name: String,
-            @Header("phone") phone: String,
-            @Header("address") address: String,
+        @Query("id") userId: Int,
+        @Query("name") name: String,
+        @Query("phone") phone: String,
+        @Query("address") address: String,
     ): Call<ResultApi>
 
     @PUT("password")
     fun changePass(
-            @Header("id") userId: Int,
-            @Header("old_password") oldPass: String,
-            @Header("new_password") newPass: String
+        @Query("id") userId: Int,
+        @Query("oldPassword") oldPass: String,
+        @Query("newPassword") newPass: String
     ): Call<ResultApi>
 
     @POST("")
     fun forgotPassword(email: String): Call<Int>
 
     @GET("users")
-    fun getUserInfoByUserID(@Header("id") userId: Int): Call<ResultUser>
+    fun getUserInfoByUserID(@Header("id") userId: Int): Call<User>
 
     //product
     @GET("products")
-    fun getListProductSale(): Call<ArrayList<Product>>
+    fun getListProductSale(): Call<ArrayList<ProductDetail>>
 
     @GET("products")
-    fun getAllProducts(): Call<ArrayList<Product>>
+    fun getAllProducts(): Call<ArrayList<ProductDetail>>
 
     @GET("products/{id}")
-    fun getProductDetailByID(@Path("id") productID: Int): Call<Product>
+    fun getProductDetailByID(@Path("id") productID: Int): Call<ProductDetail>
 
     @GET("slides")
     fun getListSlider(): Call<ArrayList<Slide>>
 
     // category
     @GET("brands")
-    fun getListCategory(): Call<ArrayList<String>>
+    fun getListCategory(): Call<ArrayList<Category>>
 
     @GET("getByBrand")
-    fun getListProductOfCategory(@Header("filter") cate: String): Call<ArrayList<Product>>
+    fun getListProductOfCategory(@Query("filter") cate: String): Call<ArrayList<ProductDetail>>
 
     // cart
-    @GET("countCarts/{id}")
-    fun getCartCount(@Path("id") userID: Int): Call<Int>
+//    @GET("countCarts/{id}")
+//    fun getCartCount(@Path("id") userID: Int): Call<Int>
 
-    @POST("carts")
-    fun plusCart(
-            @Header("id_user") userID: Int,
-            @Header("id") productID: Int,
-            @Header("sl") quantity: Int
-    ): Call<ResultApi>
-
-    @DELETE("carts")
-    fun delItemCart(@Header("id_user") userID: Int, @Header("id") productID: Int): Call<ResultApi>
-
-    @PUT("carts")
-    fun minusCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
-
-    @GET("carts")
-    fun getProductsCart(@Header("id") userID: Int): Call<ArrayList<Product>>
+//    @POST("carts")
+//    fun plusCart(
+//            @Header("id_user") userID: Int,
+//            @Header("id") productID: Int,
+//            @Header("sl") quantity: Int
+//    ): Call<ResultApi>
+//
+//    @DELETE("carts")
+//    fun delItemCart(@Header("id_user") userID: Int, @Header("id") productID: Int): Call<ResultApi>
+//
+//    @PUT("carts")
+//    fun minusCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
+//
+//    @GET("carts")
+//    fun getProductsCart(@Header("id") userID: Int): Call<ArrayList<Product>>
 
     //order
-    @POST("soldCopy")
-    fun addOrder(@Header("id") orderId: Int): Call<ResultApi>
+    @POST("invoices")
+    fun addOrder(@Body invoiceRequest: InvoiceRequest): Call<ResultApi>
 
     @GET("sold")
     fun getAccomplishOrderItem( @Header("id_user") orderId: Int): Call<ResultOrder>
