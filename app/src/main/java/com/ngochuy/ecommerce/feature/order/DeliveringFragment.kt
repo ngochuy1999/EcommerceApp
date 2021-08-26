@@ -39,12 +39,12 @@ class DeliveringFragment :Fragment(){
     }
 
 
-    private val productAdapter: DeliveringRecyclerViewAdapter by lazy {
+    private val invoiceAdapter: DeliveringRecyclerViewAdapter by lazy {
         DeliveringRecyclerViewAdapter { id -> showProduct(id) }
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), OrderDetailDeliveryActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailActivity::class.java)
         intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
@@ -77,7 +77,7 @@ class DeliveringFragment :Fragment(){
     }
 
     private fun initViews() {
-        listDelivering.adapter = productAdapter
+        listDelivering.adapter = invoiceAdapter
         listDelivering.setHasFixedSize(true)
         listDelivering.setItemViewCacheSize(20)
     }
@@ -85,7 +85,7 @@ class DeliveringFragment :Fragment(){
     private fun bindViewModel() {
         orderViewModel.deliverOrderItem.observe(viewLifecycleOwner) {
             if (it?.size != 0 ) {
-                productAdapter.setProductList(it ?: arrayListOf())
+                invoiceAdapter.setProductList(it ?: arrayListOf())
                 ll_deliver_empty.gone()
             }else ll_deliver_empty.visible()
         }

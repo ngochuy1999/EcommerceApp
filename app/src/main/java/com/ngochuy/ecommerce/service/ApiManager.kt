@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 interface ApiManager {
     companion object {
 
-        private const val BASE_URL = "http://192.168.1.3:8080/rest/"
+        private const val BASE_URL = "http://192.168.1.10:8080/rest/"
 
         fun create(): ApiManager {
             val requestInterceptor = Interceptor { chain ->

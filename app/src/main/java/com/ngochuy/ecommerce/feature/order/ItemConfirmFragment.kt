@@ -39,12 +39,12 @@ class ItemConfirmFragment :Fragment(){
     }
 
 
-    private val productAdapter: ItemConfirmRecyclerViewAdapter by lazy {
+    private val invoiceAdapter: ItemConfirmRecyclerViewAdapter by lazy {
         ItemConfirmRecyclerViewAdapter { id -> showProduct(id) }
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), OrderDetailConfirmActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailActivity::class.java)
         intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
@@ -76,7 +76,7 @@ class ItemConfirmFragment :Fragment(){
         }
     }
     private fun initViews() {
-        listConfirm.adapter = productAdapter
+        listConfirm.adapter = invoiceAdapter
         listConfirm.setHasFixedSize(true)
         listConfirm.setItemViewCacheSize(20)
     }
@@ -84,7 +84,7 @@ class ItemConfirmFragment :Fragment(){
     private fun bindViewModel() {
         orderViewModel.confirmOrderItem.observe(viewLifecycleOwner) {
             if (it?.size != 0 ) {
-                productAdapter.setProductList(it ?: arrayListOf())
+                invoiceAdapter.setProductList(it ?: arrayListOf())
                 ll_co_empty.gone()
             }else ll_co_empty.visible()
         }

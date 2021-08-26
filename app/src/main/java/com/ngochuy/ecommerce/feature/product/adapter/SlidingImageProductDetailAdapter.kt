@@ -32,7 +32,7 @@ class SlidingImageProductDetailAdapter (
         val imageView = imageLayout.findViewById(R.id.image_product) as ImageView
 
         Glide.with(context)
-            .load("https://hoanghamobile.com/i/preview/Uploads/"+arrAdv[position])
+            .load(arrAdv[position])
             .into(imageView)
 
         view.addView(imageLayout, 0)

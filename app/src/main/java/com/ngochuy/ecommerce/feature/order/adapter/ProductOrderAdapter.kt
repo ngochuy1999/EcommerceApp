@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ngochuy.ecommerce.data.InvoiceDetail
-import com.ngochuy.ecommerce.data.Product
-import com.ngochuy.ecommerce.databinding.ItemProductOrderBinding
+import com.ngochuy.ecommerce.databinding.ItemProductInvoiceDetailBinding
 
 class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listProductSale: ArrayList<InvoiceDetail> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            ProductConfirmViewHolder(
-                    ItemProductOrderBinding.inflate(
+        ItemProductInvoiceDetailViewHolder(
+                    ItemProductInvoiceDetailBinding.inflate(
                             LayoutInflater.from(parent.context),
                             parent,
                             false
@@ -22,7 +21,7 @@ class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = listProductSale.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ProductConfirmViewHolder).bind(listProductSale[position])
+        (holder as ItemProductInvoiceDetailViewHolder).bind(listProductSale[position])
     }
 
     fun setProductList(list: List<InvoiceDetail>) {
@@ -33,8 +32,8 @@ class ProductOrderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    inner class ProductConfirmViewHolder(
-            private val binding: ItemProductOrderBinding
+    inner class ItemProductInvoiceDetailViewHolder(
+            private val binding: ItemProductInvoiceDetailBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(itemInvocie: InvoiceDetail) {

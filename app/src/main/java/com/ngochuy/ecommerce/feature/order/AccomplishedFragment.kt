@@ -36,12 +36,12 @@ class AccomplishedFragment :Fragment(){
     }
 
 
-    private val productAdapter: AccomplishedFragmentAdapter by lazy {
+    private val invoiceAdapter: AccomplishedFragmentAdapter by lazy {
         AccomplishedFragmentAdapter { id -> showProduct(id) }
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), OrderDetailAccomplishActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailActivity::class.java)
         intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
@@ -74,7 +74,7 @@ class AccomplishedFragment :Fragment(){
     }
 
     private fun initViews() {
-        rvlist.adapter = productAdapter
+        rvlist.adapter = invoiceAdapter
         rvlist.setHasFixedSize(true)
         rvlist.setItemViewCacheSize(20)
     }
@@ -82,7 +82,7 @@ class AccomplishedFragment :Fragment(){
     private fun bindViewModel() {
         orderViewModel.orderItem.observe(viewLifecycleOwner) {
             if (it?.size != 0 ) {
-                productAdapter.setProductList(it ?: arrayListOf())
+                invoiceAdapter.setProductList(it ?: arrayListOf())
                 ll_order_empty.gone()
             }else ll_order_empty.visible()
         }

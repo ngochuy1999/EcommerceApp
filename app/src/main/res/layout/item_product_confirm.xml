@@ -19,7 +19,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product_conf_order"
-            imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.imageDetail}"
+            imageFromUrl="@{product.imageDetail}"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"

@@ -41,7 +41,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product_add_cart"
             android:layout_width="100dp"
-            imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.imageDetail.imageUrl1}"
+            imageFromUrl="@{product.imageDetail.imageUrl1}"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"

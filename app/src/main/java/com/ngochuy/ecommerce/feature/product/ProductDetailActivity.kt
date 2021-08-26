@@ -41,12 +41,6 @@ class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
         )[ProductsViewModel::class.java]
     }
 
-    private val cartViewModel: CartViewModel by lazy {
-        ViewModelProvider(
-            this,
-            Injection.provideCartViewModelFactory()
-        )[CartViewModel::class.java]
-    }
 
     private var cartDB: CartDatabase?= null
 

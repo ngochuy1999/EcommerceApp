@@ -26,7 +26,7 @@ import kotlin.coroutines.CoroutineContext
 
 open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
 
-    val orderViewModel: OrderViewModel by lazy {
+    private val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
                 this,
                 Injection.provideOrderViewModelFactory()
@@ -41,7 +41,8 @@ open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
 
     lateinit var binding: ActivityOrderDetailBinding
     var invoiceId: Int? = null
-    val productAdapter: ProductOrderAdapter by lazy {
+
+    private val productAdapter: ProductOrderAdapter by lazy {
         ProductOrderAdapter()
     }
 
@@ -60,57 +61,19 @@ open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
             }
         }
         binding.tranFee = 20000
+        orderViewModel.getDetailInvoiceItem(invoiceId!!)
+        bindingViewModel()
         initViews()
         setEvents()
     }
 
-    private fun initViews() {
-        binding.rvProductOrderDetail.adapter = productAdapter
-        binding.rvProductOrderDetail.setHasFixedSize(true)
-        binding.rvProductOrderDetail.setItemViewCacheSize(20)
-    }
-
-
-    private fun setEvents() {
-        binding.cartProductDetail.setOnClickListener {
-            // Check user login
-            if (getIntPref(USER_ID) != -1) startActivity<CartActivity>()
-            else startActivity<LoginActivity>()
-        }
-        btnBack.setOnClickListener { finish() }
-        btnCancelOrder.setOnClickListener {
-            binding.tvStatusOrder.setText(R.string.cancelled)
-            binding.btnCancelOrder.gone()
-        }
-    }
-}
-class OrderDetailAccomplishActivity : OrderDetailActivity(){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        invoiceId?.let { orderViewModel.getDetailInvoiceItem(it) }
-        bindAccViewModel()
-    }
-
-    private fun bindAccViewModel(){
+    private fun bindingViewModel(){
         orderViewModel.invoiceDetailItem.observe(this, {
-            productAdapter.setProductList(it)
+            productAdapter.setProductList(it?: arrayListOf())
             binding.invoice = it[0].invoice
-        })
-        binding.tvStatusOrder.setText(R.string.accomplished)
-        binding.btnCancelOrder.gone()
-    }
-}
-class OrderDetailConfirmActivity : OrderDetailActivity(){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        invoiceId?.let { orderViewModel.getDetailInvoiceItem(it) }
-        bindConViewModel()
-    }
-
-    private fun bindConViewModel(){
-        orderViewModel.invoiceDetailItem.observe(this, {
-            productAdapter.setProductList(it)
-            binding.invoice = it[0].invoice
+            if (it[0].invoice?.invoiceStatus?.statusId==1){
+                binding.btnCancelOrder.visible()
+            }
         })
         orderViewModel.networkInvoiceDetailItem.observe(this, {
             when (it.status) {
@@ -125,36 +88,23 @@ class OrderDetailConfirmActivity : OrderDetailActivity(){
             }
         })
     }
-}
-class OrderDetailDeliveryActivity : OrderDetailActivity(){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        invoiceId?.let { orderViewModel.getDetailInvoiceItem(it) }
-        bindDeViewModel()
+    private fun initViews() {
+        binding.rvProductInvoiceDetail.adapter = productAdapter
+        binding.rvProductInvoiceDetail.setHasFixedSize(true)
+        binding.rvProductInvoiceDetail.setItemViewCacheSize(20)
     }
 
-    private fun bindDeViewModel(){
-        orderViewModel.invoiceDetailItem.observe(this, {
-            productAdapter.setProductList(it)
-            binding.invoice = it[0].invoice
-        })
-        binding.tvStatusOrder.setText(R.string.delivery)
-        binding.btnCancelOrder.gone()
-    }
-}
-class OrderDetailPaymentActivity : OrderDetailActivity(){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        invoiceId?.let { orderViewModel.getDetailInvoiceItem(it) }
-        bindPaViewModel()
-    }
 
-    private fun bindPaViewModel(){
-        orderViewModel.invoiceDetailItem.observe(this, {
-            productAdapter.setProductList(it)
-            binding.invoice = it[0].invoice
-        })
-        binding.tvStatusOrder.setText(R.string.payment)
-        binding.btnCancelOrder.gone()
+    private fun setEvents() {
+        binding.cartProductDetail.setOnClickListener {
+            // Check user login
+            if (getIntPref(USER_ID) != -1) startActivity<CartActivity>()
+            else startActivity<LoginActivity>()
+        }
+        btnBack.setOnClickListener { finish() }
+        btnCancelOrder.setOnClickListener {
+            binding.tvStatusOrder.setText(R.string.cancelled)
+            binding.btnCancelOrder.gone()
+        }
     }
 }

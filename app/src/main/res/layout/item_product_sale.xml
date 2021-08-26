@@ -30,7 +30,7 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
-                imageFromUrl="@{`https://hoanghamobile.com/i/preview/Uploads/`+product.imageDetail.imageUrl1}"
+                imageFromUrl="@{product.imageDetail.imageUrl1}"
                 android:background="@color/colorWhiteBG"
                 android:scaleType="centerCrop" />
 

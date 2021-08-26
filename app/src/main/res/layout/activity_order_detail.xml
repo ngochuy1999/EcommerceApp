@@ -273,14 +273,14 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_product_order_detail"
+                    android:id="@+id/rv_product_invoice_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorWhiteBG"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="1"
-                    tools:listitem="@layout/item_product_confirm" />
+                    tools:listitem="@layout/item_product_invoice_detail" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -398,6 +398,7 @@
                     android:background="@drawable/bg_rounded_corner_red"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:visibility="gone"
                     android:text="@string/cancel_order"
                     android:textAllCaps="true"
                     android:textColor="@color/colorWhite"

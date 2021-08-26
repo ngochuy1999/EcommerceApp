@@ -40,12 +40,12 @@ class PaymentFragment :Fragment(){
     }
 
 
-    private val productAdapter: PaymentRecyclerViewAdapter by lazy {
+    private val invoiceAdapter: PaymentRecyclerViewAdapter by lazy {
         PaymentRecyclerViewAdapter { id -> showProduct(id) }
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), OrderDetailPaymentActivity::class.java)
+        val intent = Intent(requireContext(), OrderDetailActivity::class.java)
         intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
@@ -78,7 +78,7 @@ class PaymentFragment :Fragment(){
     }
 
     private fun initViews() {
-        listPayment.adapter = productAdapter
+        listPayment.adapter = invoiceAdapter
         listPayment.setHasFixedSize(true)
         listPayment.setItemViewCacheSize(20)
     }
@@ -86,7 +86,7 @@ class PaymentFragment :Fragment(){
     private fun bindViewModel() {
         orderViewModel.paymentOrderItem.observe(viewLifecycleOwner) {
             if (it?.size != 0 ) {
-                productAdapter.setProductList(it ?: arrayListOf())
+                invoiceAdapter.setProductList(it ?: arrayListOf())
                 ll_pa_empty.gone()
             }else ll_pa_empty.visible()
         }
