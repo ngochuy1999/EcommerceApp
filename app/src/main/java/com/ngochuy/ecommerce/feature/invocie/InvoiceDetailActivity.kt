@@ -1,4 +1,4 @@
-package com.ngochuy.ecommerce.feature.order
+package com.ngochuy.ecommerce.feature.invocie
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +11,7 @@ import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
-import com.ngochuy.ecommerce.feature.order.adapter.ProductOrderAdapter
+import com.ngochuy.ecommerce.feature.invocie.adapter.ProductOrderAdapter
 import com.ngochuy.ecommerce.roomdb.CartDatabase
 import com.ngochuy.ecommerce.roomdb.ProductEntity
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
@@ -21,10 +21,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.toast
 import kotlin.coroutines.CoroutineContext
 
-open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
+open class InvoiceDetailActivity : AppCompatActivity(),CoroutineScope {
 
     private val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
@@ -40,7 +41,7 @@ open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
         get() = mJob + Dispatchers.Main
 
     lateinit var binding: ActivityOrderDetailBinding
-    var invoiceId: Int? = null
+    private var invoiceId: Int? = null
 
     private val productAdapter: ProductOrderAdapter by lazy {
         ProductOrderAdapter()
@@ -87,6 +88,17 @@ open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
                 }
             }
         })
+
+        orderViewModel.cancelInvoice.observe(this,{
+            when(it.isStatus){
+                1 -> {
+                    startActivity<CancelInvoiceActivity>()
+                    finish()
+                    toast("Đã hủy hóa đơn")
+                }
+                0 -> toast("error")
+            }
+        })
     }
     private fun initViews() {
         binding.rvProductInvoiceDetail.adapter = productAdapter
@@ -103,8 +115,7 @@ open class OrderDetailActivity : AppCompatActivity(),CoroutineScope {
         }
         btnBack.setOnClickListener { finish() }
         btnCancelOrder.setOnClickListener {
-            binding.tvStatusOrder.setText(R.string.cancelled)
-            binding.btnCancelOrder.gone()
+            invoiceId?.let { orderViewModel.cancelInvoice(it) }
         }
     }
 }

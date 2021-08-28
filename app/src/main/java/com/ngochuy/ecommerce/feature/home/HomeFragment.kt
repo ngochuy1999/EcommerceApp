@@ -22,7 +22,6 @@ import com.ngochuy.ecommerce.ext.visible
 import com.ngochuy.ecommerce.feature.home.adapter.ProductSaleAdapter
 import com.ngochuy.ecommerce.feature.product.ProductDetailActivity
 import com.ngochuy.ecommerce.viewmodel.HomeViewModel
-import com.ngochuy.ecommerce.widget.GridItemDecoration
 import com.ngochuy.ecommerce.widget.SlidingImageAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
@@ -94,7 +93,7 @@ class HomeFragment : Fragment() {
             override fun run() {
                 handler.post(update)
             }
-        }, 3000, 3000)
+        }, 5000, 5000)
     }
 
     private fun bindViewModel() {

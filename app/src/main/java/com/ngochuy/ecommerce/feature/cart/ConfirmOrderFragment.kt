@@ -5,41 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.lifecycle.observe
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.InvoiceRequest
-import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.data.ProductInCart
 import com.ngochuy.ecommerce.data.Status
-import com.ngochuy.ecommerce.databinding.DialogOtpBinding
 import com.ngochuy.ecommerce.databinding.FragmentConfirmOrderBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.cart.adapter.ProductCartConfirmAdapter
 import com.ngochuy.ecommerce.roomdb.CartDatabase
 import com.ngochuy.ecommerce.roomdb.ProductEntity
-import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.fragment_confirm_order.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.support.v4.toast
 import kotlin.coroutines.CoroutineContext
 
 class ConfirmOrderFragment :Fragment(), CoroutineScope{
-//    private val cartViewModel: CartViewModel by lazy {
-//        ViewModelProvider(
-//                requireActivity(),
-//                Injection.provideCartViewModelFactory()
-//        )[CartViewModel::class.java]
-//    }
+
     private val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
                 requireActivity(),
@@ -67,14 +56,13 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
-        //cartViewModel.getProductsCart(requireContext().getIntPref(USER_ID))
         showProductOrder()
     }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentConfirmOrderBinding.inflate(inflater, container, false)
         return binding.root
@@ -164,7 +152,7 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
             val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
             if (products?.size != 0) {
                 productAdapter.setProductList(products!!)
-                getTotalPrice(products!!)
+                getTotalPrice(products)
             }
         }
     }
@@ -173,10 +161,6 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
         userViewModel.userInfo.observe(viewLifecycleOwner) {
             binding.user = it
         }
-//        cartViewModel.productsCart.observe(viewLifecycleOwner, Observer {
-//            productAdapter.setProductList(it)
-//            getTotalPrice(it)
-//        })
 
         orderViewModel.dataCheckOut.observe(viewLifecycleOwner) {
             when (it.isStatus) {
@@ -194,16 +178,29 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
             }
         }
 
+        orderViewModel.networkCheckOut.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.RUNNING -> progressOr.visible()
+                Status.SUCCESS -> {
+                    progressOr.gone()
+                }
+                Status.FAILED -> {
+                    progressOr.gone()
+                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
     }
 
     private fun getTotalPrice(arrProduct: List<ProductEntity>) {
         var totalPriceCart = 0L
-        var discount = 0
-        var price = 0L
+        var discount: Int
+        var price: Long
         for (pro in arrProduct) {
-            discount = pro.sale ?: 0
-            price = pro.price ?: 0
-            val priceSale = (price?.minus(((discount * 0.01) * price))).times(pro.quantityInCart?: 1)
+            discount = pro.sale
+            price = pro.price
+            val priceSale = (price.minus(((discount * 0.01) * price))).times(pro.quantityInCart?: 1)
             totalPriceCart += priceSale.toLong()
         }
         binding.price = totalPriceCart

@@ -6,15 +6,21 @@
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_location.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_phone.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/shadow_to_white.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/a.xml" value="0.10326086956521739" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_cart.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_change_pass.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_edit_profile.xml" value="0.15" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_list_order.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order_detail.xml" value="0.22" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_product_detail.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_product_in_category.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/bottom_sheet_add_cart.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/dialog_otp.xml" value="0.10371376811594203" />
-        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/divider_header.xml" value="0.2" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/divider_header.xml" value="0.5" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_accomplished_list.xml" value="0.1" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_all_invoice.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_cancel_invoice.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_cart.xml" value="0.1082427536231884" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_category.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_confirm_order.xml" value="0.1" />
@@ -26,12 +32,14 @@
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_payment.xml" value="0.11096014492753623" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_sign_up.xml" value="0.10643115942028986" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_user.xml" value="0.10869565217391304" />
-        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_accomplished.xml" value="0.12" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_accomplished.xml" value="0.18" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_all_invoice.xml" value="0.33" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_cancel_invoice.xml" value="0.33" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_category.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_confirm.xml" value="0.22" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_delivering.xml" value="0.25" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_order.xml" value="0.22" />
-        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_payment.xml" value="0.22" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_payment.xml" value="0.33" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_product.xml" value="0.1" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_product_cart.xml" value="0.1109375" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_product_configuration.xml" value="0.22" />
@@ -39,6 +47,9 @@
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_product_invoice_detail.xml" value="0.146875" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_product_order.xml" value="0.1" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_product_sale.xml" value="0.10371376811594203" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/ll_cart.xml" value="0.10326086956521739" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/slidingimages_layout_home.xml" value="0.10326086956521739" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/slidingimages_productdetail.xml" value="0.10326086956521739" />
       </map>
     </option>
   </component>

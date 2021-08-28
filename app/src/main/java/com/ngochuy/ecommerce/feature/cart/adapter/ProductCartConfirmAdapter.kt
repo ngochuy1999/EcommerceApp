@@ -3,7 +3,6 @@ package com.ngochuy.ecommerce.feature.cart.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.databinding.ItemProductConfirmBinding
 import com.ngochuy.ecommerce.roomdb.ProductEntity
 

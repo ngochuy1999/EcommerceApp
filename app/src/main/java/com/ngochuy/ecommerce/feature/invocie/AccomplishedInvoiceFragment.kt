@@ -1,11 +1,8 @@
-package com.ngochuy.ecommerce.feature.order
+package com.ngochuy.ecommerce.feature.invocie
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,19 +14,16 @@ import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.main.MainActivity
-import com.ngochuy.ecommerce.feature.order.adapter.AccomplishedFragmentAdapter
-import com.ngochuy.ecommerce.feature.order.adapter.ItemConfirmRecyclerViewAdapter
-import com.ngochuy.ecommerce.feature.product.ProductDetailActivity
+import com.ngochuy.ecommerce.feature.invocie.adapter.AccomplishedAdapter
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_accomplished_list.*
-import kotlinx.android.synthetic.main.fragment_delivering.*
-import kotlinx.android.synthetic.main.fragment_item_confirm.*
 import org.jetbrains.anko.support.v4.startActivity
+
 
 /**
  * A fragment representing a list of Items.
  */
-class ItemConfirmFragment :Fragment(){
+class AccomplishedInvoiceFragment :Fragment(){
 
     private val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
@@ -39,19 +33,19 @@ class ItemConfirmFragment :Fragment(){
     }
 
 
-    private val invoiceAdapter: ItemConfirmRecyclerViewAdapter by lazy {
-        ItemConfirmRecyclerViewAdapter { id -> showProduct(id) }
+    private val invoiceAdapter: AccomplishedAdapter by lazy {
+        AccomplishedAdapter { id -> showProduct(id) }
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), OrderDetailActivity::class.java)
+        val intent = Intent(requireContext(), InvoiceDetailActivity::class.java)
         intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        orderViewModel.getConfirmOrderItem(requireContext().getIntPref(USER_ID))
+        orderViewModel.getAccomplishOrderItem(requireContext().getIntPref(USER_ID))
     }
 
     override fun onCreateView(
@@ -59,7 +53,7 @@ class ItemConfirmFragment :Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_confirm, container, false)
+        return inflater.inflate(R.layout.fragment_accomplished_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,38 +64,38 @@ class ItemConfirmFragment :Fragment(){
     }
 
     private fun setEvent() {
-        btn_continue_shopping_co.setOnClickListener {
+        btn_continue_shopping_order.setOnClickListener {
             startActivity<MainActivity>()
             requireActivity().finish()
         }
     }
+
     private fun initViews() {
-        listConfirm.adapter = invoiceAdapter
-        listConfirm.setHasFixedSize(true)
-        listConfirm.setItemViewCacheSize(20)
+        rvlist.adapter = invoiceAdapter
+        rvlist.setHasFixedSize(true)
+        rvlist.setItemViewCacheSize(20)
     }
 
     private fun bindViewModel() {
-        orderViewModel.confirmOrderItem.observe(viewLifecycleOwner) {
+        orderViewModel.orderItem.observe(viewLifecycleOwner) {
             if (it?.size != 0 ) {
                 invoiceAdapter.setProductList(it ?: arrayListOf())
-                ll_co_empty.gone()
-            }else ll_co_empty.visible()
+                ll_order_empty.gone()
+            }else ll_order_empty.visible()
         }
 
-        orderViewModel.networkConfirmOrderItem.observe(viewLifecycleOwner) {
+        orderViewModel.networkOrderItem.observe(viewLifecycleOwner) {
             when (it.status) {
-                Status.RUNNING -> progressCo.visible()
+                Status.RUNNING -> progressOrder.visible()
                 Status.SUCCESS -> {
-                    progressCo.gone()
+                    progressOrder.gone()
                 }
                 Status.FAILED -> {
-                    progressCo.gone()
+                    progressOrder.gone()
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()
                 }
             }
         }
-
 
     }
 

@@ -33,10 +33,10 @@ class OrderRepositoryImpl(private val apiService: ApiService) : OrderRepository 
 
 
 
-    override fun getAllOrderItem(orderID: Int): Result<ArrayList<Invoice>> {
+    override fun getAccomplishOrderItem(orderID: Int): Result<ArrayList<Invoice>> {
         val networkState = MutableLiveData<NetworkState>()
         val response = MutableLiveData<ArrayList<Invoice>>()
-        apiService.getAllOrderItem(
+        apiService.getAccomplishOrderItem(
                 orderID,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
@@ -122,6 +122,52 @@ class OrderRepositoryImpl(private val apiService: ApiService) : OrderRepository 
         )
     }
 
+    override fun getAllOderItem(orderID: Int): Result<ArrayList<Invoice>> {
+        val networkState = MutableLiveData<NetworkState>()
+        val response = MutableLiveData<ArrayList<Invoice>>()
+        apiService.getAllOrderItem(
+            orderID,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { data ->
+                response.value = data
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = response,
+            networkState = networkState
+        )
+    }
+
+    override fun getCancelOderItem(orderID: Int): Result<ArrayList<Invoice>> {
+        val networkState = MutableLiveData<NetworkState>()
+        val response = MutableLiveData<ArrayList<Invoice>>()
+        apiService.getCancelOrderItem(
+            orderID,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { data ->
+                response.value = data
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = response,
+            networkState = networkState
+        )
+    }
+
     override fun getDetailInvoice(invoiceId: Int): Result<ArrayList<InvoiceDetail>> {
         val networkState = MutableLiveData<NetworkState>()
         val response = MutableLiveData<ArrayList<InvoiceDetail>>()
@@ -145,5 +191,27 @@ class OrderRepositoryImpl(private val apiService: ApiService) : OrderRepository 
         )
     }
 
+    override fun cancelInvoice(invoiceId: Int): Result<ResultApi> {
+        val networkState = MutableLiveData<NetworkState>()
+        val response = MutableLiveData<ResultApi>()
+        apiService.cancelInvoice(
+            invoiceId,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { data ->
+                response.value = data
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = response,
+            networkState = networkState
+        )
+    }
 
 }

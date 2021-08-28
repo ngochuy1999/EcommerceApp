@@ -1,4 +1,4 @@
-package com.ngochuy.ecommerce.feature.order.adapter
+package com.ngochuy.ecommerce.feature.invocie.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

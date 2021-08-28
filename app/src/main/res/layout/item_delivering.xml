@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.ngochuy.ecommerce.ext.DateUtils"/>
         <variable
             name="item"
             type="com.ngochuy.ecommerce.data.Invoice" />
@@ -27,7 +27,7 @@
                 android:id="@+id/vTag"
                 android:layout_width="@dimen/size_32dp"
                 android:layout_height="0dp"
-                android:background="#4CAF50"
+                android:background="#149589"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,13 +60,24 @@
                 app:layout_constraintStart_toStartOf="@id/vTag" />
 
             <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_margin_12dp"
+                android:text="@string/delivery_date"
+                android:textAlignment="textStart"
+                android:textColor="#149589"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
                 android:id="@+id/tvBoughtDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_margin_12dp"
-                android:text="@{item.buyDate}"
+                android:text="@{DateUtils.convertFormat(item.deliveryDate, DateUtils.DATE_FORMAT_SERVER, DateUtils.FULL_DATE_FORMAT)}"
                 android:textAlignment="textEnd"
-                android:textColor="#cc0066"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vTag"
                 app:layout_constraintTop_toTopOf="parent"

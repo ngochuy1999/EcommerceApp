@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 interface ApiManager {
     companion object {
 
-        private const val BASE_URL = "http://192.168.1.10:8080/rest/"
+        private const val BASE_URL = "http://192.168.1.3:8080/rest/"
 
         fun create(): ApiManager {
             val requestInterceptor = Interceptor { chain ->
@@ -113,49 +113,34 @@ interface ApiManager {
     @GET("getByBrand")
     fun getListProductOfCategory(@Query("filter") cate: String): Call<ArrayList<ProductDetail>>
 
-    // cart
-//    @GET("countCarts/{id}")
-//    fun getCartCount(@Path("id") userID: Int): Call<Int>
-
-//    @POST("carts")
-//    fun plusCart(
-//            @Header("id_user") userID: Int,
-//            @Header("id") productID: Int,
-//            @Header("sl") quantity: Int
-//    ): Call<ResultApi>
-//
-//    @DELETE("carts")
-//    fun delItemCart(@Header("id_user") userID: Int, @Header("id") productID: Int): Call<ResultApi>
-//
-//    @PUT("carts")
-//    fun minusCart(@Query("") userID: Int, @Query("") productID: Int): Call<Boolean>
-//
-//    @GET("carts")
-//    fun getProductsCart(@Header("id") userID: Int): Call<ArrayList<Product>>
+    //=============Invoice==========
 
     //order
     @POST("invoices")
     fun addOrder(@Body invoiceRequest: InvoiceRequest): Call<ResultApi>
 
     //get invoice
-    @GET("sold")
-    fun getAllOrder (@Header("userId") orderId: Int): Call<ResultOrder>
+    @GET("invoices")
+    fun getAllOrder (@Query("userId") orderId: Int): Call<ArrayList<Invoice>>
 
     @GET("accomplish")
-    fun getAccomplishOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
+    fun getAccomplishOrderItem( @Query("userId") userId: Int): Call<ArrayList<Invoice>>
 
     @GET("confirm")
-    fun getConfirmOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
+    fun getConfirmOrderItem( @Query("userId") userId: Int): Call<ArrayList<Invoice>>
 
     @GET("payment")
-    fun getPaymentOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
+    fun getPaymentOrderItem( @Query("userId") userId: Int): Call<ArrayList<Invoice>>
 
     @GET("delivery")
-    fun getDeliverOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
+    fun getDeliverOrderItem( @Query("userId") userId: Int): Call<ArrayList<Invoice>>
 
     @GET("cancel")
-    fun getCancelOrderItem( @Header("userId") orderId: Int): Call<ArrayList<Invoice>>
+    fun getCancelOrderItem( @Query("userId") userId: Int): Call<ArrayList<Invoice>>
 
     @GET("invoiceDetail")
-    fun getDetailInvoice( @Header("invoiceId") invoiceId: Int): Call<ArrayList<InvoiceDetail>>
+    fun getDetailInvoice( @Query("invoiceId") invoiceId: Int): Call<ArrayList<InvoiceDetail>>
+
+    @POST("cancelInvoice")
+    fun cancelInvoice( @Query("invoiceId") invoiceId: Int): Call<ResultApi>
 }

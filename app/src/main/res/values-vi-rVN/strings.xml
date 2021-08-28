@@ -200,5 +200,7 @@
     <string name="waiting_receive">Chờ lấy hàng</string>
     <string name="cancelled">Đã hủy</string>
     <string name="product_configuration">Thông số kỹ thuật</string>
+    <string name="buy_date">Ngày đặt hàng:</string>
+    <string name="delivery_date">Ngày nhận hàng:</string>
 
 </resources>

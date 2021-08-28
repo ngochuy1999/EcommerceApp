@@ -5,12 +5,14 @@
 
     <data>
 
+        <import type="com.ngochuy.ecommerce.ext.DateUtils"/>
         <variable
             name="item"
             type="com.ngochuy.ecommerce.data.Invoice" />
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/item_all_invoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/layout_margin_12dp"
@@ -59,13 +61,25 @@
                 app:layout_constraintStart_toStartOf="@id/vTag" />
 
             <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_margin_12dp"
+                android:text="@string/buy_date"
+                android:textAlignment="textStart"
+                android:textColor="#1473ae"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/tvBoughtDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_margin_12dp"
-                android:text="@{item.buyDate}"
+                android:text="@{DateUtils.convertFormat(item.buyDate, DateUtils.DATE_FORMAT_SERVER, DateUtils.FULL_DATE_FORMAT)}"
                 android:textAlignment="textEnd"
-                android:textColor="#cc0066"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vTag"
                 app:layout_constraintTop_toTopOf="parent"

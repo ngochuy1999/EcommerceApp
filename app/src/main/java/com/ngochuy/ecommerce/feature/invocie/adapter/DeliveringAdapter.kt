@@ -1,15 +1,13 @@
-package com.ngochuy.ecommerce.feature.order.adapter
+package com.ngochuy.ecommerce.feature.invocie.adapter
 
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ngochuy.ecommerce.data.CartType
 import com.ngochuy.ecommerce.data.Invoice
-import com.ngochuy.ecommerce.data.Product
-import com.ngochuy.ecommerce.databinding.ItemAccomplishedBinding
-import com.ngochuy.ecommerce.databinding.ItemProductCartBinding
+import com.ngochuy.ecommerce.databinding.ItemDeliveringBinding
 
-class AccomplishedFragmentAdapter(
+
+class DeliveringAdapter(
     private var onProductClick: (id:Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -17,7 +15,7 @@ class AccomplishedFragmentAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ProductCartViewHolder(
-            ItemAccomplishedBinding.inflate(
+            ItemDeliveringBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -40,14 +38,14 @@ class AccomplishedFragmentAdapter(
     }
 
     inner class ProductCartViewHolder(
-        private val binding: ItemAccomplishedBinding
+        private val binding: ItemDeliveringBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(itemAc: Invoice) {
+        fun bind(itemDe: Invoice) {
             binding.apply {
-                item = itemAc
+                item = itemDe
                 executePendingBindings()
-                itemAccomplishOrder.setOnClickListener { item?.invoiceId?.let { it ->
+                itemDeliveryOrder.setOnClickListener { item?.invoiceId?.let { it ->
                     onProductClick(
                         it
                     )

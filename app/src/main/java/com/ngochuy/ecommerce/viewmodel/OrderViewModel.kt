@@ -9,6 +9,7 @@ import com.ngochuy.ecommerce.repository.OrderRepository
 
 class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
 
+    // Add Order
 
     private val requestOrder = MutableLiveData<Result<ResultApi>>()
 
@@ -25,7 +26,35 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
         requestOrder.value = repository.order(invoiceRequest)
     }
 
-    /*         ITEM ORDER   */
+    /*         ITEM ALL INVOICE   */
+    private val requestAllOrder = MutableLiveData<Result<ArrayList<Invoice>>>()
+
+    val allOrderItem = Transformations.switchMap(requestAllOrder) {
+        it.data
+    }
+    val networkAllOrderItem = Transformations.switchMap(requestAllOrder) {
+        it.networkState
+    }
+
+    fun getAllOrderItem(orderId: Int) {
+        requestAllOrder.value = repository.getAllOderItem(orderId)
+    }
+
+    /*         ITEM CANCEL ORDER   */
+    private val requestCancelOrder = MutableLiveData<Result<ArrayList<Invoice>>>()
+
+    val cancelOderItem = Transformations.switchMap(requestCancelOrder) {
+        it.data
+    }
+    val networkCancelOrderItem = Transformations.switchMap(requestCancelOrder) {
+        it.networkState
+    }
+
+    fun getCancelOrderItem(orderId: Int) {
+        requestCancelOrder.value = repository.getCancelOderItem(orderId)
+    }
+
+    /*         ITEM ACCOMPLISH ORDER   */
     private val requestItemOrder = MutableLiveData<Result<ArrayList<Invoice>>>()
 
     val orderItem = Transformations.switchMap(requestItemOrder) {
@@ -35,8 +64,8 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
         it.networkState
     }
 
-    fun getAllOrderItem(orderId: Int) {
-        requestItemOrder.value = repository.getAllOrderItem(orderId)
+    fun getAccomplishOrderItem(orderId: Int) {
+        requestItemOrder.value = repository.getAccomplishOrderItem(orderId)
     }
 
 
@@ -96,6 +125,20 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
 
     fun getDetailInvoiceItem(invoiceId: Int) {
         requestDetailInvoice.value = repository.getDetailInvoice(invoiceId)
+    }
+
+    /*         CANCEL INVOICE  */
+    private val requestCancelInvocie = MutableLiveData<Result<ResultApi>>()
+
+    val cancelInvoice = Transformations.switchMap(requestCancelInvocie) {
+        it.data
+    }
+    val networkCancelInvoice = Transformations.switchMap(requestCancelInvocie) {
+        it.networkState
+    }
+
+    fun cancelInvoice(invoiceId: Int) {
+        requestCancelInvocie.value = repository.cancelInvoice(invoiceId)
     }
 
 }

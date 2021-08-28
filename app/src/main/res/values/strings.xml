@@ -239,5 +239,19 @@
     <string name="waiting_receive">Wait receive</string>
     <string name="cancelled">Cancelled</string>
     <string name="product_configuration">Configuration</string>
+    <string name="buy_date">Buy Date:</string>
+    <string name="delivery_date">Delivery Date:</string>
+    <string name="yesterday_cap" translatable="false">Yesterday</string>
+    <string name="small_min" translatable="false">&lt; 1 min</string>
+    <string name="one_year_ago" translatable="false">1 year ago</string>
+    <string name="minutes_ago" translatable="false">%1$d mins ago</string>
+    <string name="hours_ago" translatable="false">%1$d hours ago</string>
+    <string name="days_ago" translatable="false">%1$d days ago</string>
+    <string name="weeks_ago" translatable="false">%1$d weeks ago</string>
+    <string name="months_ago" translatable="false">%1$d months ago</string>
+    <string name="years_ago" translatable="false">%1$d years ago</string>
+    <string name="in_the_future" translatable="false">In the future</string>
+    <string name="one_hour_ago" translatable="false">1 hour ago</string>
+    <string name="yesterday" translatable="false">yesterday</string>
 
 </resources>

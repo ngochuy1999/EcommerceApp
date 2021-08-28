@@ -2,26 +2,18 @@ package com.ngochuy.ecommerce.feature.authentication
 
 import android.os.Bundle
 import android.view.View
-import android.widget.CheckBox
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityEditProfileBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
-import com.ngochuy.ecommerce.feature.cart.OrderSuccessFragment
 import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.activity_edit_profile.*
-import kotlinx.android.synthetic.main.fragment_order_success.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.startActivity
 
 class EditProfileActivity : AppCompatActivity() {
 

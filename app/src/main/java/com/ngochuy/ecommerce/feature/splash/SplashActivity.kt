@@ -5,7 +5,6 @@ import android.os.Bundle
 import org.jetbrains.anko.startActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.core.view.doOnLayout
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.ext.*

@@ -1,11 +1,8 @@
-package com.ngochuy.ecommerce.feature.order
+package com.ngochuy.ecommerce.feature.invocie
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,20 +14,15 @@ import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.main.MainActivity
-import com.ngochuy.ecommerce.feature.order.adapter.AccomplishedFragmentAdapter
-import com.ngochuy.ecommerce.feature.order.adapter.PaymentRecyclerViewAdapter
-import com.ngochuy.ecommerce.feature.product.ProductDetailActivity
+import com.ngochuy.ecommerce.feature.invocie.adapter.DeliveringAdapter
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
-import kotlinx.android.synthetic.main.fragment_accomplished_list.*
 import kotlinx.android.synthetic.main.fragment_delivering.*
-import kotlinx.android.synthetic.main.fragment_item_confirm.*
-import kotlinx.android.synthetic.main.fragment_payment.*
 import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * A fragment representing a list of Items.
  */
-class PaymentFragment :Fragment(){
+class DeliveringInvoiceFragment :Fragment(){
 
     private val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
@@ -40,19 +32,19 @@ class PaymentFragment :Fragment(){
     }
 
 
-    private val invoiceAdapter: PaymentRecyclerViewAdapter by lazy {
-        PaymentRecyclerViewAdapter { id -> showProduct(id) }
+    private val invoiceAdapter: DeliveringAdapter by lazy {
+        DeliveringAdapter { id -> showProduct(id) }
     }
 
     private fun showProduct(id: Int) {
-        val intent = Intent(requireContext(), OrderDetailActivity::class.java)
+        val intent = Intent(requireContext(), InvoiceDetailActivity::class.java)
         intent.putExtra(INVOICE_ID, id)
         startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        orderViewModel.getPaymentOrderItem(requireContext().getIntPref(USER_ID))
+        orderViewModel.getDeliverOrderItem(requireContext().getIntPref(USER_ID))
     }
 
     override fun onCreateView(
@@ -60,7 +52,7 @@ class PaymentFragment :Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment, container, false)
+        return inflater.inflate(R.layout.fragment_delivering, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,39 +63,38 @@ class PaymentFragment :Fragment(){
     }
 
     private fun setEvent() {
-        btn_continue_shopping_pa.setOnClickListener {
+        btn_continue_shopping_de.setOnClickListener {
             startActivity<MainActivity>()
             requireActivity().finish()
         }
     }
 
     private fun initViews() {
-        listPayment.adapter = invoiceAdapter
-        listPayment.setHasFixedSize(true)
-        listPayment.setItemViewCacheSize(20)
+        listDelivering.adapter = invoiceAdapter
+        listDelivering.setHasFixedSize(true)
+        listDelivering.setItemViewCacheSize(20)
     }
 
     private fun bindViewModel() {
-        orderViewModel.paymentOrderItem.observe(viewLifecycleOwner) {
+        orderViewModel.deliverOrderItem.observe(viewLifecycleOwner) {
             if (it?.size != 0 ) {
                 invoiceAdapter.setProductList(it ?: arrayListOf())
-                ll_pa_empty.gone()
-            }else ll_pa_empty.visible()
+                ll_deliver_empty.gone()
+            }else ll_deliver_empty.visible()
         }
 
-        orderViewModel.networkPaymentOrderItem.observe(viewLifecycleOwner) {
+        orderViewModel.networkDeliverOrderItem.observe(viewLifecycleOwner) {
             when (it.status) {
-                Status.RUNNING -> progressPa.visible()
+                Status.RUNNING -> progressDeliver.visible()
                 Status.SUCCESS -> {
-                    progressPa.gone()
+                    progressDeliver.gone()
                 }
                 Status.FAILED -> {
-                    progressPa.gone()
+                    progressDeliver.gone()
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()
                 }
             }
         }
-
 
     }
 

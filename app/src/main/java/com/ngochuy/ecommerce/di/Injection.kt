@@ -33,9 +33,6 @@ object Injection {
     private fun provideCategoryRepository(): CategoryRepository {
         return CategoryRepositoryImpl(provideApiService())
     }
-    private fun provideCartRepository(): CartRepository {
-        return CartRepositoryImpl(provideApiService())
-    }
 
     /*----------------- View model factory -----------------*/
 
@@ -59,8 +56,5 @@ object Injection {
         return ProductsViewModelFactory(provideProductRepository())
     }
 
-    fun provideCartViewModelFactory(): ViewModelProvider.Factory {
-        return CartViewModelFactory(provideCartRepository())
-    }
 
 }

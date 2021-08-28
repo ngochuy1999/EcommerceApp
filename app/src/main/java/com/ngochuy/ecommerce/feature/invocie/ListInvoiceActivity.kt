@@ -1,20 +1,17 @@
-package com.ngochuy.ecommerce.feature.order
+package com.ngochuy.ecommerce.feature.invocie
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.databinding.ActivityListOrderBinding
-import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.USER_ID
 import com.ngochuy.ecommerce.ext.getIntPref
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
-import com.ngochuy.ecommerce.feature.order.adapter.PageAdapter
+import com.ngochuy.ecommerce.feature.invocie.adapter.PageAdapter
 import com.ngochuy.ecommerce.roomdb.CartDatabase
 import com.ngochuy.ecommerce.roomdb.ProductEntity
-import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import kotlinx.android.synthetic.main.activity_list_order.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,25 +55,31 @@ open class OrderActivity : AppCompatActivity(),CoroutineScope  {
 
 
 }
-class DeliveringActivity : OrderActivity(){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewPager.adapter = PageAdapter(supportFragmentManager)
-        viewPager.setCurrentItem(2, true)
-        tabLayout.setupWithViewPager(viewPager)
-    }
-}
-class AccomplishedActivity : OrderActivity(){
-
+class AllInvocieActivity : OrderActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewPager.adapter = PageAdapter(supportFragmentManager)
         viewPager.setCurrentItem(0, true)
         tabLayout.setupWithViewPager(viewPager)
     }
-
 }
-class ComfirmActivity : OrderActivity()  {
+class CancelInvoiceActivity : OrderActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewPager.adapter = PageAdapter(supportFragmentManager)
+        viewPager.setCurrentItem(5, true)
+        tabLayout.setupWithViewPager(viewPager)
+    }
+}
+class DeliveringActivity : OrderActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewPager.adapter = PageAdapter(supportFragmentManager)
+        viewPager.setCurrentItem(3, true)
+        tabLayout.setupWithViewPager(viewPager)
+    }
+}
+class AccomplishedActivity : OrderActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,12 +89,22 @@ class ComfirmActivity : OrderActivity()  {
     }
 
 }
+class ComfirmActivity : OrderActivity()  {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewPager.adapter = PageAdapter(supportFragmentManager)
+        viewPager.setCurrentItem(2, true)
+        tabLayout.setupWithViewPager(viewPager)
+    }
+
+}
 class PaymentActivity : OrderActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewPager.adapter = PageAdapter(supportFragmentManager)
-        viewPager.setCurrentItem(3, true)
+        viewPager.setCurrentItem(4, true)
         tabLayout.setupWithViewPager(viewPager)
     }
 }

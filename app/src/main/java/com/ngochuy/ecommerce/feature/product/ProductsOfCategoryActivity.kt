@@ -20,7 +20,6 @@ import com.ngochuy.ecommerce.feature.main.MainActivity
 import com.ngochuy.ecommerce.feature.product.adapter.ProductAdapter
 import com.ngochuy.ecommerce.roomdb.CartDatabase
 import com.ngochuy.ecommerce.roomdb.ProductEntity
-import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
 import kotlinx.android.synthetic.main.activity_product_in_category.*
 import kotlinx.coroutines.CoroutineScope

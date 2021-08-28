@@ -14,12 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
-        <activity android:name=".feature.order.AccomplishedActivity" />
-        <activity android:name=".feature.order.ComfirmActivity" />
-        <activity android:name=".feature.order.DeliveringActivity" />
-        <activity android:name=".feature.order.PaymentActivity" />
+        <activity android:name=".feature.invocie.AllInvocieActivity" />
+        <activity android:name=".feature.invocie.AccomplishedActivity" />
+        <activity android:name=".feature.invocie.CancelInvoiceActivity" />
+        <activity android:name=".feature.invocie.ComfirmActivity" />
+        <activity android:name=".feature.invocie.DeliveringActivity" />
+        <activity android:name=".feature.invocie.PaymentActivity" />
         <activity
-            android:name=".feature.order.OrderDetailActivity"
+            android:name=".feature.invocie.InvoiceDetailActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".feature.search.SearchActivity"

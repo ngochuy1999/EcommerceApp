@@ -7,16 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.feature.main.MainActivity
-import com.ngochuy.ecommerce.feature.order.ComfirmActivity
-import com.ngochuy.ecommerce.feature.order.OrderDetailActivity
-import com.ngochuy.ecommerce.roomdb.CartDatabase
+import com.ngochuy.ecommerce.feature.invocie.ComfirmActivity
 import kotlinx.android.synthetic.main.fragment_order_success.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import org.jetbrains.anko.support.v4.startActivity
-import kotlin.coroutines.CoroutineContext
 
 class OrderSuccessFragment : Fragment(){
 

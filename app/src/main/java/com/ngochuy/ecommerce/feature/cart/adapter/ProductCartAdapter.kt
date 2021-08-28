@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ngochuy.ecommerce.data.CartType
-import com.ngochuy.ecommerce.data.Product
 import com.ngochuy.ecommerce.databinding.ItemProductCartBinding
 import com.ngochuy.ecommerce.roomdb.ProductEntity
 import kotlinx.coroutines.CoroutineScope

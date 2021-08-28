@@ -23,15 +23,12 @@ import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.search.SearchActivity
 import com.ngochuy.ecommerce.roomdb.CartDatabase
 import com.ngochuy.ecommerce.roomdb.ProductEntity
-import com.ngochuy.ecommerce.viewmodel.CartViewModel
-import kotlinx.android.synthetic.main.ll_cart.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
 import kotlin.coroutines.CoroutineContext
-import kotlin.math.truncate
 
 class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener,CoroutineScope {
     private lateinit var binding: ActivityMainBinding

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.ngochuy.ecommerce.ext.DateUtils"/>
         <variable
             name="item"
@@ -11,7 +12,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/item_payment_order"
+        android:id="@+id/item_cancel_invoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/layout_margin_12dp"
@@ -27,7 +28,7 @@
                 android:id="@+id/vTag"
                 android:layout_width="@dimen/size_32dp"
                 android:layout_height="0dp"
-                android:background="#4C8C3D"
+                android:background="#F44336"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +52,7 @@
                 android:gravity="bottom"
                 android:includeFontPadding="false"
                 android:rotation="-90"
-                android:text="Payment"
+                android:text="Cancel"
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
@@ -64,9 +65,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_margin_12dp"
-                android:text="@string/delivery_date"
+                android:text="@string/buy_date"
                 android:textAlignment="textStart"
-                android:textColor="#4C8C3D"
+                android:textColor="#F44336"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vTag"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -76,9 +77,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_margin_12dp"
-                android:text="@{DateUtils.convertFormat(item.deliveryDate, DateUtils.DATE_FORMAT_SERVER, DateUtils.FULL_DATE_FORMAT)}"
+                android:text="@{DateUtils.convertFormat(item.buyDate, DateUtils.DATE_FORMAT_SERVER, DateUtils.FULL_DATE_FORMAT)}"
                 android:textAlignment="textEnd"
-                android:textColor="#000000"
+                android:textColor="#F44336"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vTag"
                 app:layout_constraintTop_toTopOf="parent"

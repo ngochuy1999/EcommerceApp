@@ -14,7 +14,7 @@
     android:layout_height="match_parent"
 
     app:layoutManager="LinearLayoutManager"
-    tools:context=".feature.order.AccomplishedFragment"
+    tools:context=".feature.invocie.AccomplishedInvoiceFragment"
     tools:listitem="@layout/item_accomplished" />
     <LinearLayout
         android:id="@+id/ll_order_empty"

@@ -1,17 +1,13 @@
-package com.ngochuy.ecommerce.feature.order.adapter
+package com.ngochuy.ecommerce.feature.invocie.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.Invoice
-import com.ngochuy.ecommerce.data.Product
-import com.ngochuy.ecommerce.databinding.ItemDeliveringBinding
+import com.ngochuy.ecommerce.databinding.ItemPaymentBinding
 
 
-class DeliveringRecyclerViewAdapter(
+class PaymentAdapter(
     private var onProductClick: (id:Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -19,7 +15,7 @@ class DeliveringRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ProductCartViewHolder(
-            ItemDeliveringBinding.inflate(
+            ItemPaymentBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -42,14 +38,14 @@ class DeliveringRecyclerViewAdapter(
     }
 
     inner class ProductCartViewHolder(
-        private val binding: ItemDeliveringBinding
+        private val binding: ItemPaymentBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(itemDe: Invoice) {
+        fun bind(itemPay: Invoice) {
             binding.apply {
-                item = itemDe
+                item = itemPay
                 executePendingBindings()
-                itemDeliveryOrder.setOnClickListener { item?.invoiceId?.let { it ->
+                itemPaymentOrder.setOnClickListener { item?.invoiceId?.let { it ->
                     onProductClick(
                         it
                     )

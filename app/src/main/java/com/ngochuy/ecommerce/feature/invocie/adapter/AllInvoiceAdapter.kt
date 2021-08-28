@@ -1,18 +1,13 @@
-package com.ngochuy.ecommerce.feature.order.adapter
+package com.ngochuy.ecommerce.feature.invocie.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.ngochuy.ecommerce.R
+import androidx.recyclerview.widget.RecyclerView
 import com.ngochuy.ecommerce.data.Invoice
-import com.ngochuy.ecommerce.data.Product
-import com.ngochuy.ecommerce.databinding.ItemAccomplishedBinding
-import com.ngochuy.ecommerce.databinding.ItemConfirmBinding
+import com.ngochuy.ecommerce.databinding.ItemAllInvoiceBinding
+import kotlin.collections.ArrayList
 
-
-class ItemConfirmRecyclerViewAdapter(
+class AllInvoiceAdapter(
     private var onProductClick: (id:Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -20,7 +15,7 @@ class ItemConfirmRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ProductCartViewHolder(
-            ItemConfirmBinding.inflate(
+            ItemAllInvoiceBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -43,14 +38,14 @@ class ItemConfirmRecyclerViewAdapter(
     }
 
     inner class ProductCartViewHolder(
-        private val binding: ItemConfirmBinding
+        private val binding: ItemAllInvoiceBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(itemConfim : Invoice) {
+        fun bind(itemAll : Invoice) {
             binding.apply {
-                item = itemConfim
+                item = itemAll
                 executePendingBindings()
-                itemConfirmOrder.setOnClickListener { item?.invoiceId?.let { it1 ->
+                itemAllInvoice.setOnClickListener { item?.invoiceId?.let { it1 ->
                     onProductClick(
                         it1
                     )

@@ -2,6 +2,7 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.ngochuy.ecommerce.ext.DateUtils"/>
 
         <import type="java.util.ArrayList" />
 
@@ -132,26 +133,45 @@
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_id"
                         app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_id"
-                        tools:text="@string/order_id" />
+                        tools:text="1" />
+
+                    <TextView
+                        android:id="@+id/tv_tt_order_detail_buy_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/buy_date"
+                        app:layout_constraintStart_toStartOf="@id/tv_tt_order_detail_buy_date"
+                        app:layout_constraintTop_toBottomOf="@id/tv_tt_order_detail_id" />
+
+                    <TextView
+                        android:id="@+id/tv_item_order_detail_buy_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@{DateUtils.convertFormat(invoice.buyDate, DateUtils.DATE_FORMAT_SERVER, DateUtils.FULL_DATE_FORMAT)}"
+                        app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_buy_date"
+                        app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_buy_date"
+                        tools:text="30/09/2021" />
 
                     <TextView
                         android:id="@+id/tv_tt_order_detail_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="@string/order_date"
+                        android:text="@string/delivery_date"
                         app:layout_constraintStart_toStartOf="@id/tv_tt_order_detail_date"
-                        app:layout_constraintTop_toBottomOf="@id/tv_tt_order_detail_id" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_tt_order_detail_buy_date" />
 
                     <TextView
                         android:id="@+id/tv_item_order_detail_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{invoice.buyDate}"
+                        android:text="@{DateUtils.convertFormat(invoice.deliveryDate, DateUtils.DATE_FORMAT_SERVER, DateUtils.FULL_DATE_FORMAT)}"
                         app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_date"
                         app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_date"
-                        tools:text="@string/order_id" />
+                        tools:text="30/09/2021" />
 
                     <TextView
                         android:id="@+id/tv_tt_order_detail_status"
@@ -169,7 +189,8 @@
                         android:layout_marginStart="10dp"
                         app:layout_constraintStart_toEndOf="@id/tv_tt_order_detail_status"
                         app:layout_constraintTop_toTopOf="@id/tv_tt_order_detail_status"
-                        android:text="@{invoice.invoiceStatus.statusName}" />
+                        android:text="@{invoice.invoiceStatus.statusName}"
+                        tools:text="Chờ xác nhận"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

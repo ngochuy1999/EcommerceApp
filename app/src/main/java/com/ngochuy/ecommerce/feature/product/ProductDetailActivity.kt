@@ -21,9 +21,7 @@ import com.ngochuy.ecommerce.feature.product.adapter.ProductDetailAdapter
 import com.ngochuy.ecommerce.feature.product.adapter.SlidingImageProductDetailAdapter
 import com.ngochuy.ecommerce.roomdb.CartDatabase
 import com.ngochuy.ecommerce.roomdb.ProductEntity
-import com.ngochuy.ecommerce.viewmodel.CartViewModel
 import com.ngochuy.ecommerce.viewmodel.ProductsViewModel
-import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

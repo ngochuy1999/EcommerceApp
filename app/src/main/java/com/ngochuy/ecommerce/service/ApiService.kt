@@ -66,19 +66,6 @@ class ApiService(private val apiApi: ApiManager) {
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
 
-//    fun addCart(
-//            userID: Int,
-//            productID: Int,
-//            quantity: Int,
-//            onPrepared: () -> Unit,
-//            onSuccess: (ResultApi?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = apiApi.plusCart(userID, productID, quantity)
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
-//
     fun getListCategory(
         onPrepared: () -> Unit,
         onSuccess: (ArrayList<Category>?) -> Unit,
@@ -88,54 +75,6 @@ class ApiService(private val apiApi: ApiManager) {
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
-//
-//    fun getCartCount(
-//            userID: Int,
-//            onPrepared: () -> Unit,
-//            onSuccess: (Int?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = apiApi.getCartCount(userID)
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
-//
-//    fun minusCart(
-//            userID: Int,
-//            productID: Int,
-//            onPrepared: () -> Unit,
-//            onSuccess: (Boolean?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = apiApi.minusCart(userID, productID)
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
-//
-//    fun plusCart(
-//            userID: Int,
-//            productID: Int,
-//            quantity: Int,
-//            onPrepared: () -> Unit,
-//            onSuccess: (ResultApi?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = apiApi.plusCart(userID, productID, quantity)
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
-//
-//    fun delCart(
-//            userID: Int,
-//            productID: Int,
-//            onPrepared: () -> Unit,
-//            onSuccess: (ResultApi?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = apiApi.delItemCart(userID, productID)
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
 
 
     fun login(
@@ -214,17 +153,6 @@ class ApiService(private val apiApi: ApiManager) {
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
 
-//    fun getProductCart(
-//            userID: Int,
-//            onPrepared: () -> Unit,
-//            onSuccess: (ArrayList<Product>?) -> Unit,
-//            onError: (String) -> Unit
-//    ) {
-//        val request = apiApi.getProductsCart(userID)
-//        onPrepared()
-//        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
-//    }
-
 
     fun addOrder(
             invoiceRequest: InvoiceRequest,
@@ -239,6 +167,26 @@ class ApiService(private val apiApi: ApiManager) {
 
 
     fun getAllOrderItem(
+        orderID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ArrayList<Invoice>?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getAllOrder(orderID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+    fun getCancelOrderItem(
+        orderID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ArrayList<Invoice>?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getCancelOrderItem(orderID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+    fun getAccomplishOrderItem(
             orderID : Int,
             onPrepared: () -> Unit,
             onSuccess: (ArrayList<Invoice>?) -> Unit,
@@ -290,6 +238,16 @@ class ApiService(private val apiApi: ApiManager) {
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
 
+    fun cancelInvoice(
+        invoiceID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ResultApi?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.cancelInvoice(invoiceID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
 
 //    fun getCode(
 //        email: String,
