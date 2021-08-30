@@ -69,4 +69,64 @@
         <item name="android:textColorSecondary">@color/colorGray</item>
     </style>
 
+    <style name="normal_text">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="normal_text.grey" parent="normal_text">
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="normal_text.bold" parent="normal_text">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="normal_text.EditText" parent="normal_text">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingTop">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingStart">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingBottom">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingEnd">@dimen/layout_margin_16dp</item>
+        <item name="android:background">@drawable/rounded_border_edittext</item>
+        <item name="android:layout_marginTop">@dimen/layout_margin_16dp</item>
+        <item name="android:layout_marginStart">@dimen/layout_margin_16dp</item>
+        <item name="android:layout_marginEnd">@dimen/layout_margin_16dp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+
+    <style name="normal_text.EditText.Register" parent="normal_text.EditText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingTop">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingBottom">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingStart">@dimen/layout_margin_16dp</item>
+        <item name="android:paddingEnd">@dimen/layout_margin_16dp</item>
+        <item name="android:background">@drawable/rounded_border_edittext</item>
+        <item name="android:layout_marginTop">@dimen/layout_margin_16dp</item>
+        <item name="android:layout_marginStart">@dimen/layout_margin_32dp</item>
+        <item name="android:layout_marginEnd">@dimen/layout_margin_32dp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
+
+
 </resources>

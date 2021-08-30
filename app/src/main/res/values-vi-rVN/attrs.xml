@@ -15,4 +15,18 @@
         </attr>
         <attr name="clearButtonDrawable" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="LoadingButton">
+        <attr name="isShowTextBehind" format="boolean"/>
+        <attr name="text" format="string" />
+        <attr name="isLoading" format="boolean" />
+        <attr name="isOpacity" format="boolean"/>
+        <attr name="loadingText" format="string"/>
+        <attr name="outOfStock" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="SpannedGridLayoutManager">
+        <attr name="android:orientation" />
+        <attr name="spanCount" />
+        <attr name="aspectRatio" format="string" />
+    </declare-styleable>
 </resources>

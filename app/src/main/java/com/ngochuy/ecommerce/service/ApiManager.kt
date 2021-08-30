@@ -93,6 +93,19 @@ interface ApiManager {
     @GET("users")
     fun getUserInfoByUserID(@Header("id") userId: Int): Call<User>
 
+    //List Address
+    @GET("address")
+    fun getAddress( @Query("userId") userId: Int): Call<ArrayList<ShoppingAddress>>
+
+    @POST("address")
+    fun addAddress( @Body addressRequest: AddressRequest): Call<ResultApi>
+
+    @DELETE("address")
+    fun deleteAddress( @Query("addressId") addressId: Int): Call<ResultApi>
+
+    @GET("addressDefault")
+    fun getAddressDefault( @Query("userId") userId: Int): Call<ShoppingAddress>
+
     //product
     @GET("products")
     fun getListProductSale(): Call<ArrayList<ProductDetail>>
@@ -143,4 +156,5 @@ interface ApiManager {
 
     @POST("cancelInvoice")
     fun cancelInvoice( @Query("invoiceId") invoiceId: Int): Call<ResultApi>
+
 }

@@ -8,6 +8,9 @@ interface ProductDAO {
     @Query("SELECT * FROM product ORDER BY productId ASC")
     suspend fun getAllProduct(): List<ProductEntity>
 
+    @Query("SELECT SUM(quantityInCart) FROM product")
+    suspend fun cartCount(): Int
+
     @Query("SELECT * FROM product WHERE productId = :proId")
     suspend fun findProductById(proId: Int): ProductEntity
 

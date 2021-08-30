@@ -202,5 +202,8 @@
     <string name="product_configuration">Thông số kỹ thuật</string>
     <string name="buy_date">Ngày đặt hàng:</string>
     <string name="delivery_date">Ngày nhận hàng:</string>
+    <string name="error_active">Tài khoản chưa được kích hoạt, vui lòng kích hoạt  ở email xác thực</string>
+    <string name="err_signup_email">Email đã được đăng ký</string>
+    <string name="error_is_empty">Không được để trống</string>
 
 </resources>

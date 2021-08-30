@@ -76,14 +76,30 @@ class MainActivity : AppCompatActivity() , ViewPager.OnPageChangeListener,Corout
             mJob = Job()
             cartDB = CartDatabase.getDatabase(this)
             launch {
-                val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
-                binding.cartCount= products?.size
+                val cart = cartDB?.productDao()?.cartCount()
+                if(cart == null){
+                    binding.cartCount = 0
+                }else
+                    binding.cartCount = cart
             }
         }
         addViewPager()
         bindViewModel()
         addBotNavEvents()
         addEvents()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mJob = Job()
+        cartDB = CartDatabase.getDatabase(this)
+        launch {
+            val cart = cartDB?.productDao()?.cartCount()
+            if(cart == null){
+                binding.cartCount = 0
+            }else
+                binding.cartCount = cart
+        }
     }
 
     private fun addEvents() {

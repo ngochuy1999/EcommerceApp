@@ -28,4 +28,13 @@ interface AuthRepository {
     ): Result<ResultApi>
 
     fun getUserInfoByUserID(userId: Int): Result<User>
+
+    fun getAddress(userId: Int): Result<ArrayList<ShoppingAddress>>
+
+    fun getAddressDefault(userId: Int): Result<ShoppingAddress>
+
+    fun addAddress(addressRequest: AddressRequest): Result<ResultApi>
+
+    fun deleteAddress(addressId: Int): Result<ResultApi>
+
 }

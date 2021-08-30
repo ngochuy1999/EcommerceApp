@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -79,4 +81,9 @@ fun bindTextCartCount(view: TextView, counter: Int) {
         view.text = counter.toString()
     }
     else view.gone()
+}
+
+@BindingAdapter("setVisible")
+fun setVisible(view: View, isVisible: Boolean?) {
+    view.isVisible = isVisible ?: false
 }

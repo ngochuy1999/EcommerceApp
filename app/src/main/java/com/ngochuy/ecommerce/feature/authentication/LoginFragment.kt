@@ -156,6 +156,9 @@ class LoginFragment : Fragment() {
     private fun bindingViewModel() {
         userViewModel.resultLogin.observe(viewLifecycleOwner, Observer {
             when (it.isStatus) {
+                -1 -> {
+                    Toast.makeText(requireContext(), getString(R.string.error_active), Toast.LENGTH_LONG).show()
+                }
                 0 -> {
                     Toast.makeText(requireContext(), getString(R.string.error_login), Toast.LENGTH_LONG).show()
                 }

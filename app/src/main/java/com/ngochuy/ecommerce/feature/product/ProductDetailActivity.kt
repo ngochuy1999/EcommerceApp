@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialog
 import com.ngochuy.ecommerce.R
@@ -14,7 +13,9 @@ import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.ActivityProductDetailBinding
 import com.ngochuy.ecommerce.databinding.BottomSheetAddCartBinding
 import com.ngochuy.ecommerce.di.Injection
-import com.ngochuy.ecommerce.ext.*
+import com.ngochuy.ecommerce.ext.PRODUCT_ID
+import com.ngochuy.ecommerce.ext.USER_ID
+import com.ngochuy.ecommerce.ext.getIntPref
 import com.ngochuy.ecommerce.feature.authentication.LoginActivity
 import com.ngochuy.ecommerce.feature.cart.CartActivity
 import com.ngochuy.ecommerce.feature.product.adapter.ProductDetailAdapter
@@ -26,7 +27,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.*
+import org.jetbrains.anko.startActivity
 import kotlin.coroutines.CoroutineContext
 
 class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
@@ -72,8 +73,11 @@ class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
                 mJob = Job()
                 cartDB = CartDatabase.getDatabase(this)
                 launch {
-                    val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
-                    binding.cartCount= products?.size
+                    val cart = cartDB?.productDao()?.cartCount()
+                    if(cart == null){
+                        binding.cartCount = 0
+                    }else
+                        binding.cartCount = cart
                 }
             }
 
@@ -88,6 +92,19 @@ class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        mJob = Job()
+        cartDB = CartDatabase.getDatabase(this)
+        launch {
+            val cart = cartDB?.productDao()?.cartCount()
+            if(cart == null){
+                binding.cartCount = 0
+            }else
+                binding.cartCount = cart
+        }
+    }
+
     private fun addEvents() {
         binding.cartProductDetail.setOnClickListener {
             // Check user login
@@ -97,7 +114,7 @@ class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
         binding.btnBackProductDetail.setOnClickListener {
             finish()
         }
-        binding.btnBuy.setOnClickListener {
+        binding.btnBuy.setOnClickListener{
             addCart()
         }
     }
@@ -122,6 +139,11 @@ class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
                             )
                         }
                             ?.let { cartDB?.productDao()?.insert(it) }
+                        val cart = cartDB?.productDao()?.cartCount()
+                        if(cart == null){
+                            binding.cartCount = 0
+                        }else
+                            binding.cartCount = cart
                     }
                 } else {
                     launch {
@@ -136,7 +158,11 @@ class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
                                 it.quantityInCart?.plus(1)
                             )
                         }.let { cartDB?.productDao()?.update(it) }
-
+                        val cart = cartDB?.productDao()?.cartCount()
+                        if(cart == null){
+                            binding.cartCount = 0
+                        }else
+                            binding.cartCount = cart
                     }
                 }
             }
@@ -154,27 +180,28 @@ class ProductDetailActivity : AppCompatActivity(), CoroutineScope {
         mBottomSheetDialog.setContentView(bindingDialog.root)
 
         // Add events
-        bindingDialog.btnCancelDialogAddCart.setOnClickListener() { mBottomSheetDialog.dismiss() }
-        bindingDialog.btnViewCart.setOnClickListener() {
+        bindingDialog.btnCancelDialogAddCart.setOnClickListener { mBottomSheetDialog.dismiss() }
+        bindingDialog.btnViewCart.setOnClickListener {
             startActivity<CartActivity>()
             mBottomSheetDialog.dismiss()
         }
         mBottomSheetDialog.show()
     }
 
+
     private fun bindViewModel() {
 
-        productViewModel.product.observe(this, Observer {
+        productViewModel.product.observe(this, {
             binding.product = it
             productDetail = it
 
-            arrDetail = it.detail?.let { it1 -> arrayListOf<String>(it1.display,it1.inch,it1.pixel,it1.cpu,it1.os,it1.rom,it1.ram,it1.battery) }!!
+            arrDetail = it.detail?.let { it1 -> arrayListOf(it1.display,it1.inch,it1.pixel,it1.cpu,it1.os,it1.rom,it1.ram,it1.battery) }!!
             arrDetail.let { it1 -> productDetailsAdapter.setListProductDetail(it1) }
             binding.rvProductDetail.adapter = productDetailsAdapter
             binding.rvProductDetail.setHasFixedSize(true)
             binding.rvProductDetail.setItemViewCacheSize(20)
 
-            arrSlide = it.imageDetail?.let { it1 -> arrayListOf<String>(it1.imageUrl1,it1.imageUrl2,it1.imageUrl3,it1.imageUrl4,it1.imageUrl5) }!!
+            arrSlide = it.imageDetail?.let { it1 -> arrayListOf(it1.imageUrl1,it1.imageUrl2,it1.imageUrl3,it1.imageUrl4,it1.imageUrl5) }!!
             slideAdapter.notifyDataSetChanged()
             binding.ivProductDetail.adapter= SlidingImageProductDetailAdapter(this, arrSlide)
 

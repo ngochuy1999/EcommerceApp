@@ -45,7 +45,6 @@ class EditProfileActivity : AppCompatActivity() {
                 }
                 1 -> {
                     Toast.makeText(this, getString(R.string.edit_user), Toast.LENGTH_LONG).show()
-                    startActivity<MainActivity>()
                     finish()
                 }
             }

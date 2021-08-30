@@ -47,6 +47,11 @@ class UserFragment : Fragment() {
         userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
     }
 
+    override fun onResume() {
+        super.onResume()
+        userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?

@@ -56,65 +56,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <include
+                    android:id="@+id/shipping_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_shipping_address"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="@string/receiver_s_address"
-                    android:textColor="@color/colorTextHint"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_name_address_conf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    tools:text="@string/name_sign_up"
-                    android:text="@{`Name: `+user.name}"
-                    android:textColor="@color/colorTextHint"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_phone_conf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
-                    tools:text="@string/phone"
-                    android:text="@{`Phone: `+user.phone}"
-                    android:textColor="@color/colorTextHint"
-                    android:textSize="14sp" />
-                <TextView
-                    android:id="@+id/tv_email_conf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
-                    tools:text="@string/email"
-                    android:text="@{`Email: `+user.account.email}"
-                    android:textColor="@color/colorTextHint"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_address_conf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    tools:text="@string/add_address"
-                    android:text="@{`Address: `+user.address}"
-                    android:textColor="@color/colorTextHint"
-                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_line1"

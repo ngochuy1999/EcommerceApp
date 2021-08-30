@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.feature.main.MainActivity
@@ -27,10 +28,16 @@ class OrderSuccessFragment : Fragment(){
     }
 
     private fun addEvents() {
-        btnBackOrderSuccess.setOnClickListener { startActivity<MainActivity>() }
-        btn_continue_shopping_dialog.setOnClickListener { startActivity<MainActivity>() }
+        btn_continue_shopping_dialog.setOnClickListener {
+            startActivity<MainActivity>()
+            requireActivity().finish()
+        }
+
         btn_view_order.setOnClickListener {
             startActivity<ComfirmActivity>()
+            requireActivity().finish()
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(){
             requireActivity().finish()
         }
     }

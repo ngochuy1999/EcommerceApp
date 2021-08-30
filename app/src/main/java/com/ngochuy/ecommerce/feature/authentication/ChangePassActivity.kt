@@ -39,7 +39,6 @@ class ChangePassActivity : AppCompatActivity() {
                 }
                 1 -> {
                     Toast.makeText(this, getString(R.string.change_pass), Toast.LENGTH_LONG).show()
-                    startActivity<MainActivity>()
                     finish()
                 }
             }

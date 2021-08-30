@@ -88,6 +88,66 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
         requestUserInfo.value = repository.getUserInfoByUserID(userId)
     }
 
+    /*--------------- get address---------------*/
+    private val requestAddress = MutableLiveData<Result<ArrayList<ShoppingAddress>>>()
+
+    val networkAddressUser = Transformations.switchMap(requestAddress) {
+        it.networkState
+    }
+
+    val addressUser = Transformations.switchMap(requestAddress) {
+        it.data
+    }
+
+    fun getAddress(userId: Int) {
+        requestAddress.value = repository.getAddress(userId)
+    }
+
+    /*--------------- get address default---------------*/
+    private val requestAddressDefault = MutableLiveData<Result<ShoppingAddress>>()
+
+    val networkAddressDefault = Transformations.switchMap(requestAddressDefault) {
+        it.networkState
+    }
+
+    val addressDefault = Transformations.switchMap(requestAddressDefault) {
+        it.data
+    }
+
+    fun getAddressDefault(userId: Int) {
+        requestAddressDefault.value = repository.getAddressDefault(userId)
+    }
+
+    /*--------------- add address ---------------*/
+    private val requestAddressAdd = MutableLiveData<Result<ResultApi>>()
+
+    val networkAddressAdd = Transformations.switchMap(requestAddressAdd) {
+        it.networkState
+    }
+
+    val resultAddressAdd = Transformations.switchMap(requestAddressAdd) {
+        it.data
+    }
+
+    fun addAddress(request: AddressRequest) {
+        requestAddressAdd.value = repository.addAddress(request)
+    }
+
+    /*--------------- delete address ---------------*/
+    private val resultDeleteAddress = MutableLiveData<Result<ResultApi>>()
+
+    val networkDeleteAddress = Transformations.switchMap(resultDeleteAddress) {
+        it.networkState
+    }
+
+    val resultDelAddress = Transformations.switchMap(resultDeleteAddress) {
+        it.data
+    }
+
+    fun deleteAddress(adressId: Int) {
+        resultDeleteAddress.value = repository.deleteAddress(adressId)
+    }
+
 
     /*---------------Change acc info --------------*/
     private val requestChangeInfo = MutableLiveData<Result<ResultApi>>()

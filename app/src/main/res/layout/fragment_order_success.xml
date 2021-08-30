@@ -6,31 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorBlue">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnBackOrderSuccess"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:linksClickable="true"
-            android:padding="16dp"
-            android:tint="@color/colorWhiteBG"
-            app:srcCompat="@drawable/ic_left_arrow"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/order_information"
-            android:textColor="@color/colorWhiteBG"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:layout_width="match_parent"

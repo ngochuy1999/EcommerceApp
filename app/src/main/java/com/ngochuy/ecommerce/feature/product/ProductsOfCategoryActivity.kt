@@ -75,8 +75,11 @@ class ProductsOfCategoryActivity : AppCompatActivity(),CoroutineScope {
                 mJob = Job()
                 cartDB = CartDatabase.getDatabase(this)
                 launch {
-                    val products: List<ProductEntity>? = cartDB?.productDao()?.getAllProduct()
-                    binding.cartCount= products?.size
+                    val cart = cartDB?.productDao()?.cartCount()
+                    if(cart == null){
+                        binding.cartCount = 0
+                    }else
+                    binding.cartCount = cart
                 }
             }
 
@@ -85,6 +88,19 @@ class ProductsOfCategoryActivity : AppCompatActivity(),CoroutineScope {
                 .makeText(applicationContext, "Can't load info of this product!", Toast.LENGTH_LONG)
                 .show()
             finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mJob = Job()
+        cartDB = CartDatabase.getDatabase(this)
+        launch {
+            val cart = cartDB?.productDao()?.cartCount()
+            if(cart == null){
+                binding.cartCount = 0
+            }else
+                binding.cartCount = cart
         }
     }
 

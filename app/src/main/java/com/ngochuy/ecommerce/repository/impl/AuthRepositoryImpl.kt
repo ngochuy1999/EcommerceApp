@@ -156,4 +156,96 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
                 networkState = networkState
         )
     }
+
+    override fun getAddress(userId: Int): Result<ArrayList<ShoppingAddress>> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseUser = MutableLiveData<ArrayList<ShoppingAddress>>()
+        apiService.getAddress(
+            userId,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { response ->
+                responseUser.value = response
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = responseUser,
+            networkState = networkState
+        )
+    }
+
+    override fun getAddressDefault(userId: Int): Result<ShoppingAddress> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseUser = MutableLiveData<ShoppingAddress>()
+        apiService.getAddressDefault(
+            userId,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { response ->
+                responseUser.value = response
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = responseUser,
+            networkState = networkState
+        )
+    }
+
+    override fun addAddress(addressRequest: AddressRequest): Result<ResultApi> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseUser = MutableLiveData<ResultApi>()
+        apiService.addAddress(
+            addressRequest,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { response ->
+                responseUser.value = response
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = responseUser,
+            networkState = networkState
+        )
+    }
+
+    override fun deleteAddress(addressId: Int): Result<ResultApi> {
+        val networkState = MutableLiveData<NetworkState>()
+        val responseUser = MutableLiveData<ResultApi>()
+        apiService.deleteAddress(
+            addressId,
+            onPrepared = {
+                networkState.postValue(NetworkState.LOADING)
+            },
+            onSuccess = { response ->
+                responseUser.value = response
+                networkState.postValue(NetworkState.LOADED)
+            },
+            onError = { errMessage ->
+                networkState.postValue(NetworkState.error(errMessage))
+            }
+        )
+
+        return Result(
+            data = responseUser,
+            networkState = networkState
+        )
+    }
 }

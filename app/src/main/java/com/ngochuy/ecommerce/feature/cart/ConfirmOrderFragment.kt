@@ -5,29 +5,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.InvoiceRequest
 import com.ngochuy.ecommerce.data.ProductInCart
+import com.ngochuy.ecommerce.data.ShoppingAddress
 import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.databinding.FragmentConfirmOrderBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
+import com.ngochuy.ecommerce.feature.addressbook.AddressBookFragment
+import com.ngochuy.ecommerce.feature.addressbook.ShippingAddressDetailFragment
 import com.ngochuy.ecommerce.feature.cart.adapter.ProductCartConfirmAdapter
 import com.ngochuy.ecommerce.roomdb.CartDatabase
 import com.ngochuy.ecommerce.roomdb.ProductEntity
 import com.ngochuy.ecommerce.viewmodel.OrderViewModel
+import com.ngochuy.ecommerce.viewmodel.SharedViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_confirm_order.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.support.v4.toast
 import kotlin.coroutines.CoroutineContext
 
 class ConfirmOrderFragment :Fragment(), CoroutineScope{
+
+    private val sharedModel: SharedViewModel by activityViewModels()
 
     private val orderViewModel: OrderViewModel by lazy {
         ViewModelProvider(
@@ -43,6 +53,7 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
     }
 
     private lateinit var binding: FragmentConfirmOrderBinding
+    private var addressDf : ShoppingAddress? = null
     private var totalPrice: Long = 0
     private val productAdapter: ProductCartConfirmAdapter by lazy {
         ProductCartConfirmAdapter()
@@ -55,7 +66,6 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userViewModel.getInfoUser(requireContext().getIntPref(USER_ID))
         showProductOrder()
     }
 
@@ -70,6 +80,7 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userViewModel.getAddressDefault(requireContext().getIntPref(USER_ID))
         binding.feeShip = 20000
         bindViewModel()
         addEvents()
@@ -86,6 +97,12 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
         binding.btnBackConfirm.setOnClickListener { requireActivity().onBackPressed() }
         binding.btnPaymentConf.setOnClickListener {
             addOrder()
+        }
+        shipping_address.setOnClickListener {
+            requireActivity().addFragment(
+                id = R.id.frmCart,
+                fragment = AddressBookFragment()
+            )
         }
     }
 
@@ -140,8 +157,13 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
                     pro.quantityInCart?.let { ProductInCart(pro.productId, it) }?.let { list.add(it) }
                 }
             }
-            val invoiceRequest = InvoiceRequest(requireContext().getIntPref(USER_ID),totalPrice,list)
-            orderViewModel.addOrder(invoiceRequest)
+            val invoiceRequest = addressDf?.let {
+                InvoiceRequest(requireContext().getIntPref(USER_ID),
+                    it.name,it.phone,it.getFullAddress(),totalPrice,list)
+            }
+            if (invoiceRequest != null) {
+                orderViewModel.addOrder(invoiceRequest)
+            }else{Toast.makeText(requireContext(), "Chọn địa chỉ giao hàng", Toast.LENGTH_SHORT).show()}
         }
     }
 
@@ -158,8 +180,15 @@ class ConfirmOrderFragment :Fragment(), CoroutineScope{
     }
 
     private fun bindViewModel() {
-        userViewModel.userInfo.observe(viewLifecycleOwner) {
-            binding.user = it
+
+        userViewModel.addressDefault.observe(viewLifecycleOwner) {
+            binding.shippingAddress.item = it
+            addressDf = it
+        }
+
+        sharedModel.selectedAddress.observe(viewLifecycleOwner) {
+            binding.shippingAddress.item = it
+            addressDf = it
         }
 
         orderViewModel.dataCheckOut.observe(viewLifecycleOwner) {

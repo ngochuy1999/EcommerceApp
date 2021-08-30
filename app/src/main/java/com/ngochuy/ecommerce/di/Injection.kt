@@ -56,5 +56,4 @@ object Injection {
         return ProductsViewModelFactory(provideProductRepository())
     }
 
-
 }

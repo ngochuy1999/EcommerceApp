@@ -17,6 +17,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
 
@@ -97,6 +98,9 @@ dependencies {
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'net.danlew:android.joda:2.10.9.1'
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+    implementation 'com.google.android.material:material:1.0.0'
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
@@ -106,5 +110,6 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
+
 
 }

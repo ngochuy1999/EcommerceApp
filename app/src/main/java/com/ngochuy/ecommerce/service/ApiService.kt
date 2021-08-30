@@ -1,6 +1,7 @@
 package com.ngochuy.ecommerce.service
 
 import com.ngochuy.ecommerce.data.*
+import retrofit2.Call
 
 class ApiService(private val apiApi: ApiManager) {
 
@@ -110,6 +111,50 @@ class ApiService(private val apiApi: ApiManager) {
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
+
+    fun getAddress(
+        userID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ArrayList<ShoppingAddress>?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getAddress(userID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+
+    fun getAddressDefault(
+        userID : Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ShoppingAddress?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.getAddressDefault(userID)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+
+    fun addAddress(
+        addressRequest: AddressRequest,
+        onPrepared: () -> Unit,
+        onSuccess: (ResultApi?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.addAddress(addressRequest)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+    fun deleteAddress(
+        addressId: Int,
+        onPrepared: () -> Unit,
+        onSuccess: (ResultApi?) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val request =  apiApi.deleteAddress(addressId)
+        onPrepared()
+        ApiRequestHelper.asyncRequest(request, onSuccess, onError)
+    }
+
 
     fun signUp(
             email: String,

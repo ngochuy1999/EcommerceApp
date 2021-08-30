@@ -57,15 +57,11 @@ class ProductCartAdapter(
                 }
                 btnMinus.setOnClickListener {
                     item.let { it1 ->
-//                        item.quantity?.minus(1)
-//                        binding.tvNumberPrCart.text =  item.quantity.toString()
                         onProductClick(it1, CartType.MINUS)
                     }
                 }
                 btnPlus.setOnClickListener {
                     item.let { it1 ->
-//                        item.quantity?.minus(1)
-//                        binding.tvNumberPrCart.text = (item.quantity?.plus(1)).toString()
                         onProductClick(it1, CartType.PLUS)
                     }
                 }

@@ -58,8 +58,11 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(requireContext(),getString(R.string.done_signup), Toast.LENGTH_LONG).show()
                     requireActivity().replaceFragment(fragment = LoginFragment())
                 }
-                else -> {
+                -1 -> {
                     Toast.makeText(requireContext(), getString(R.string.err_signup), Toast.LENGTH_LONG).show()
+                }
+                0-> {
+                    Toast.makeText(requireContext(), getString(R.string.err_signup_email), Toast.LENGTH_LONG).show()
                 }
             }
         })
