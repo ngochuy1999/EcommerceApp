@@ -263,7 +263,7 @@
     <string name="name" translatable="false">Name</string>
     <string name="add_a_shipping_address" translatable="false">Add a shipping address</string>
     <string name="we_will_only_contact_you_by_phone_if_there_is_a_problem_with_your_order" translatable="false">We will only contact you by phone if there is a problem with your order</string>
-    <string name="todo">TODO</string>
+    <string name="todo" translatable="false">TODO</string>
     <string name="error_is_empty">Not empty</string>
 
 </resources>

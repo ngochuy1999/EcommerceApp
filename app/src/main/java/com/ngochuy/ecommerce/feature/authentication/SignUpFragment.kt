@@ -88,7 +88,6 @@ class SignUpFragment : Fragment() {
         val name = binding.edtName.textTrim()
         val phone = binding.edtPhone.textTrim()
         val mail = binding.edtMail.textTrim()
-        val address = binding.edtAddress.textTrim()
         val pass = binding.edtPass.textTrim()
 
         if (name.isEmpty()) {
@@ -109,17 +108,14 @@ class SignUpFragment : Fragment() {
             binding.edtMail.error = getString(R.string.err_email_not_valid)
             check = false
         }
-        if (address.isEmpty()) {
-            binding.edtAddress.error = getString(R.string.error_input_email_not_entered)
-            check = false
-        }
+
         if (pass.isEmpty()) {
             binding.edtPass.error = getString(R.string.error_old_passwords_is_empty)
             check = false
         }
 
         if (check) {
-            userViewModel.signUp(mail, name, pass, phone, address)
+            userViewModel.signUp(mail, name, pass, phone)
         }
     }
 

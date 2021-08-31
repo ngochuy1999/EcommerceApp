@@ -13,6 +13,7 @@
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/shadow_to_white.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout-v21/fragment_address_book.xml" value="0.15" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/a.xml" value="0.10326086956521739" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_address_detail.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_cart.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_change_pass.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_edit_profile.xml" value="0.15" />
@@ -63,6 +64,9 @@
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/ll_cart.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/slidingimages_layout_home.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/slidingimages_productdetail.xml" value="0.10326086956521739" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/menu/bot_nav_bar.xml" value="0.15925925925925927" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20185185185185187" />
+        <entry key="..\:/Users/ngoch/AndroidStudioProjects/Ecommerce/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.20185185185185187" />
       </map>
     </option>
   </component>

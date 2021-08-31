@@ -1,5 +1,6 @@
 package com.ngochuy.ecommerce.feature.addressbook
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,15 @@ import androidx.lifecycle.observe
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.AddressType
 import com.ngochuy.ecommerce.data.ShoppingAddress
+import com.ngochuy.ecommerce.data.Status
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
 import com.ngochuy.ecommerce.feature.addressbook.adapter.AddressAdapter
+import com.ngochuy.ecommerce.feature.invocie.InvoiceDetailActivity
 import com.ngochuy.ecommerce.viewmodel.SharedViewModel
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_address_book.*
+import kotlinx.android.synthetic.main.fragment_category.*
 
 class AddressBookFragment : Fragment(){
 
@@ -55,6 +59,7 @@ class AddressBookFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        userViewModel.getAddress(requireContext().getIntPref(USER_ID))
     }
 
     override fun onCreateView(
@@ -67,11 +72,15 @@ class AddressBookFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userViewModel.getAddress(requireContext().getIntPref(USER_ID))
         initAdapter()
         addEvents()
         bindViewModel()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        userViewModel.getAddress(requireContext().getIntPref(USER_ID))
     }
 
     private fun initAdapter() {
@@ -84,10 +93,8 @@ class AddressBookFragment : Fragment(){
             swlRefresh.isRefreshing = false
         }
         fabCreateAddress.setOnClickListener {
-            requireActivity().addFragment(
-                id = R.id.frmCart,
-                fragment = ShippingAddressDetailFragment()
-            )
+            val intent = Intent(requireContext(), AddressDetailActivity::class.java)
+            startActivity(intent)
         }
 
     }

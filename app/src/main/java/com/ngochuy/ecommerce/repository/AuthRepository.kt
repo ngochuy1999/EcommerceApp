@@ -9,14 +9,12 @@ interface AuthRepository {
             name: String,
             password: String,
             phone: String,
-            address: String
     ): Result<ResultApi>
 
     fun changeInfo(
             userId: Int,
             name: String,
             phone: String,
-            address: String
     ): Result<ResultApi>
 
     fun forgotPassword(email: String): Result<Int>

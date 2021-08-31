@@ -132,26 +132,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
-                    android:theme="@style/TextLabel">
-
-                    <com.ngochuy.ecommerce.widget.EditTextField
-                        android:id="@+id/edtAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/address"
-                        android:inputType="textPostalAddress"
-                        android:singleLine="true"
-                        android:text="@={userViewModel.address}"
-                        android:theme="@style/EditTextTheme"
-                        app:clearButtonMode="whileEditing" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
                     android:theme="@style/TextLabel"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/colorGray">

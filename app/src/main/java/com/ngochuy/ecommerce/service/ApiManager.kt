@@ -38,7 +38,10 @@ interface ApiManager {
 
             val okHttpClient = OkHttpClient.Builder()
                     .addInterceptor(requestInterceptor)
-                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .callTimeout(2, TimeUnit.MINUTES)
+                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
                     .build()
 
             return Retrofit.Builder()
@@ -68,8 +71,7 @@ interface ApiManager {
         @Query("email") email: String,
         @Query("name") name: String,
         @Query("password") password: String,
-        @Query("phone") phone: String,
-        @Query("address") address: String
+        @Query("phone") phone: String
     ): Call<ResultApi>
 
     @PUT("users")
@@ -77,7 +79,6 @@ interface ApiManager {
         @Query("id") userId: Int,
         @Query("name") name: String,
         @Query("phone") phone: String,
-        @Query("address") address: String,
     ): Call<ResultApi>
 
     @PUT("password")

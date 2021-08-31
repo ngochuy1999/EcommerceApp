@@ -161,12 +161,11 @@ class ApiService(private val apiApi: ApiManager) {
             name: String,
             password: String,
             phone: String,
-            address: String,
             onPrepared: () -> Unit,
             onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.signUp(email, name , password, phone, address)
+        val request = apiApi.signUp(email, name , password, phone)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }
@@ -175,12 +174,11 @@ class ApiService(private val apiApi: ApiManager) {
             userId: Int,
             name: String,
             phone: String,
-            address: String,
             onPrepared: () -> Unit,
             onSuccess: (ResultApi?) -> Unit,
             onError: (String) -> Unit
     ) {
-        val request = apiApi.changeInfoAcc(userId, name, phone, address)
+        val request = apiApi.changeInfoAcc(userId, name, phone)
         onPrepared()
         ApiRequestHelper.asyncRequest(request, onSuccess, onError)
     }

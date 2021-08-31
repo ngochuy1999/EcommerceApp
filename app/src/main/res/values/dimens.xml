@@ -92,12 +92,8 @@
     <dimen name="text_size_large">19sp</dimen>
     <dimen name="text_size_xlarge">21sp</dimen>
     <dimen name="text_size_xxlarge">23sp</dimen>
-
-
     <dimen name="design_bottom_navigation_icon_size" tools:override="true">19dp</dimen>
-
     <dimen name="fast_scroll_overlay_text_size">100dp</dimen>
-
     <dimen name="padding_20dp">20dp</dimen>
     <dimen name="margin6">6dp</dimen>
 </resources>

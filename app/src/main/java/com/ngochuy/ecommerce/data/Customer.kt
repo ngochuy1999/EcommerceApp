@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 
 data class Customer(
     val account: Account,
-    val address: String,
     val dateCreate: String,
     val imageUrl: String,
     val name: String,

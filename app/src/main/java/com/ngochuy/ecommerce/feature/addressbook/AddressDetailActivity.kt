@@ -1,65 +1,50 @@
 package com.ngochuy.ecommerce.feature.addressbook
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.ngochuy.ecommerce.R
 import com.ngochuy.ecommerce.data.AddressRequest
-import com.ngochuy.ecommerce.databinding.FragmentDetailShippingAddressBinding
+import com.ngochuy.ecommerce.databinding.ActivityAddressDetailBinding
 import com.ngochuy.ecommerce.di.Injection
 import com.ngochuy.ecommerce.ext.*
-import com.ngochuy.ecommerce.feature.authentication.LoginFragment
 import com.ngochuy.ecommerce.viewmodel.UserViewModel
 
-class ShippingAddressDetailFragment : Fragment(){
+class AddressDetailActivity : AppCompatActivity() {
+
 
     private val userViewModel: UserViewModel by lazy {
         ViewModelProvider(
-            requireActivity(),
+            this,
             Injection.provideAuthViewModelFactory()
         )[UserViewModel::class.java]
     }
-    private lateinit var binding: FragmentDetailShippingAddressBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentDetailShippingAddressBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViews()
+    private lateinit var binding: ActivityAddressDetailBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_address_detail)
         bindViewModel()
+
     }
 
-    private fun initViews() {
-        binding.fragment = this
-    }
-
-    private fun bindViewModel(){
-        userViewModel.resultAddressAdd.observe(viewLifecycleOwner, {
+    private fun bindViewModel() {
+        userViewModel.resultAddressAdd.observe(this, {
             when (it.isStatus) {
                 1 -> {
                     Toast.makeText(
-                        requireContext(),
+                        this,
                         "Thêm địa chỉ thành công",
                         Toast.LENGTH_LONG
                     ).show()
-                    requireActivity().removeFragment("detail")
+                    finish()
                 }
                 0 -> {
                     Toast.makeText(
-                        requireContext(),
+                        this,
                         "error",
                         Toast.LENGTH_LONG
                     ).show()
@@ -68,7 +53,7 @@ class ShippingAddressDetailFragment : Fragment(){
         })
     }
 
-    fun onAddAddress() {
+    fun onAddAddress(view: View) {
         var check = true
         val name = binding.edtName.textTrim()
         val phone = binding.edtPhone.textTrim()
@@ -108,7 +93,7 @@ class ShippingAddressDetailFragment : Fragment(){
         }
 
         if (check) {
-            val shipAddress = AddressRequest(requireContext().getIntPref(USER_ID),active,district,default,name,phone,provice,street,ward)
+            val shipAddress = AddressRequest(getIntPref(USER_ID),active,district,default,name,phone,provice,street,ward)
             userViewModel.addAddress(shipAddress)
         }
     }

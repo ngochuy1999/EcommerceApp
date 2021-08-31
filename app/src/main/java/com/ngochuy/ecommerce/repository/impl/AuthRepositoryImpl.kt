@@ -34,12 +34,11 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
             name: String,
             password: String,
             phone: String,
-            address: String
     ): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
         val responseSignUp = MutableLiveData<ResultApi>()
         apiService.signUp(
-                email, name, password, phone, address, onPrepared = {
+                email, name, password, phone, onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },
                 onSuccess = { response ->
@@ -60,12 +59,11 @@ class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
             userId: Int,
             name: String,
             phone: String,
-            address: String
     ): Result<ResultApi> {
         val networkState = MutableLiveData<NetworkState>()
         val responseSignUp = MutableLiveData<ResultApi>()
         apiService.changeUserInfo(
-                userId, name, phone, address,
+                userId, name, phone,
                 onPrepared = {
                     networkState.postValue(NetworkState.LOADING)
                 },

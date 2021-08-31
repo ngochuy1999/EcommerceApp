@@ -88,7 +88,6 @@ class EditProfileActivity : AppCompatActivity() {
         var check = true
         val name = binding.edtNameEdit.textTrim()
         val phone = binding.edtPhoneEdit.textTrim()
-        val address = binding.edtAddress.textTrim()
 
         if (name.isEmpty()) {
             binding.edtNameEdit.error = getString(R.string.error_input_name_not_entered)
@@ -98,16 +97,11 @@ class EditProfileActivity : AppCompatActivity() {
             binding.edtPhoneEdit.error = getString(R.string.error_input_phone_not_entered)
             check = false
         }
-        if (address.isEmpty()) {
-            binding.edtAddress.error = getString(R.string.error_input_email_not_entered)
-            check = false
-        }
         if (check) {
             userViewModel.changeInfo(
                     userViewModel.userInfo.value?.userId ?: 0,
                     name,
-                    phone,
-                    address
+                    phone
             )
         }
     }

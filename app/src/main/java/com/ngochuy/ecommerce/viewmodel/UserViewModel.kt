@@ -8,7 +8,6 @@ import com.ngochuy.ecommerce.data.*
 import com.ngochuy.ecommerce.repository.AuthRepository
 
 class UserViewModel(private val repository: AuthRepository) : ViewModel() {
-    var address = MutableLiveData<String>().apply { value = "" }
     var email = MutableLiveData<String>().apply { value = "" }
     var password = MutableLiveData<String>().apply { value = "" }
     var name = MutableLiveData<String>().apply { value = "" }
@@ -24,8 +23,7 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
     }
 
     fun isValidateSignUp(): Boolean =
-        name.value.equals("") && !address.value.equals("")
-                && !phone.value.equals("") && !email.value.equals("") && !password.value.equals("")
+        name.value.equals("") && !phone.value.equals("") && !email.value.equals("") && !password.value.equals("")
 
     /*---------------Login---------------*/
     private val requestLogin = MutableLiveData<Result<ResultApi>>()
@@ -57,9 +55,8 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
             name: String,
             password: String,
             phone: String,
-            address: String
     ) {
-        requestSignUp.value = repository.signUp(email, name, password, phone, address)
+        requestSignUp.value = repository.signUp(email, name, password, phone)
     }
 
     /*--------------- Forgot password---------------*/
@@ -164,10 +161,9 @@ class UserViewModel(private val repository: AuthRepository) : ViewModel() {
         userId: Int,
         name: String,
         phone: String,
-        address: String,
     ) {
         requestChangeInfo.value =
-            repository.changeInfo(userId, name, phone, address)
+            repository.changeInfo(userId, name, phone)
     }
 
     /*---------------Change pass --------------*/
