@@ -155,7 +155,7 @@ interface ApiManager {
     @GET("invoiceDetail")
     fun getDetailInvoice( @Query("invoiceId") invoiceId: Int): Call<ArrayList<InvoiceDetail>>
 
-    @POST("cancelInvoice")
+    @PUT("cancelInvoice")
     fun cancelInvoice( @Query("invoiceId") invoiceId: Int): Call<ResultApi>
 
 }

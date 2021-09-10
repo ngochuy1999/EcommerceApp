@@ -62,6 +62,11 @@ class ConfirmInvoiceFragment :Fragment(){
         setEvent()
     }
 
+    override fun onResume() {
+        super.onResume()
+        orderViewModel.getConfirmOrderItem(requireContext().getIntPref(USER_ID))
+    }
+
     private fun setEvent() {
         btn_continue_shopping_co.setOnClickListener {
             startActivity<MainActivity>()

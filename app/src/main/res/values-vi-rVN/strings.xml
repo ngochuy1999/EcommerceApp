@@ -183,7 +183,7 @@
     <string name="status_order">Đang chờ giao hàng</string>
     <string name="err_pass_empty">Mật khẩu không được để trống</string>
     <string name="no_signup">Bạn không có tài khoản? Hãy đăng kí</string>
-    <string name="done_signup">Đăng ký thành công</string>
+    <string name="done_signup">Đăng ký thành công. Xác nhận đăng kí bằng email</string>
     <string name="touchid">Cài đặt TouchID</string>
     <string name="use_touchId">Đăng nhập bằng TouchID</string>
     <string name="use_touchid2">Sử dụng TouchID của bạn để đăng nhập thay cho mật khẩu</string>
@@ -205,5 +205,13 @@
     <string name="error_active">Tài khoản chưa được kích hoạt, vui lòng kích hoạt  ở email xác thực</string>
     <string name="err_signup_email">Email đã được đăng ký</string>
     <string name="error_is_empty">Không được để trống</string>
+    <string name="street" translatable="false">Tên Đường</string>
+    <string name="name">Họ và tên</string>
+    <string name="add_a_shipping_address" translatable="false">Thêm địa chỉ giao hàng</string>
+    <string name="we_will_only_contact_you_by_phone_if_there_is_a_problem_with_your_order">Chúng tôi sẽ liên hệ với bạn qua điện thoại nếu có vấn đề với đơn hàng của bạn</string>
+    <string name="province">Tỉnh/Thành Phố</string>
+    <string name="wards">Quận/Huyện</string>
+    <string name="district">Phường/Xã</string>
+    <string name="default_address" translatable="false">Địa chỉ mặc định</string>
 
 </resources>

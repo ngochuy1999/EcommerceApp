@@ -9,6 +9,6 @@ import kotlinx.android.parcel.Parcelize
 data class Description(
     val des1: String,
     val des2: String,
-    val descriptionId: Int,
+    val productId: Int,
     val image: String
 ): Parcelable

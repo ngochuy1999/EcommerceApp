@@ -89,11 +89,24 @@ open class InvoiceDetailActivity : AppCompatActivity(),CoroutineScope {
             }
         })
 
+        orderViewModel.networkCancelOrderItem.observe(this, {
+            when (it.status) {
+                Status.RUNNING -> progressOrderDetail.visible()
+                Status.SUCCESS -> {
+                    progressOrderDetail.gone()
+                }
+                Status.FAILED -> {
+                    progressOrderDetail.gone()
+                    it.msg?.let { it1 -> toast(it1) }
+                }
+            }
+        })
+
         orderViewModel.cancelInvoice.observe(this,{
             when(it.isStatus){
                 1 -> {
-                    startActivity<CancelInvoiceActivity>()
-                    finish()
+                    btnCancelOrder.gone()
+                    tvStatusOrder.text = getText(R.string.cancel_order)
                     toast("Đã hủy hóa đơn")
                 }
                 0 -> toast("error")

@@ -9,5 +9,5 @@ data class Customer(
     val imageUrl: String,
     val name: String,
     val phone: String,
-    val userId: Int
+    val accountId: Int
 )

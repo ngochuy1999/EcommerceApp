@@ -10,7 +10,7 @@ data class Detail(
     val battery: String,
     val cpu: String,
     val display: String,
-    val detailId: Int,
+    val productId: Int,
     val inch: String,
     val os: String,
     val pixel: String,
