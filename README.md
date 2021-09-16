@@ -2,7 +2,7 @@
 An e-commerce mobile app for selling and/or buying smartphone.   
 
 Data API:
-https://github.com/cobebandiem/api-phone-shop
+https://github.com/ngochuy1999/API_Phone_Shop
 
 Programming language:
 - [Kotlin](https://kotlinlang.org/) — an official language on Android. It is expressive, concise, and powerful. Best of all, it’s interoperable with existing Android languages and runtime.
